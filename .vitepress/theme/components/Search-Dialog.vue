@@ -59,7 +59,7 @@ function search(): void {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 150;
+    z-index: 100;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -100,11 +100,11 @@ function search(): void {
 }
 
 .title {
-    color: rgb(76, 88, 102);
+    color: var(--font-color-grey);
     font-weight: bold;
     font-size: 25px;
     padding: 5px 0;
-    border-bottom: 5px solid rgb(255, 228, 1);
+    border-bottom: 5px solid var(--font-color-gold);
     z-index: 100;
 }
 
@@ -148,7 +148,7 @@ function search(): void {
     gap: 10px;
 
     span {
-        color: rgb(76, 88, 102);
+        color: var(--font-color-grey);
         text-align: center;
     }
 }
@@ -166,7 +166,7 @@ li {
     a {
         height: 50px;
         line-height: 50px;
-        color: rgb(76, 88, 102);
+        color: var(--font-color-grey);
 
     }
 }

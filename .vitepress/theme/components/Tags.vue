@@ -38,7 +38,7 @@ onMounted(() => {
 </script>
 <style scoped lang='less'>
 .active a {
-    background-color: rgb(51, 73, 93) !important;
+    background-color: var(--btn-hover) !important;
 }
 
 
@@ -52,7 +52,7 @@ onMounted(() => {
     background-color: rgba(255, 255, 255, 0.25);
     border-radius: 32px;
     border: solid 2px white;
-    backdrop-filter: blur(2px);
+    backdrop-filter: var(--blur-val);
     margin-top: 50px;
     margin-bottom: 10px;
     width: 720px;
@@ -66,10 +66,10 @@ onMounted(() => {
         margin-right: 16px;
 
         a {
-            color: rgb(76, 88, 102);
+            color: var(--font-color-grey);
             padding: 3px 5px 3px 5px;
-            color: rgb(255, 228, 1);
-            background-color: rgb(66, 92, 139);
+            color: var(--font-color-gold);
+            background-color: var(--btn-background);
             border-radius: 5px;
             transition: all .5s;
 
@@ -79,7 +79,7 @@ onMounted(() => {
                 margin-right: 5px;
                 width: 5px;
                 height: 5px;
-                background-color: rgb(255, 228, 1);
+                background-color: var(--font-color-gold);
                 border-radius: 50%;
                 vertical-align: middle;
                 transition: all .5s;
@@ -87,7 +87,7 @@ onMounted(() => {
             }
 
             &:hover {
-                background-color: rgb(51, 73, 93);
+                background-color: var(--btn-hover);
             }
         }
     }

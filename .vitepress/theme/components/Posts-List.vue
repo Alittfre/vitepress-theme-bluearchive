@@ -92,21 +92,10 @@ const totalPage = computed(() => {
         border-radius: 32px;
         border: solid 2px white;
         transition: all .5s;
-        background:
-            linear-gradient(.5turn, transparent, rgb(248, 252, 253) 50%),
-            repeating-linear-gradient(60deg,
-                rgba(190, 242, 255, 0.6),
-                transparent 35px),
-            repeating-linear-gradient(180deg, transparent, rgba(18, 211, 249, 0.2) 30px),
-            repeating-linear-gradient(120deg,
-                rgba(16, 179, 215, 0.2),
-                transparent 46px);
-        backdrop-filter: blur(2px);
-        box-shadow: 0 0 15px rgb(108, 154, 196);
-
-        &:hover {
-            background-position: 25px;
-        }
+        background: linear-gradient(.5turn, transparent, rgb(255, 255, 255) 70%),
+            var(--triangle-background);
+        backdrop-filter: var(--blur-val);
+        box-shadow: var(--blue-shadow);
     }
 
     .title {
@@ -122,22 +111,22 @@ const totalPage = computed(() => {
             height: 24px;
             vertical-align: middle;
             border-radius: 3px;
-            background-color: rgb(18, 138, 250);
+            background-color: var(--color-blue);
         }
 
         a {
             padding: 3px 10px 3px 10px;
-            color: rgb(76, 88, 102);
+            color: var(--font-color-grey);
             transition: all .5s;
 
             &:hover {
-                text-shadow: 0 0 3px rgb(76, 88, 102);
+                text-shadow: 0 0 3px var(--font-color-grey);
             }
         }
     }
 
     .publishTime {
-        color: rgb(76, 88, 102);
+        color: var(--font-color-grey);
     }
 
     .tags {
@@ -155,10 +144,10 @@ const totalPage = computed(() => {
             margin-right: 16px;
 
             a {
-                color: rgb(76, 88, 102);
+                color: var(--font-color-grey);
                 padding: 3px 5px 3px 5px;
-                color: rgb(255, 228, 1);
-                background-color: rgb(66, 92, 139);
+                color: var(--font-color-gold);
+                background-color: var(--btn-background);
                 border-radius: 5px;
                 transition: all .5s;
 
@@ -168,7 +157,7 @@ const totalPage = computed(() => {
                     margin-right: 5px;
                     width: 5px;
                     height: 5px;
-                    background-color: rgb(255, 228, 1);
+                    background-color: var(--font-color-gold);
                     border-radius: 50%;
                     vertical-align: middle;
                     transition: all .5s;
@@ -176,8 +165,8 @@ const totalPage = computed(() => {
                 }
 
                 &:hover {
-                    background-color: rgb(51, 73, 93);
-                    color: rgb(255, 228, 1);
+                    background-color: var(--btn-hover);
+                    color: var(--font-color-gold);
 
                 }
             }
@@ -185,7 +174,7 @@ const totalPage = computed(() => {
     }
 
     .summary {
-        color: rgb(76, 88, 102);
+        color: var(--font-color-grey);
 
     }
 }

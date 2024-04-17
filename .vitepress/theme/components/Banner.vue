@@ -24,8 +24,18 @@ const { state } = useStore()
     width: 100%;
     height: 80vh;
     transition: all .5s;
+    z-index: 0;
 }
 
+.banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(0.5turn, transparent, var(--general-background-color));
+}
 .postViewer {
     height: 50vh;
 }

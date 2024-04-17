@@ -38,34 +38,24 @@ onUnmounted(() => {
 .viewBox {
     box-sizing: border-box;
     position: relative;
-    // top: 50px;
     padding: 50px;
     border-radius: 32px;
     border: solid 2px white;
     transition: all .5s;
     background:
-        linear-gradient(.5turn, transparent, rgb(248, 252, 253) 10%),
-        repeating-linear-gradient(60deg,
-            rgba(190, 242, 255, 0.6),
-            transparent 35px),
-        repeating-linear-gradient(180deg, transparent, rgba(18, 211, 249, 0.2) 30px),
-        repeating-linear-gradient(120deg,
-            rgba(16, 179, 215, 0.2),
-            transparent 46px);
-    backdrop-filter: blur(2px);
-    box-shadow: 0 0 15px rgb(108, 154, 196);
+        linear-gradient(.5turn, transparent, white 10%),
+        var(--triangle-background);
+    backdrop-filter: var(--blur-val);
+    box-shadow: var(--blue-shadow);
 }
 
 html {
-    --color-grey: rgb(76, 88, 102);
-    --color-gold: rgb(255, 228, 1);
-    --color-blue: rgb(18, 138, 250);
     --vp-icon-copy: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='20' width='20' stroke='rgba(128,128,128,1)' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2'/%3E%3C/svg%3E");
     --vp-icon-copied: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='20' width='20' stroke='rgba(128,128,128,1)' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2m-6 9 2 2 4-4'/%3E%3C/svg%3E");
 }
 
 .content {
-    color: var(--color-grey);
+    color: var(--font-color-grey);
 
     a {
         color: var(--color-blue);
@@ -90,12 +80,17 @@ html {
         }
 
     }
-    h2 {
-    padding-bottom: 0.3em;
-    margin-bottom: 1em;
-    border-bottom: 1px dashed var(--color-grey);
-  }
 
+    h2 {
+        padding-bottom: 0.3em;
+        margin-bottom: 1em;
+        border-bottom: 2px dashed #ced4da;
+    }
+
+    hr {
+        border: 0;
+        border-top: 2px dashed #ced4da;
+    }
 
 }
 
@@ -123,7 +118,7 @@ div[class*="language-"] {
         user-select: none;
         font-weight: bold;
         padding-bottom: 10px;
-        border-bottom: 5px solid var(--color-gold);
+        border-bottom: 5px solid var(--font-color-gold);
     }
 
     pre {

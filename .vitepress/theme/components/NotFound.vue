@@ -15,16 +15,16 @@ const base = useData().site.value.base
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: rgb(76, 88, 102);
+    color: var(--font-color-grey);
     font-size: large;
     width: 720px;
     margin: 100px auto;
     background-color: rgba(255, 255, 255, 0.25);
     border-radius: 32px;
     border: solid 2px white;
-    backdrop-filter: blur(2px);
+    backdrop-filter: var(--blur-val);
     a {
-        color: rgb(76, 88, 102);
+        color: var(--font-color-grey);
     }
 }
 </style>

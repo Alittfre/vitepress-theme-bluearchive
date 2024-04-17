@@ -28,12 +28,14 @@ const social = themeConfig.social
     align-items: center;
     justify-content: center;
     margin: 50px 10px 0 10px;
+    z-index: 100;
 }
 
 .welcomeText {
     font-size: 80px;
     font-weight: bold;
     color: white;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
     transition: all .5s;
 
     &:hover {
@@ -51,10 +53,10 @@ const social = themeConfig.social
     padding-top: 50px;
     height: 200px;
     width: 720px;
-    background-color: rgba(255, 255, 255, 0.25);
+    background-color: rgba(255, 255, 255, 0.3);
     border-radius: 32px;
     border: solid 2px white;
-    backdrop-filter: blur(2px);
+    backdrop-filter: var(--blur-val);
 
     .avatar {
         position: absolute;
@@ -79,7 +81,7 @@ const social = themeConfig.social
     span {
         margin-top: 10px;
         font-weight: bold;
-        color: rgb(76, 88, 102);
+        color: var(--font-color-grey);
         text-align: center;
         margin-right: 16px;
         margin-left: 16px;
@@ -98,7 +100,7 @@ const social = themeConfig.social
             transition: all .5s;
 
             &:hover {
-                filter: drop-shadow(0 0 5px rgba(248, 252, 253));
+                filter: drop-shadow(0 0 5px var(--font-color-grey));
             }
         }
     }

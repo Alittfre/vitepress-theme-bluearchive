@@ -1,7 +1,7 @@
 ---
 title: HelloWorld
 date: 2024-4-16
-tags: [HelloWord, vue, vitepress]
+tags: [HelloWorld, vue, vitepress]
 ---
 
 只是一个HelloWorld

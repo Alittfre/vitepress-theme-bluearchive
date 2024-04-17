@@ -53,18 +53,11 @@ header {
         border-bottom: solid 2px white;
         border-left: solid 2px white;
         border-right: solid 2px white;
-
         background:
-            linear-gradient(.25turn, transparent, rgb(248, 252, 253) 25%),
-            repeating-linear-gradient(60deg,
-                rgba(190, 242, 255, 0.15),
-                transparent 35px),
-            repeating-linear-gradient(180deg, transparent, rgba(108, 230, 255, 0.20) 30px),
-            repeating-linear-gradient(120deg,
-                rgba(16, 179, 215, 0.2),
-                transparent 46px);
-        backdrop-filter: blur(2px);
-        box-shadow: 0 0 15px rgb(108, 154, 196);
+            linear-gradient(.25turn, transparent, white 25%),
+            var(--triangle-background);
+        backdrop-filter: var(--blur-val);
+        box-shadow: var(--blue-shadow);
         transition: all .5s;
 
         &:hover {
@@ -78,7 +71,7 @@ header {
         img {
             height: 36px;
             width: auto;
-            filter: drop-shadow(0 0 5px rgb(18, 138, 250));
+            filter: drop-shadow(0 0 5px rgba(18, 138, 250, 0.5));
         }
     }
 
@@ -103,7 +96,7 @@ header {
 
                     &:hover {
                         color: var(--font-color-gold);
-                        background-color: var(--hover-color);
+                        background-color: var(--btn-background);
                     }
                 }
 
