@@ -1,0 +1,26 @@
+{
+  "name": "vitepress-theme-bluearchive",
+  "version": "0.0.1",
+  "description": "vitepress-theme-bluearchive",
+  "type": "module",
+  "main": ".vitepress/theme/Layout.vue",
+  "author": "Alittfre",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.12.5",
+    "less": "^4.2.0",
+    "vitepress": "^1.0.2"
+  },
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "dependencies": {
+    "gitalk": "^1.8.0",
+    "gray-matter": "^4.0.3",
+    "md5": "^2.3.0",
+    "minisearch": "^6.3.0",
+    "normalize.less": "^1.0.0"
+  }
+}
