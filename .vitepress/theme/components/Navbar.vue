@@ -106,6 +106,7 @@ header {
 
     .search {
         padding-right: 16px;
+        cursor: pointer;
 
         img {
             height: 36px;

@@ -19,7 +19,6 @@ const welcomeText = themeConfig.welcomeText
 const avatar = themeConfig.avatar
 const motto = themeConfig.motto
 const social = themeConfig.social
-
 </script>
 <style scoped lang='less'>
 .welcomeBox {

@@ -1,7 +1,7 @@
 <template>
     <div class="viewBox container">
         <content class="content" />
-        <Gitalk></Gitalk>
+        <Gitalk v-if="themeConfig.clientID"></Gitalk>
     </div>
 </template>
 <script setup lang="ts">
@@ -33,6 +33,8 @@ onUnmounted(() => {
         excerpt: ''
     }
 })
+
+const themeConfig = useData().theme.value
 </script>
 <style lang='less'>
 .viewBox {

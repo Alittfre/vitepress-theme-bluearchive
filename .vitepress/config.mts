@@ -48,6 +48,5 @@ export default defineConfigWithTheme<ThemeConfig>({
   markdown: {
     theme: 'github-light',
     lineNumbers: true
-  },
-
+  }
 })
