@@ -11,33 +11,33 @@ const cwd = process.cwd()
 let id = 1
 
 interface Post {
-  id:number,
-  title: string,
-  content: string,
-  href: string,
-  create: number,
-  update: number,
-  tags?: string[],
-  wordCount: number,
-  cover?: string,
+  id: number
+  title: string
+  content: string
+  href: string
+  create: number
+  update: number
+  tags?: string[]
+  wordCount: number
+  cover?: string
   excerpt: string | undefined
 }
 
 // Post数据缓存
-const cache: Map<string, { timestamp: number, post: Post }> = new Map()
+const cache: Map<string, { timestamp: number; post: Post }> = new Map()
 
 function countWords(text: string): number {
   // 将连续的英文字母串替换为单个字母
-  const replacedText = text.replace(/[a-zA-Z]+/g, "A");
+  const replacedText = text.replace(/[a-zA-Z]+/g, 'A')
 
-  const pattern = /[\u4E00-\u9FA5A]/g;
-  const matches = replacedText.match(pattern);
+  const pattern = /[\u4E00-\u9FA5A]/g
+  const matches = replacedText.match(pattern)
 
-  let count = 0;
+  let count = 0
   if (matches) {
-      count = matches.length;
+    count = matches.length
   }
-  return count;
+  return count
 }
 
 function getPost(md: any, file: string, postDir: string): Post {
@@ -56,12 +56,12 @@ function getPost(md: any, file: string, postDir: string): Post {
     title: data.title,
     content: content,
     href: `posts/${file.replace(/\.md$/, '.html')}`,
-    create: + (new Date(data.date) || timestamp),
+    create: +(new Date(data.date) || timestamp),
     update: timestamp,
     tags: data.tags,
     wordCount: countWords(content),
     cover: data.cover,
-    excerpt: excerpt
+    excerpt: excerpt,
   }
 
   cache.set(fullPath, { timestamp, post })
@@ -81,5 +81,5 @@ async function load() {
 
 export default {
   watch: path.relative(__dirname, cwd + '/posts/*.md').replace(/\\/g, '/'),
-  load
+  load,
 }

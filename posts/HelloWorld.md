@@ -4,9 +4,10 @@ date: 2024-4-16
 tags: [HelloWorld, vue, vitepress]
 ---
 
-只是一个HelloWorld
+只是一个 HelloWorld
 
 ---
+
 # Markdown Extension Examples
 
 This page demonstrates some of the built-in markdown extensions provided by VitePress.
