@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!page.isNotFound">
+  <template v-if="!page.isNotFound">
     <Navbar></Navbar>
     <Banner>
       <transition name="opac" mode="out-in">
@@ -18,7 +18,7 @@
       <PostViewer v-else></PostViewer>
     </transition>
     <ToTop></ToTop>
-  </div>
+  </template>
   <NotFound v-else></NotFound>
 </template>
 <script setup lang="ts">

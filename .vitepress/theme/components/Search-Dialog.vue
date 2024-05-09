@@ -12,10 +12,10 @@
         v-model="searchStr"
         @input="search"
       />
-      <ul class="searchList">
+      <ul class="searchList" @click="closeDialog">
         <span>{{ status }}</span>
         <li v-for="res in resultList">
-          <a :href="base + res.href" @click="closeDialog">{{ res.title }}</a>
+          <a :href="base + res.href">{{ res.title }}</a>
         </li>
       </ul>
     </div>

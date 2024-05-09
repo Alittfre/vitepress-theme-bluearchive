@@ -109,7 +109,7 @@ const totalPage = computed(() => {
     transition: all 0.5s;
     background: linear-gradient(0.5turn, transparent, rgb(255, 255, 255) 70%),
       var(--triangle-background);
-    backdrop-filter: var(--blur-val);
+    // backdrop-filter: var(--blur-val);
     box-shadow: var(--blue-shadow);
   }
 

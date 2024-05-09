@@ -21,7 +21,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   state.currPost = {
-    id: 1,
+    id: 0,
     title: '',
     content: '',
     href: '',
@@ -44,8 +44,8 @@ const themeConfig = useData().theme.value
   border-radius: 32px;
   border: solid 2px white;
   transition: all 0.5s;
-  background: linear-gradient(0.5turn, transparent, white 10%), var(--triangle-background);
-  backdrop-filter: var(--blur-val);
+  background: linear-gradient(0.5turn, transparent, white 5%), var(--triangle-background);
+  // backdrop-filter: var(--blur-val);
   box-shadow: var(--blue-shadow);
 }
 

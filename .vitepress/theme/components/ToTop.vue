@@ -8,11 +8,13 @@ import { ref, onMounted, onUnmounted } from 'vue'
 const hide = `bottom: 100%; right: 100%; opacity: 0;`
 const style = ref(hide)
 const onScroll = () => {
-  if (window.scrollY > 200) {
-    style.value = `bottom: 50px`
-  } else {
-    style.value = hide
-  }
+  window.requestAnimationFrame(() => {
+    if (window.scrollY > 200) {
+      style.value = `bottom: 50px`
+    } else {
+      style.value = hide
+    }
+  })
 }
 const toTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
