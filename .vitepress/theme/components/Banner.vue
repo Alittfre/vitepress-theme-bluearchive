@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="banner"
-    :class="{ postViewer: state.currPost.href }"
-    :style="`background-image: url(${banner});`"
-  >
+  <div class="banner" :class="{ postViewer: state.currPost.href }" :style="`background-image: url(${banner});`">
     <slot></slot>
   </div>
 </template>
@@ -27,7 +23,7 @@ const { state } = useStore()
   background-position: center center;
   width: 100%;
   height: 80vh;
-  transition: all 0.2s;
+  // transition: all 0.2s;
 
   mask: linear-gradient(to top, transparent, var(--general-background-color) 10%);
   perspective: 1000px;
