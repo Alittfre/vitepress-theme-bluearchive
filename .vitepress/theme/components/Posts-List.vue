@@ -11,7 +11,7 @@
         </ul>
         <ul class="tags HeadLine" v-else>
           <li v-for="tag in post.tags">
-            <a :href="`${base}tags/?q=${tag}`">{{ tag }}</a>
+            <a :href="`${base}tags/?q=${tag}`"><i class="iconfont icon-tag"></i> {{ tag }}</a>
           </li>
         </ul>
         <span class="summary HeadLine">{{ post.excerpt }}</span>
@@ -157,18 +157,6 @@ const totalPage = computed(() => {
         background-color: var(--btn-background);
         border-radius: 5px;
         transition: all 0.5s;
-
-        &::before {
-          display: inline-block;
-          content: '';
-          margin-right: 5px;
-          width: 5px;
-          height: 5px;
-          background-color: var(--font-color-gold);
-          border-radius: 50%;
-          vertical-align: middle;
-          transition: all 0.5s;
-        }
 
         &:hover {
           background-color: var(--btn-hover);
