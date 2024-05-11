@@ -1,12 +1,15 @@
 # vitepress-theme-bluearchive
 
-BA主题博客，基于VitePress，绝赞画饼中
+![logo](.vitepress\theme\assets\icon\footLogo.svg)
 
-[在线预览](https://alittfre.github.io/)
+BA 主题博客，基于 VitePress，绝赞画饼中
+
+[在线预览](https://vitepress-theme-bluearchive.vercel.app/)
 
 ![preview](./preview.webp)
 
 ## 功能
+
 - [x] 首页横幅
 - [x] 文章列表
 - [x] 标签页面
@@ -16,34 +19,37 @@ BA主题博客，基于VitePress，绝赞画饼中
 - [x] 手机端适配
 
 ## 画饼
+
 - [ ] latex 公式
 - [ ] RSS
+- [ ] 优化 md 浏览样式
 - [ ] more...
 
 ## 主题配置
 
+首页头图和头像在`.vitepress\theme\assets\banner`
+
 配置文件在`.vitepress/config.mts`
+
 ```ts
 export interface ThemeConfig {
   //banner
-  name: string, // 首页名字
-  banner: string, // 首页头图
-  welcomeText: string, // 首页问候语
-  avatar: string, // 首页头像
-  motto: string, // 首页签名
-  social: { icon: string, url: string }[] // 联系方式，数量建议在2-5个之间，
-                                          // 可以自己加上对应icon
+  name: string // 首页名字
+  welcomeText: string // 首页问候语
+  motto: string // 首页签名
+  social: { icon: string; url: string }[] // 社交平台，icon可选ilibili，github，tw，weibo
 
   //gitalk配置
-  clientID: string,
-  clientSecret: string,
-  repo: string,
-  owner: string,
+  clientID: string
+  clientSecret: string
+  repo: string
+  owner: string
   admin: string[]
 }
 ```
 
 ## 文章配置
+
 ```md
 ---
 title: 标题
@@ -56,7 +62,6 @@ tags: [标签1, 标签2]
 ---
 
 文章主体内容
-
 ```
 
 ## 快速开始
@@ -66,28 +71,33 @@ tags: [标签1, 标签2]
 ```
 yarn install
 ```
+
 运行项目
+
 ```
 yarn run dev
 ```
+
 打包项目
+
 ```
 yarn run build
 ```
 
+## 上线 GitHub Pages 并使用 GitHub Actions 自动构建
 
-## 上线GitHub Pages并使用GitHub Actions自动构建
-
-本仓库为模板仓库，你可以点击右上角绿色的`Use this template`按钮，快速创建基于本仓库的GitHub Pages仓库。
+本仓库为模板仓库，你可以点击右上角绿色的`Use this template`按钮，快速创建基于本仓库的 GitHub Pages 仓库。
 
 关于模板仓库，你可以点击[从模板创建仓库](https://docs.github.com/zh/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)。
 
-关于GitHub Pages仓库，你可以点击[GitHub Pages 快速入门](https://docs.github.com/zh/pages/getting-started-with-github-pages)。
+关于 GitHub Pages 仓库，你可以点击[GitHub Pages 快速入门](https://docs.github.com/zh/pages/getting-started-with-github-pages)。
 
-关于GitHub Actions，你可以点击[GitHub Actions 文档](https://docs.github.com/zh/actions)。
+关于 GitHub Actions，你可以点击[GitHub Actions 文档](https://docs.github.com/zh/actions)。
 
 ### GitHub Actions 相关配置
+
 在项目的 .github/workflows 目录中创建一个名为 deploy.yml 的文件，其中包含这样的内容：
+
 ```yml
 # 构建 VitePress 站点并将其部署到 GitHub Pages 的示例工作流程
 #
@@ -155,6 +165,6 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
-
 ## 感谢
+
 - [vitepress-theme-sakura](https://github.com/flaribbit/vitepress-theme-sakura) 提供参考
