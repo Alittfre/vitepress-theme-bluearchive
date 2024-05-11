@@ -1,6 +1,6 @@
 # vitepress-theme-bluearchive
 
-![logo](.vitepress\theme\assets\icon\footLogo.svg)
+![logo](.vitepress/theme/assets/icon/footLogo.svg)
 
 BA 主题博客，基于 VitePress，绝赞画饼中
 
