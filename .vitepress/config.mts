@@ -22,6 +22,7 @@ export default defineConfigWithTheme<ThemeConfig>({
     ['link', { rel: 'stylesheet', href: 'https://unpkg.com/gitalk/dist/gitalk.css' }],
     ['script', { src: 'https://unpkg.com/gitalk/dist/gitalk.min.js' }],
   ],
+  ignoreDeadLinks: true,
   title: "Sensei's 部落格",
   description: "Sensei's 部落格",
   themeConfig: {

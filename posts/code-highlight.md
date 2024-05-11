@@ -157,22 +157,6 @@ insert into "topic" ("forum_id", "subject")
 values (2, 'D''artagnian');
 ```
 
-```objectivec
-#import <UIKit/UIKit.h>
-#import "Dependency.h"
-
-@protocol WorldDataSource
-@optional
-- (NSString*)worldName;
-@required
-- (BOOL)allowsToLive;
-@end
-
-@property (nonatomic, readonly) NSString *title;
-- (IBAction) show;
-@end
-```
-
 ```java
 /**
  * @author John Smith <john.smith@example.com>
