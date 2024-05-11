@@ -1,13 +1,9 @@
 <template>
-  <div class="banner" :class="{ postViewer: state.currPost.href }" :style="`background-image: url(${banner});`">
+  <div class="banner" :class="{ postViewer: state.currPost.href }">
     <slot></slot>
   </div>
 </template>
 <script setup lang="ts">
-import { useData } from 'vitepress'
-const themeConfig = useData().theme.value
-const banner = themeConfig.banner
-
 import { useStore } from '../store'
 const { state } = useStore()
 </script>
@@ -24,7 +20,7 @@ const { state } = useStore()
   width: 100%;
   height: 80vh;
   // transition: all 0.2s;
-
+  background-image: url(../assets/banner/banner.jpg);
   mask: linear-gradient(to top, transparent, var(--general-background-color) 10%);
   perspective: 1000px;
 }

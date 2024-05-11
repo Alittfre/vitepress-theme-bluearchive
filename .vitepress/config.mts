@@ -2,9 +2,7 @@ import { defineConfigWithTheme } from 'vitepress'
 export interface ThemeConfig {
   //banner
   name: string
-  banner: string
   welcomeText: string
-  avatar: string
   motto: string
   social: { icon: string; url: string }[]
 
@@ -29,13 +27,11 @@ export default defineConfigWithTheme<ThemeConfig>({
   themeConfig: {
     //banner区配置
     name: "Sensei's 部落格",
-    banner: '/banner.jpg',
     welcomeText: 'Hello, VitePress',
-    avatar: '/avatar.jpg',
     motto: '何気ない日常で、ほんの少しの奇跡を見つける物語。',
     social: [
-      { icon: '/github.svg', url: 'https://github.com/' },
-      { icon: '/bilibili.svg', url: 'https://www.bilibili.com/' },
+      { icon: 'github', url: 'https://github.com/' },
+      { icon: 'bilibili', url: 'https://www.bilibili.com/' },
     ],
 
     //gitalk配置

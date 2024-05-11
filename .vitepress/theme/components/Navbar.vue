@@ -9,8 +9,7 @@
           </li>
         </ul>
       </span>
-      <span class="search" @click="showDialog = true">
-        <a href=""><img src="../assets/icon/search.svg" alt="" /></a>
+      <span class="iconfont icon-search search" @click="showDialog = true">
       </span>
     </nav>
   </header>
@@ -108,11 +107,8 @@ header {
   .search {
     padding-right: 16px;
     cursor: pointer;
-
-    img {
-      height: 36px;
-      width: auto;
-    }
+    font-size: 36px;
+    color: var(--icon-color);
   }
 }
 

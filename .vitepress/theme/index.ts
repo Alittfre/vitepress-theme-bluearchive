@@ -2,6 +2,7 @@
 import Layout from './Layout.vue'
 import type { Theme } from 'vitepress'
 import 'normalize.less'
+import './assets/icon/iconfont.css'
 
 export default {
   Layout,

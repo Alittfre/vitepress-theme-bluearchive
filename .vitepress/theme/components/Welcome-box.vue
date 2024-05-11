@@ -1,24 +1,16 @@
 <template>
-  <div
-    class="welcomeBox"
-    ref="welcomeBoxRef"
-    @mousemove="parallax"
-    @mouseleave="reset"
-    :style="{ transform: `rotateY(${calcY}deg) rotateX(${calcX}deg)` }"
-  >
+  <div class="welcomeBox" ref="welcomeBoxRef" @mousemove="parallax" @mouseleave="reset"
+    :style="{ transform: `rotateY(${calcY}deg) rotateX(${calcX}deg)` }">
     <span class="welcomeText">{{ welcomeText }}</span>
-    <div
-      class="infoBox"
-      :style="{
-        background: `linear-gradient(${angle}deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5))`,
-      }"
-    >
-      <img :src="avatar" alt="" class="avatar" />
+    <div class="infoBox" :style="{
+      background: `linear-gradient(${angle}deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5))`,
+    }">
+      <img src="../assets/banner/avatar.jpg" alt="" class="avatar" />
       <span class="name">{{ name }}</span>
       <span>{{ motto }}</span>
       <ul>
         <li v-for="item in social">
-          <a :href="item.url"><img :src="item.icon" alt="" /></a>
+          <a :href="item.url"><i :class="`iconfont icon-${item.icon} social`"></i></a>
         </li>
       </ul>
     </div>
@@ -29,7 +21,6 @@ import { useData } from 'vitepress'
 const themeConfig = useData().theme.value
 const name = themeConfig.name
 const welcomeText = themeConfig.welcomeText
-const avatar = themeConfig.avatar
 const motto = themeConfig.motto
 const social = themeConfig.social
 
@@ -95,6 +86,7 @@ const reset = () => {
   border-radius: 32px;
   border: solid 2px white;
   backdrop-filter: var(--blur-val);
+
   .avatar {
     position: absolute;
     top: -25%;
@@ -132,9 +124,10 @@ const reset = () => {
     width: 200px;
     padding: 0;
 
-    img {
-      width: 32px;
+    .social {
+      font-size: 32px;
       transition: all 0.5s;
+      color: var(--font-color-grey);
 
       &:hover {
         filter: drop-shadow(0 0 5px var(--font-color-grey));
