@@ -8,9 +8,9 @@
   "license": "ISC",
   "devDependencies": {
     "@types/md5": "^2.3.5",
-    "@types/node": "^20.12.5",
+    "@types/node": "^20.12.11",
     "less": "^4.2.0",
-    "vitepress": "^1.0.2"
+    "vitepress": "^1.1.4"
   },
   "scripts": {
     "dev": "vitepress dev",

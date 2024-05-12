@@ -9,7 +9,7 @@
       </transition>
     </Banner>
     <transition name="opac" mode="out-in">
-      <PostsList :key="path + state.currTag" :posts="finalPosts" v-if="path === '' || path === 'tags/'">
+      <PostsList :key="path + reflashKey" :posts="finalPosts || []" v-if="path === '' || path === 'tags/'">
       </PostsList>
       <PostViewer v-else></PostViewer>
     </transition>
@@ -41,7 +41,9 @@ const path = computed(() => route.path.replace(base, '').replace('index.html', '
 import { data as posts } from './utils/posts.data'
 import { useStore } from './store'
 const { state } = useStore()
+let reflashKey = 0
 const finalPosts = computed(() => {
+  reflashKey++
   if (path.value === '') {
     return posts
   } else if (path.value === 'tags/') {
