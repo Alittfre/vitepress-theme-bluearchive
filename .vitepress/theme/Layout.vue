@@ -3,14 +3,13 @@
     <Navbar></Navbar>
     <Banner>
       <transition name="opac" mode="out-in">
-        <WelcomeBox v-if="path === ''"></WelcomeBox>
-        <Tags v-else-if="path === 'tags/'"></Tags>
+        <WelcomeBox v-if="page.filePath === 'index.md'"></WelcomeBox>
+        <Tags v-else-if="page.filePath === 'tags/index.md'"></Tags>
         <PostInnerBanner v-else></PostInnerBanner>
       </transition>
     </Banner>
     <transition name="opac" mode="out-in">
-      <PostsList :key="path + reflashKey" :posts="finalPosts || []" v-if="path === '' || path === 'tags/'">
-      </PostsList>
+      <PostsList v-if="page.filePath === 'index.md' || page.filePath === 'tags/index.md'"></PostsList>
       <PostViewer v-else></PostViewer>
     </transition>
     <ToTop></ToTop>
@@ -30,27 +29,8 @@ import NotFound from './components/NotFound.vue'
 import ToTop from './components/ToTop.vue'
 
 // 路径切换
-import { computed } from 'vue'
-import { useData, useRoute } from 'vitepress'
+import { useData } from 'vitepress'
 const { page } = useData()
-const base = useData().site.value.base
-const route = useRoute()
-const path = computed(() => route.path.replace(base, '').replace('index.html', ''))
-
-// 文章传值
-import { data as posts } from './utils/posts.data'
-import { useStore } from './store'
-const { state } = useStore()
-let reflashKey = 0
-const finalPosts = computed(() => {
-  reflashKey++
-  if (path.value === '') {
-    return posts
-  } else if (path.value === 'tags/') {
-    return state.selectedPosts
-  }
-  return []
-})
 </script>
 
 <style lang="less">

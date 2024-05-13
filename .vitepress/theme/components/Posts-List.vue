@@ -24,15 +24,13 @@
   </div>
 </template>
 <script setup lang="ts">
-import { type PostData } from '../utils/posts.data'
 import { useData } from 'vitepress'
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
+import { data as posts } from '../utils/posts.data'
 import { useStore } from '../store'
 const { state } = useStore()
+const { page } = useData()
 const base = useData().site.value.base
-const { posts } = defineProps<{
-  posts: PostData[]
-}>()
 
 function formatDate(timestamp: number): string {
   const date = new Date(timestamp)
@@ -45,10 +43,22 @@ function formatDate(timestamp: number): string {
 const currPage = ref(1)
 const pageSize = ref(5)
 const postsList = computed(() => {
-  return posts.slice((currPage.value - 1) * pageSize.value, currPage.value * pageSize.value)
+  return finalPosts.value.slice((currPage.value - 1) * pageSize.value, currPage.value * pageSize.value)
 })
 const totalPage = computed(() => {
-  return Math.ceil(posts.length / pageSize.value) || 1
+  return Math.ceil(finalPosts.value.length / pageSize.value) || 1
+})
+
+// 文章传值
+const finalPosts = computed(() => {
+  if (page.value.filePath === 'index.md') {
+    currPage.value = 1
+    return posts
+  } else if (page.value.filePath === 'tags/index.md') {
+    currPage.value = 1
+    return state.selectedPosts
+  }
+  return []
 })
 </script>
 <style scoped lang="less">
