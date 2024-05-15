@@ -17,12 +17,15 @@ BA 主题博客，基于 VitePress，绝赞画饼中
 - [x] gitalk 评论
 - [x] 代码高亮
 - [x] 手机端适配
+- [x] latex 公式
 
 ## 画饼
 
-- [ ] latex 公式
 - [ ] RSS
 - [ ] 优化 md 浏览样式
+- [ ] 夜间模式
+- [ ] 底栏
+- [ ] 优化 404
 - [ ] more...
 
 ## 主题配置
@@ -168,3 +171,4 @@ jobs:
 ## 感谢
 
 - [vitepress-theme-sakura](https://github.com/flaribbit/vitepress-theme-sakura) 提供参考
+- [vitepress X BA logo](https://github.com/nulla2011/bluearchive-logo) 非常好 BA logo 生成器
