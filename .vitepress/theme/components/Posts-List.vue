@@ -65,7 +65,7 @@ const finalPosts = computed(() => {
 .list-move,
 .list-enter-active,
 .list-leave-active {
-  transition: all 0.2s;
+  transition: all 0.5s;
 }
 
 .list-enter-from,
@@ -77,7 +77,8 @@ const finalPosts = computed(() => {
   以便能够正确地计算移动的动画。 */
 .list-leave-active {
   position: absolute;
-  width: 100%;
+  right: 0;
+  left: 0;
 }
 
 .HeadLine {
@@ -100,14 +101,12 @@ const finalPosts = computed(() => {
     display: flex;
     flex-direction: column;
     margin-bottom: 50px;
-    padding: 32px 40px 32px 40px;
+    padding: 32px 40px;
     background-color: rgb(248, 252, 253);
     border-radius: 32px;
     border: solid 2px white;
-    transition: all 0.5s;
     background: linear-gradient(0.5turn, transparent, rgb(255, 255, 255) 70%),
       var(--triangle-background);
-    // backdrop-filter: var(--blur-val);
     box-shadow: var(--blue-shadow);
   }
 
@@ -128,7 +127,7 @@ const finalPosts = computed(() => {
     }
 
     a {
-      padding: 3px 10px 3px 10px;
+      padding: 3px 10px;
       color: var(--font-color-grey);
       transition: all 0.5s;
 
@@ -158,7 +157,7 @@ const finalPosts = computed(() => {
 
       a {
         color: var(--font-color-grey);
-        padding: 3px 5px 3px 5px;
+        padding: 3px 5px;
         color: var(--font-color-gold);
         background-color: var(--btn-background);
         border-radius: 5px;
