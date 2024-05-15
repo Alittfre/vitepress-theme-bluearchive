@@ -31,14 +31,16 @@ let calcY = ref(0)
 let calcX = ref(0)
 let angle = ref(0)
 const parallax = (e: MouseEvent) => {
-  window.requestAnimationFrame(() => {
-    let box = welcomeBoxRef!.value!.getBoundingClientRect()
-    calcY.value = (e.clientX - box.x - box.width / 2) / multiple
-    calcX.value = -(e.clientY - box.y - box.height / 2) / multiple
-    angle.value = Math.floor(
-      getMouseAngle(e.clientY - box.y - box.height / 2, e.clientX - box.x - box.width / 2),
-    )
-  })
+  if (welcomeBoxRef.value) {
+    window.requestAnimationFrame(() => {
+      let box = welcomeBoxRef.value!.getBoundingClientRect()
+      calcY.value = (e.clientX - box.x - box.width / 2) / multiple
+      calcX.value = -(e.clientY - box.y - box.height / 2) / multiple
+      angle.value = Math.floor(
+        getMouseAngle(e.clientY - box.y - box.height / 2, e.clientX - box.x - box.width / 2),
+      )
+    })
+  }
 }
 function getMouseAngle(x, y) {
   const radians = Math.atan2(y, x)
