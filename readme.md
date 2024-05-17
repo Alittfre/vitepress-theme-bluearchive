@@ -18,6 +18,7 @@ BA 主题博客，基于 VitePress，绝赞画饼中
 - [x] 代码高亮
 - [x] 手机端适配
 - [x] latex 公式
+- [x] 点击烟花效果 🎉
 
 ## 画饼
 
@@ -26,6 +27,9 @@ BA 主题博客，基于 VitePress，绝赞画饼中
 - [ ] 夜间模式
 - [ ] 底栏
 - [ ] 优化 404
+- [ ] Arona 的 spine 模型
+- [ ] 让点击烟花更还原游戏效果
+- [ ] 首屏加载动画
 - [ ] more...
 
 ## 主题配置
@@ -172,3 +176,4 @@ jobs:
 
 - [vitepress-theme-sakura](https://github.com/flaribbit/vitepress-theme-sakura) 提供参考
 - [vitepress X BA logo](https://github.com/nulla2011/bluearchive-logo) 非常好 BA logo 生成器
+- [Anime.js Fireworks canvas demo](https://codepen.io/juliangarnier/pen/gmOwJX) and [hexo-theme-yun](https://github.com/YunYouJun/hexo-theme-yun) 点击烟花效果 🎉
