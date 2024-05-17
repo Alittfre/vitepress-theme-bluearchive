@@ -7,6 +7,7 @@
   "author": "Alittfre",
   "license": "ISC",
   "devDependencies": {
+    "@types/animejs": "^3.1.12",
     "@types/md5": "^2.3.5",
     "@types/node": "^20.12.11",
     "less": "^4.2.0",
@@ -19,6 +20,7 @@
     "preview": "vitepress preview"
   },
   "dependencies": {
+    "animejs": "^3.2.2",
     "gray-matter": "^4.0.3",
     "md5": "^2.3.0",
     "minisearch": "^6.3.0",
