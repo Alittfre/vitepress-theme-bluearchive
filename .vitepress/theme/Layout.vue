@@ -1,4 +1,5 @@
 <template>
+  <Fireworks></Fireworks>
   <template v-if="!page.isNotFound">
     <Navbar></Navbar>
     <Banner>
@@ -27,6 +28,7 @@ import PostViewer from './components/Post-Viewer.vue'
 import PostInnerBanner from './components/Post-innerBanner.vue'
 import NotFound from './components/NotFound.vue'
 import ToTop from './components/ToTop.vue'
+import Fireworks from './components/Fireworks.vue'
 
 // 路径切换
 import { useData } from 'vitepress'
