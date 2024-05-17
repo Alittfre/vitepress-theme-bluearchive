@@ -26,6 +26,7 @@ interface Particle {
   color?: string
   radius?: number
   alpha?: number
+  angle?: number
   lineWidth?: number
   endPos?: { x: number; y: number }
   draw?: () => void
@@ -77,11 +78,12 @@ function createFireworks() {
       y,
       color: `rgba(${colors[anime.random(0, colors.length - 1)]},${anime.random(0.2, 0.8)})`,
       radius: anime.random(defaultConfig.circleRadius.min, defaultConfig.circleRadius.max),
+      angle: anime.random(0, 360),
       endPos: setParticleDirection({ x, y }),
       draw() {
         ctx.save()
         ctx.translate(this.x, this.y)
-        ctx.rotate((anime.random(0, 360) * Math.PI) / 180)
+        ctx.rotate((this.angle * Math.PI) / 180)
         ctx.beginPath()
         ctx.moveTo(0, -this.radius!)
         ctx.lineTo(this.radius! * Math.sin(Math.PI / 3), this.radius! * Math.cos(Math.PI / 3))
