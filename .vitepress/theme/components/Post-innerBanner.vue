@@ -1,17 +1,15 @@
 <template>
   <div class="postBanner">
     <h1 class="title">{{ state.currPost.title }}</h1>
-    <span class="status"
-      >发布于
+    <span class="status">发布于
       {{
-        Intl.DateTimeFormat('zh-CN', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-        }).format(new Date(state.currPost.create))
-      }}
-      | 约{{ state.currPost.wordCount }}字</span
-    >
+      Intl.DateTimeFormat('zh-CN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      }).format(new Date(state.currPost.create))
+    }}
+      | 约{{ state.currPost.wordCount }}字</span>
   </div>
 </template>
 <script setup lang="ts">
@@ -26,6 +24,7 @@ const { state } = useStore()
   align-items: center;
   color: white;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+
   .title {
     font-size: 80px;
     margin-bottom: 50px;
@@ -35,7 +34,7 @@ const { state } = useStore()
     font-weight: bold;
   }
 
-  @media (max-width: 720px) {
+  @media (max-width: 768px) {
     .title {
       font-size: 30px;
     }

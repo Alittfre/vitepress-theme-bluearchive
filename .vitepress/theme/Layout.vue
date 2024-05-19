@@ -48,20 +48,6 @@ const { page } = useData()
 
 html {
   scroll-behavior: smooth;
-  --font-color-grey: rgb(76, 88, 102);
-  --font-color-gold: rgb(255, 228, 1);
-  --icon-color: #466398;
-  --color-blue: rgb(18, 138, 250);
-  --btn-background: rgb(66, 92, 139);
-  --btn-hover: rgb(51, 73, 93);
-  --blur-val: blur(10px);
-  --general-background-color: #eaeff5;
-  --blue-shadow: 0 0 15px rgb(108, 154, 196);
-  --triangle-background: repeating-linear-gradient(60deg,
-      rgba(190, 242, 255, 0.3),
-      transparent 35px),
-    repeating-linear-gradient(180deg, transparent, rgba(108, 230, 255, 0.3) 30px),
-    repeating-linear-gradient(120deg, rgba(16, 179, 215, 0.3), transparent 46px);
 }
 
 .container {

@@ -100,7 +100,7 @@ const finalPosts = computed(() => {
   .Doc {
     display: flex;
     flex-direction: column;
-    margin-bottom: 50px;
+    margin: 0 0 50px 0;
     padding: 32px 40px;
     background-color: rgb(248, 252, 253);
     border-radius: 32px;
@@ -118,7 +118,6 @@ const finalPosts = computed(() => {
     &::before {
       display: inline-block;
       content: '';
-      margin-right: 10px;
       width: 6px;
       height: 24px;
       vertical-align: middle;
@@ -128,6 +127,7 @@ const finalPosts = computed(() => {
 
     a {
       padding: 3px 10px;
+      margin-left: 10px;
       color: var(--font-color-grey);
       transition: all 0.5s;
 
@@ -227,13 +227,13 @@ const finalPosts = computed(() => {
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   .HeadLine {
     margin-left: 16px;
   }
 
   .Doc {
-    margin-bottom: 30px !important;
+    margin: 0 8px 30px 8px !important;
   }
 
   .title {

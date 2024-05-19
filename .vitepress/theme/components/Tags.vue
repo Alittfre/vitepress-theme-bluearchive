@@ -54,9 +54,8 @@ onUnmounted(() => {
   border-radius: 32px;
   border: solid 2px white;
   backdrop-filter: var(--blur-val);
-  margin-top: 50px;
-  margin-bottom: 10px;
-  width: 720px;
+  margin: 50px 8px 0 8px;
+  width: 768px;
   transition: all 0.5s;
 
   li {
@@ -81,7 +80,7 @@ onUnmounted(() => {
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   .tags {
     width: 100%;
   }

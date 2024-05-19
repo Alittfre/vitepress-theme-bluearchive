@@ -112,7 +112,7 @@ header {
   }
 }
 
-@media (min-width: 720px) {
+@media (min-width: 768px) {
   .menu {
     li {
       margin: 0 50px 0 50px;

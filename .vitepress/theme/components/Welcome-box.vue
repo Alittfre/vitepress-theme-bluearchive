@@ -62,7 +62,7 @@ const reset = () => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 50px 10px 0 10px;
+  margin: 50px 8px 0 8px;
   z-index: 100;
   transform-style: preserve-3d;
   transition: all 0.2s;
@@ -84,7 +84,7 @@ const reset = () => {
   margin-top: 80px;
   padding-top: 50px;
   height: 200px;
-  width: 720px;
+  width: 768px;
   border-radius: 32px;
   border: solid 2px white;
   backdrop-filter: var(--blur-val);
@@ -138,7 +138,7 @@ const reset = () => {
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   .banner {
     .welcomeText {
       font-size: 50px;

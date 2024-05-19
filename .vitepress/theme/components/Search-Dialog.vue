@@ -4,14 +4,7 @@
     <div class="dialogContent">
       <button type="button" class="closeBtn" @click="closeDialog">×</button>
       <span class="title">搜索</span>
-      <input
-        type="text"
-        name=""
-        id="searchInput"
-        placeholder="请输入关键字"
-        v-model="searchStr"
-        @input="search"
-      />
+      <input type="text" name="" id="searchInput" placeholder="请输入关键字" v-model="searchStr" @input="search" />
       <ul class="searchList" @click="closeDialog">
         <span>{{ status }}</span>
         <li v-for="res in resultList">
@@ -84,7 +77,7 @@ function search(): void {
 .dialogContent {
   position: relative;
   width: 90%;
-  max-width: 720px;
+  max-width: 768px;
   height: auto;
   background-color: rgb(239, 239, 239);
   border-radius: 16px;
@@ -104,6 +97,10 @@ function search(): void {
   height: 56px;
   border-bottom: 3px solid rgb(213, 217, 219);
   background-color: rgb(239, 242, 244);
+  background-image: url('../assets/Popup_Deco.png');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: contain;
 }
 
 .title {
@@ -177,7 +174,7 @@ li {
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   .dialogContent {
     top: 5%;
   }
