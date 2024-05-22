@@ -13,12 +13,16 @@ const route = useRoute()
 const data = useData()
 const base = data.site.value.base
 const { state } = useStore()
-import { onUnmounted, watch } from 'vue'
+import { onMounted, onUnmounted, watch } from 'vue'
 
-watch(() => route.path, () => {
-  const currPost = posts.findIndex((p) => p.href === route.path.replace(base, ''))
+function getCurrpost() {
+  let currPost = posts.findIndex((p) => p.href === route.path.replace(base, ''))
   state.currPost = posts[currPost]
-}, { immediate: true })
+}
+
+onMounted(() => {
+  getCurrpost()
+})
 
 onUnmounted(() => {
   state.currPost = {
@@ -34,6 +38,11 @@ onUnmounted(() => {
     excerpt: '',
   }
 })
+
+watch(() => route.path, () => {
+  getCurrpost()
+})
+
 
 const themeConfig = useData().theme.value
 </script>
