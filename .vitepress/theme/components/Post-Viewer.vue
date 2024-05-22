@@ -13,11 +13,12 @@ const route = useRoute()
 const data = useData()
 const base = data.site.value.base
 const { state } = useStore()
-import { onUnmounted, onMounted } from 'vue'
-onMounted(() => {
+import { onUnmounted, watch } from 'vue'
+
+watch(() => route.path, () => {
   const currPost = posts.findIndex((p) => p.href === route.path.replace(base, ''))
   state.currPost = posts[currPost]
-})
+}, { immediate: true })
 
 onUnmounted(() => {
   state.currPost = {
