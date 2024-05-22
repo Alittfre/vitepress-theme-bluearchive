@@ -59,11 +59,7 @@ onUnmounted(() => {
   transition: all 0.5s;
 
   li {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 15px;
-    margin-right: 16px;
+    margin: 8px;
 
     a {
       color: var(--font-color-grey);
@@ -82,7 +78,7 @@ onUnmounted(() => {
 
 @media (max-width: 768px) {
   .tags {
-    width: 100%;
+    width: auto;
   }
 }
 </style>
