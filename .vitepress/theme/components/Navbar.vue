@@ -43,7 +43,7 @@ const closeDialog = () => {
 }
 
 header {
-  height: 70vh;
+  height: 80vh;
 
   nav {
     display: flex;
@@ -60,11 +60,6 @@ header {
     background: linear-gradient(0.25turn, transparent, white 25%), var(--triangle-background);
     backdrop-filter: var(--blur-val);
     box-shadow: var(--blue-shadow);
-    transition: all 0.5s;
-
-    &:hover {
-      background-position: 0 25px;
-    }
   }
 
   .logo {
@@ -115,7 +110,7 @@ header {
 @media (min-width: 768px) {
   .menu {
     li {
-      margin: 0 50px 0 50px;
+      margin: 0 50px;
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="NotFound">
+  <div class="not-found">
     <img src="../assets/NotFound.png" alt="" />
     <span>页面不存在</span>
     <span class="band"><a :href="base">回到主页</a></span>
@@ -10,7 +10,7 @@ import { useData } from 'vitepress'
 const base = useData().site.value.base
 </script>
 <style scoped lang="less">
-.NotFound {
+.not-found {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,7 +55,7 @@ const base = useData().site.value.base
 }
 
 @media(max-width: 768px) {
-  .NotFound {
+  .not-found {
     img {
       width: 50vw;
     }

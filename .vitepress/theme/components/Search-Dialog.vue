@@ -1,11 +1,11 @@
 <template>
-  <div class="searchDialog">
-    <div class="dialogCover" @click="closeDialog"></div>
-    <div class="dialogContent">
-      <button type="button" class="closeBtn" @click="closeDialog">×</button>
+  <div class="search-dialog">
+    <div class="dialog-cover" @click="closeDialog"></div>
+    <div class="dialog-content">
+      <button type="button" class="close-btn" @click="closeDialog">×</button>
       <span class="title">搜索</span>
-      <input type="text" name="" id="searchInput" placeholder="请输入关键字" v-model="searchStr" @input="search" />
-      <ul class="searchList" @click="closeDialog">
+      <input type="text" name="" id="search-input" placeholder="请输入关键字" v-model="searchStr" @input="search" />
+      <ul class="search-list" @click="closeDialog">
         <span>{{ status }}</span>
         <li v-for="res in resultList">
           <a :href="base + res.href">{{ res.title }}</a>
@@ -53,7 +53,7 @@ function search(): void {
 }
 </script>
 <style scoped lang="less">
-.searchDialog {
+.search-dialog {
   position: fixed;
   top: 0;
   left: 0;
@@ -65,7 +65,7 @@ function search(): void {
   align-items: center;
 }
 
-.dialogCover {
+.dialog-cover {
   background: rgba(0, 0, 0, 0.8);
   position: absolute;
   top: 0;
@@ -74,7 +74,7 @@ function search(): void {
   height: 100%;
 }
 
-.dialogContent {
+.dialog-content {
   position: relative;
   width: 90%;
   max-width: 768px;
@@ -88,7 +88,7 @@ function search(): void {
   align-items: center;
 }
 
-.dialogContent::before {
+.dialog-content::before {
   content: '';
   position: absolute;
   top: 0;
@@ -97,7 +97,7 @@ function search(): void {
   height: 56px;
   border-bottom: 3px solid rgb(213, 217, 219);
   background-color: rgb(239, 242, 244);
-  background-image: url('../assets/Popup_Deco.png');
+  background-image: var(--deco2);
   background-repeat: no-repeat;
   background-position: left;
   background-size: contain;
@@ -112,7 +112,7 @@ function search(): void {
   z-index: 100;
 }
 
-.closeBtn {
+.close-btn {
   position: absolute;
   top: 0;
   right: 0;
@@ -124,7 +124,7 @@ function search(): void {
   cursor: pointer;
 }
 
-#searchInput {
+#search-input {
   width: 100%;
   height: 48px;
   margin: 10px;
@@ -139,7 +139,7 @@ function search(): void {
   }
 }
 
-.searchList {
+.search-list {
   width: 100%;
   min-height: 100px;
   box-sizing: border-box;
@@ -175,7 +175,7 @@ li {
 }
 
 @media (max-width: 768px) {
-  .dialogContent {
+  .dialog-content {
     top: 5%;
   }
 }

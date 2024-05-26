@@ -1,5 +1,5 @@
 <template>
-  <div class="postBanner">
+  <div class="post-banner">
     <h1 class="title">{{ state.currPost.title }}</h1>
     <span class="status">发布于
       {{
@@ -17,7 +17,7 @@ import { useStore } from '../store'
 const { state } = useStore()
 </script>
 <style scoped lang="less">
-.postBanner {
+.post-banner {
   display: flex;
   flex-direction: column;
   justify-content: center;

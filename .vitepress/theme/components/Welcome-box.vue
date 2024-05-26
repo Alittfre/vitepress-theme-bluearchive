@@ -1,7 +1,7 @@
 <template>
-  <div class="welcomeBox" ref="welcomeBoxRef" @mousemove="parallax" @mouseleave="reset"
+  <div class="welcome-box" ref="welcomeBoxRef" @mousemove="parallax" @mouseleave="reset"
     :style="{ transform: `rotateY(${calcY}deg) rotateX(${calcX}deg)` }">
-    <span class="welcomeText">{{ welcomeText }}</span>
+    <span class="welcome-text">{{ welcomeText }}</span>
     <div class="infoBox" :style="{
       background: `linear-gradient(${angle}deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5))`,
     }">
@@ -57,7 +57,7 @@ const reset = () => {
 }
 </script>
 <style scoped lang="less">
-.welcomeBox {
+.welcome-box {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,7 +68,7 @@ const reset = () => {
   transition: all 0.2s;
 }
 
-.welcomeText {
+.welcome-text {
   font-size: 80px;
   font-weight: bold;
   color: white;
@@ -140,7 +140,7 @@ const reset = () => {
 
 @media (max-width: 768px) {
   .banner {
-    .welcomeText {
+    .welcome-text {
       font-size: 50px;
     }
 
