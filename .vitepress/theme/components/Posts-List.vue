@@ -1,16 +1,28 @@
 <template>
-  <div class="container">
-    <TransitionGroup class="DocsList" name="list" tag="ul">
-      <li class="Doc" v-for="post in postsList" :key="post.href">
-        <span class="title"><a :href="base + post.href">{{ post.title }}</a></span>
-        <span class="publishTime HeadLine">发布于 {{ formatDate(post.create) }} | 约{{ post.wordCount }}字</span>
-        <ul class="tags HeadLine">
-          <li v-for="tag in post.tags">
-            <a :href="`${base}tags/`" @click="state.currTag = tag"><i class="iconfont icon-tag"></i> {{ tag }}</a>
-          </li>
-        </ul>
-        <span class="summary HeadLine">{{ post.excerpt }}</span>
-      </li>
+  <div class="container posts-content">
+    <TransitionGroup class="posts-list" name="list" tag="div">
+      <article class="post" v-for="post in postsList" :key="post.href">
+        <header class="post-header">
+          <div class="title">
+            <div class="title-dot"></div>
+            <h1 class="name"><a :href="base + post.href">{{ post.title }}</a></h1>
+          </div>
+          <div class="meta-info-bar">
+            <div class="time-info">
+              <time datetime="">{{ formatDate(post.create) }}</time>
+            </div>
+            <div class="wordcount seperator">约{{ post.wordCount }}字</div>
+          </div>
+          <ul class="tags">
+            <li v-for="tag in post.tags">
+              <a :href="`${base}tags/`" @click="state.currTag = tag"><i class="iconfont icon-tag"></i> {{ tag }}</a>
+            </li>
+          </ul>
+        </header>
+        <div class="excerpt">
+          <p>{{ post.excerpt }}</p>
+        </div>
+      </article>
     </TransitionGroup>
     <span v-if="totalPage != 1" class="pagination">
       <button :disabled="currPage === 1" :class="{ hide: currPage === 1 }" id="up" @click="currPage--">
@@ -73,63 +85,68 @@ const finalPosts = computed(() => {
   opacity: 0;
 }
 
-/* 确保将离开的元素从布局流中删除
-  以便能够正确地计算移动的动画。 */
 .list-leave-active {
   position: absolute;
   right: 0;
   left: 0;
 }
 
-.HeadLine {
-  margin-left: 16 + 10px;
+.posts-content {
+
+  article,
+  h1,
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  color: var(--font-color-grey);
+
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
 
-.DocsList {
+.posts-list {
   position: relative;
-  top: 50px;
-  padding: 0;
-  padding-inline-start: 0;
+  overflow-wrap: break-word;
 
-  .Doc {
+  .post {
     display: flex;
     flex-direction: column;
     margin: 0 0 50px 0;
-    padding: 32px 40px;
-    background-color: rgb(248, 252, 253);
+    padding-bottom: 16px;
+    background-color: white;
     border-radius: 32px;
-    border: solid 2px white;
-    background: linear-gradient(0.5turn, transparent, rgb(255, 255, 255) 70%),
-      var(--triangle-background);
+    border-left: solid 16px #c7e4f6;
+    background-image: var(--deco1);
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
     box-shadow: var(--blue-shadow);
   }
 
-  .title {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 10px;
 
-    &::before {
-      display: inline-block;
-      content: '';
-      width: 6px;
-      height: 24px;
-      vertical-align: middle;
-      border-radius: 3px;
-      background-color: var(--color-blue);
+}
+
+.post-header {
+  padding: 32px 40px 0;
+
+  .title {
+    position: relative;
+    margin-bottom: 6px;
+
+    .title-dot {
+      width: 4px;
+      height: 20px;
+      position: absolute;
+      left: -16px;
+      top: 9.5px;
+      background: #c7e4f6;
+      border-radius: 2px;
     }
 
     a {
-      padding: 3px 10px;
-      margin-left: 10px;
       color: var(--font-color-grey);
-      transition: all 0.5s;
+      transition: text-shadow .5s;
 
       &:hover {
         text-shadow: 0 0 3px var(--font-color-grey);
@@ -137,43 +154,58 @@ const finalPosts = computed(() => {
     }
   }
 
-  .publishTime {
-    color: var(--font-color-grey);
-  }
-
-  .tags {
+  .meta-info-bar {
     display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 0;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
 
-    li {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding-top: 15px;
-      margin-right: 16px;
-
-      a {
-        color: var(--font-color-grey);
-        padding: 3px 5px;
-        color: var(--font-color-gold);
-        background-color: var(--btn-background);
-        border-radius: 5px;
-        transition: all 0.5s;
-
-        &:hover {
-          background-color: var(--btn-hover);
-          color: var(--font-color-gold);
-        }
-      }
+    .seperator::before {
+      content: '';
+      display: inline-block;
+      border-radius: 50%;
+      height: 4px;
+      width: 4px;
+      vertical-align: middle;
+      background-color: var(--font-color-grey);
+      margin: 0 16px;
     }
   }
 
-  .summary {
-    color: var(--font-color-grey);
+}
+
+
+
+.tags {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0;
+  margin-bottom: 6px;
+
+  li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 6px;
+    margin-right: 16px;
+
+    a {
+      color: var(--font-color-grey);
+      padding: 3px 5px;
+      color: var(--font-color-gold);
+      background-color: var(--btn-background);
+      border-radius: 5px;
+      transition: all 0.5s;
+
+      &:hover {
+        background-color: var(--btn-hover);
+        color: var(--font-color-gold);
+      }
+    }
   }
+}
+
+.excerpt {
+  padding: 0 40px;
 }
 
 .pagination {
@@ -199,15 +231,15 @@ const finalPosts = computed(() => {
   }
 
   #up {
-    animation: arrowUp 1s ease-in-out infinite alternate;
+    animation: arrow-pre 1s ease-in-out infinite alternate;
   }
 
   #next {
-    animation: arrowNext 1s ease-in-out infinite alternate;
+    animation: arrow-next 1s ease-in-out infinite alternate;
   }
 }
 
-@keyframes arrowUp {
+@keyframes arrow-pre {
   from {
     transform: translateX(0) rotate(-0.25turn);
   }
@@ -217,7 +249,7 @@ const finalPosts = computed(() => {
   }
 }
 
-@keyframes arrowNext {
+@keyframes arrow-next {
   from {
     transform: translateX(0) rotate(0.25turn);
   }
@@ -228,18 +260,12 @@ const finalPosts = computed(() => {
 }
 
 @media (max-width: 768px) {
-  .HeadLine {
-    margin-left: 16px;
-  }
 
-  .Doc {
+  .post {
     margin: 0 8px 30px 8px !important;
+    background-size: cover !important;
+
   }
 
-  .title {
-    a {
-      padding: 0 !important;
-    }
-  }
 }
 </style>
