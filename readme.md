@@ -6,7 +6,7 @@ BA 主题博客，基于 VitePress，绝赞画饼中
 
 [在线预览](https://vitepress-theme-bluearchive.vercel.app/)
 
-![preview](./preview.webp)
+![preview](./preview.png)
 
 ## 功能
 
@@ -73,22 +73,25 @@ tags: [标签1, 标签2]
 
 ## 快速开始
 
-安装依赖，这里是`yarn`，你也可以选你喜欢的包管理器。
+```bash
+# pnpm (推荐)
+# 安装依赖
+pnpm install
+# 开发项目
+pnpm run dev
+# 打包项目
+pnpm run build
 
-```
-yarn install
-```
+# yarn
+# yarn install
+# yarn run dev
+# yarn run build
 
-运行项目
+# npm
+# npm install
+# npm run dev
+# npm run build
 
-```
-yarn run dev
-```
-
-打包项目
-
-```
-yarn run build
 ```
 
 ## 上线 GitHub Pages 并使用 GitHub Actions 自动构建
