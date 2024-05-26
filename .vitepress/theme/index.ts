@@ -1,7 +1,7 @@
 // https://vitepress.dev/guide/custom-theme
 import Layout from './Layout.vue'
 import type { Theme } from 'vitepress'
-import 'normalize.less'
+import 'normalize.css'
 import './assets/icon/iconfont.css'
 import './styles/index.less'
 
