@@ -218,10 +218,12 @@ const finalPosts = computed(() => {
   button {
     background-color: transparent;
     border-style: none;
+    cursor: pointer;
   }
 
   .hide {
     opacity: 0;
+    cursor: auto;
   }
 
 
