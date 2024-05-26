@@ -42,6 +42,9 @@ importers:
       vitepress:
         specifier: ^1.2.2
         version: 1.2.2(@algolia/client-search@4.23.3)(@types/node@20.12.12)(less@4.2.0)(markdown-it-mathjax3@4.3.2)(postcss@8.4.38)(search-insights@2.14.0)
+      vue:
+        specifier: ^3.4.27
+        version: 3.4.27
 
 packages:
 
