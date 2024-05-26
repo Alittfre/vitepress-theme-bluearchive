@@ -81,5 +81,6 @@ a {
 ::-webkit-scrollbar-thumb {
   border-radius: 3px;
   background: var(--color-blue);
+  cursor: pointer;
 }
 </style>
