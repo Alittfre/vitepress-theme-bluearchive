@@ -1,13 +1,149 @@
 <template>
   <div class="banner" :class="{ postViewer: state.currPost.href }">
     <slot></slot>
-    <div class="wave1"></div>
-    <div class="wave2"></div>
+    <canvas id="wave"></canvas>
   </div>
 </template>
 <script setup lang="ts">
 import { useStore } from '../store'
 const { state } = useStore()
+import { onMounted } from 'vue';
+
+class SiriWave {
+  K: number;
+  F: number;
+  speed: number;
+  noise: number;
+  phase: number;
+  devicePixelRatio: number;
+  width: number;
+  height: number;
+  MAX: number;
+  canvas: HTMLCanvasElement;
+  ctx: CanvasRenderingContext2D;
+  run: boolean;
+  animationFrameID: number | null;
+
+  constructor() {
+    this.K = 1;
+    this.F = 15;
+    this.speed = 0.1;
+    this.noise = 30;
+    this.phase = 0;
+    this.devicePixelRatio = window.devicePixelRatio || 1;
+    this.width = this.devicePixelRatio * window.innerWidth;
+    this.height = this.devicePixelRatio * 120;
+    this.MAX = this.height / 2;
+    this.canvas = document.getElementById('wave') as HTMLCanvasElement;
+    this.canvas.width = this.width;
+    this.canvas.height = this.height;
+    this.canvas.style.width = (this.width / this.devicePixelRatio) + "px";
+    this.canvas.style.height = (this.height / this.devicePixelRatio) + "px";
+    this.ctx = this.canvas.getContext('2d')!;
+    this.run = false;
+    this.animationFrameID = null;
+  }
+
+  _globalAttenuationFn(x: number) {
+    return Math.pow(this.K * 4 / (this.K * 4 + Math.pow(x, 4)), this.K * 2);
+  }
+
+  _drawLine(attenuation: number, color: string, width: number, noise: number, F: number) {
+    this.ctx.moveTo(0, 0);
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = color;
+    this.ctx.lineWidth = width || 1;
+    F = F || this.F;
+    noise = noise * this.MAX || this.noise;
+    for (let i = -this.K; i <= this.K; i += 0.01) {
+      i = parseFloat(i.toFixed(2));
+      const x = this.width * ((i + this.K) / (this.K * 2));
+      const y = this.height / 2 + noise * Math.pow(Math.sin(i * 10 * attenuation), 1) * Math.sin(F * i - this.phase);
+      this.ctx.lineTo(x, y);
+    }
+    this.ctx.lineTo(this.width, this.height);
+    this.ctx.lineTo(0, this.height);
+    this.ctx.fillStyle = color;
+    this.ctx.fill();
+  }
+
+  _clear() {
+    this.ctx.globalCompositeOperation = "destination-out";
+    this.ctx.fillRect(0, 0, this.width, this.height);
+    this.ctx.globalCompositeOperation = "source-over";
+  }
+
+  _draw() {
+    if (!this.run) {
+      return;
+    }
+    this.phase = (this.phase + this.speed) % (Math.PI * 64);
+    this._clear();
+    this._drawLine(0.5, "rgba(234, 239, 245, 0.8)", 1, 0.35, 6);
+    this._drawLine(1, "rgba(234, 239, 245, 0.5)", 1, 0.25, 6);
+    this.animationFrameID = requestAnimationFrame(this._draw.bind(this));
+  }
+
+  start() {
+    this.phase = 0;
+    this.run = true;
+    this._draw();
+  }
+
+  stop() {
+    this.run = false;
+    this._clear();
+    if (this.animationFrameID !== null) {
+      cancelAnimationFrame(this.animationFrameID);
+      this.animationFrameID = null;
+    }
+  }
+
+  setNoise(v: number) {
+    this.noise = Math.min(v, 1) * this.MAX;
+  }
+
+  setSpeed(v: number) {
+    this.speed = v;
+  }
+
+  set(noise: number, speed: number) {
+    this.setNoise(noise);
+    this.setSpeed(speed);
+  }
+}
+
+let currentWave: SiriWave | null = null;
+
+function initAll() {
+  if (currentWave) {
+    currentWave.stop();
+  }
+  currentWave = new SiriWave();
+  currentWave.setSpeed(0.01);
+  currentWave.start();
+}
+
+function debounce(func: () => void, wait: number) {
+  let timeout: number | undefined;
+  return function () {
+    clearTimeout(timeout);
+    timeout = window.setTimeout(() => {
+      func();
+    }, wait);
+  };
+}
+
+onMounted(() => {
+  initAll();
+  window.addEventListener('resize', debounce(() => {
+    if (currentWave) {
+      currentWave.stop();
+    }
+    initAll();
+  }, 100));
+});
+
 </script>
 <style scoped lang="less">
 .banner {
@@ -31,42 +167,8 @@ const { state } = useStore()
   height: 50vh;
 }
 
-.wave1,
-.wave2 {
+#wave {
   position: absolute;
-  width: 400%;
   bottom: 0;
-}
-
-.wave1 {
-  background: url("../assets/wave1.png") repeat-x;
-  height: 65px;
-  animation: wave-animation-1 30s infinite linear;
-}
-
-.wave2 {
-  background: url("../assets/wave2.png") repeat-x;
-  height: 80px;
-  animation: wave-animation-2 20s infinite linear;
-}
-
-@keyframes wave-animation-1 {
-  0% {
-    left: 0;
-  }
-
-  100% {
-    left: -997px;
-  }
-}
-
-@keyframes wave-animation-2 {
-  0% {
-    left: 0;
-  }
-
-  100% {
-    left: -1009px;
-  }
 }
 </style>
