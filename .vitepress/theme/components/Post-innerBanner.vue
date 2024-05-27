@@ -24,6 +24,7 @@ const { state } = useStore()
   align-items: center;
   color: white;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+  z-index: 100;
 
   .title {
     font-size: 80px;

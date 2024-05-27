@@ -56,6 +56,7 @@ onUnmounted(() => {
   backdrop-filter: var(--blur-val);
   margin: 50px 8px 0 8px;
   width: 768px;
+  z-index: 100;
   transition: all 0.5s;
 
   li {

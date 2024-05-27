@@ -32,7 +32,7 @@ class SiriWave {
     this.phase = 0;
     this.devicePixelRatio = window.devicePixelRatio || 1;
     this.width = this.devicePixelRatio * window.innerWidth;
-    this.height = this.devicePixelRatio * 120;
+    this.height = this.devicePixelRatio * 100;
     this.MAX = this.height / 2;
     this.canvas = document.getElementById('wave') as HTMLCanvasElement;
     this.canvas.width = this.width;
