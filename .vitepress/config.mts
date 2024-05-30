@@ -1,10 +1,17 @@
 import { defineConfigWithTheme } from 'vitepress'
 export interface ThemeConfig {
+  //navBar
+  menuList: { name: string; url: string }[]
+
   //banner
   name: string
   welcomeText: string
   motto: string
   social: { icon: string; url: string }[]
+
+  //footer
+  footerName: string
+  poweredList: { name: string; url: string }[]
 
   //gitalk
   clientID: string
@@ -26,6 +33,12 @@ export default defineConfigWithTheme<ThemeConfig>({
   title: "Sensei's 部落格",
   description: "Sensei's 部落格",
   themeConfig: {
+    // navBar
+    menuList: [
+      { name: '首页', url: '' },
+      { name: '标签', url: 'tags/' },
+    ],
+
     //banner区配置
     name: "Sensei's 部落格",
     welcomeText: 'Hello, VitePress',
@@ -35,12 +48,19 @@ export default defineConfigWithTheme<ThemeConfig>({
       { icon: 'bilibili', url: 'https://www.bilibili.com/' },
     ],
 
+    //footer配置
+    footerName: 'Sensei',
+    poweredList: [
+      { name: 'VitePress', url: 'https://github.com/vuejs/vitepress' },
+      { name: 'GitHub Pages', url: 'https://docs.github.com/zh/pages' },
+    ],
+
     //gitalk配置
-    clientID: '',
-    clientSecret: '',
-    repo: '',
-    owner: '',
-    admin: [''],
+    clientID: 'b6b3d66e51f899071b8f',
+    clientSecret: 'e78d614f42ee697393b38c9b515b5968f48a743a',
+    repo: 'vitepress-theme-bluearchive',
+    owner: 'Alittfre',
+    admin: ['Alittfre'],
   },
   markdown: {
     theme: 'github-light',
