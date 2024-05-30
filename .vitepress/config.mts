@@ -56,8 +56,8 @@ export default defineConfigWithTheme<ThemeConfig>({
     ],
 
     //gitalk配置
-    clientID: 'b6b3d66e51f899071b8f',
-    clientSecret: 'e78d614f42ee697393b38c9b515b5968f48a743a',
+    clientID: 'Ov23lia9U9wFN3WMyoKK',
+    clientSecret: 'b2418ab598c188c43a247c99e728dd2735d58c3b',
     repo: 'vitepress-theme-bluearchive',
     owner: 'Alittfre',
     admin: ['Alittfre'],
