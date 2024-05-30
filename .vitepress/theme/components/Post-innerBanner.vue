@@ -29,6 +29,7 @@ const { state } = useStore()
   .title {
     font-size: 80px;
     margin-bottom: 50px;
+    text-align: center;
   }
 
   .status {

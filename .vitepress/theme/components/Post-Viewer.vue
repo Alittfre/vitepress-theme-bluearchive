@@ -58,7 +58,6 @@ const themeConfig = useData().theme.value
 }
 
 .content {
-  color: var(--font-color-grey);
 
   /**
  * Paragraph and inline elements

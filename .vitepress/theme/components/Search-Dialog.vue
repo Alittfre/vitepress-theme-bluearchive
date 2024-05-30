@@ -104,7 +104,6 @@ function search(): void {
 }
 
 .title {
-  color: var(--font-color-grey);
   font-weight: bold;
   font-size: 25px;
   padding: 5px 0;
@@ -152,7 +151,6 @@ function search(): void {
   gap: 10px;
 
   span {
-    color: var(--font-color-grey);
     text-align: center;
   }
 }

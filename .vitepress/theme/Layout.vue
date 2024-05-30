@@ -1,18 +1,21 @@
 <template>
-  <Fireworks></Fireworks>
   <template v-if="!page.isNotFound">
-    <Navbar></Navbar>
-    <Banner>
+    <main style="min-height: 100vh;">
+      <Navbar></Navbar>
+      <Banner>
+        <transition name="opac" mode="out-in">
+          <WelcomeBox v-if="page.filePath === 'index.md'"></WelcomeBox>
+          <Tags v-else-if="page.filePath === 'tags/index.md'"></Tags>
+          <PostInnerBanner v-else></PostInnerBanner>
+        </transition>
+      </Banner>
       <transition name="opac" mode="out-in">
-        <WelcomeBox v-if="page.filePath === 'index.md'"></WelcomeBox>
-        <Tags v-else-if="page.filePath === 'tags/index.md'"></Tags>
-        <PostInnerBanner v-else></PostInnerBanner>
+        <PostsList v-if="page.filePath === 'index.md' || page.filePath === 'tags/index.md'"></PostsList>
+        <PostViewer v-else></PostViewer>
       </transition>
-    </Banner>
-    <transition name="opac" mode="out-in">
-      <PostsList v-if="page.filePath === 'index.md' || page.filePath === 'tags/index.md'"></PostsList>
-      <PostViewer v-else></PostViewer>
-    </transition>
+    </main>
+    <Footer></Footer>
+    <Fireworks></Fireworks>
     <ToTop></ToTop>
   </template>
   <NotFound v-else></NotFound>
@@ -29,7 +32,7 @@ import PostInnerBanner from './components/Post-innerBanner.vue'
 import NotFound from './components/NotFound.vue'
 import ToTop from './components/ToTop.vue'
 import Fireworks from './components/Fireworks.vue'
-
+import Footer from './components/Footer.vue'
 // 路径切换
 import { useData } from 'vitepress'
 const { page } = useData()
@@ -63,6 +66,7 @@ body {
   background-position: center;
   background-attachment: fixed;
   overflow-y: scroll;
+  color: var(--font-color-grey);
 }
 
 ul {

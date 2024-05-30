@@ -2,7 +2,7 @@
   <div class="welcome-box" ref="welcomeBoxRef" @mousemove="parallax" @mouseleave="reset"
     :style="{ transform: `rotateY(${calcY}deg) rotateX(${calcX}deg)` }">
     <span class="welcome-text">{{ welcomeText }}</span>
-    <div class="infoBox" :style="{
+    <div class="info-box" :style="{
       background: `linear-gradient(${angle}deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5))`,
     }">
       <img src="../assets/banner/avatar.jpg" alt="" class="avatar" />
@@ -73,9 +73,10 @@ const reset = () => {
   font-weight: bold;
   color: white;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+  text-align: center;
 }
 
-.infoBox {
+.info-box {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -112,7 +113,6 @@ const reset = () => {
   span {
     margin-top: 10px;
     font-weight: bold;
-    color: var(--font-color-grey);
     text-align: center;
     margin-right: 16px;
     margin-left: 16px;
@@ -144,7 +144,7 @@ const reset = () => {
       font-size: 50px;
     }
 
-    .infoBox {
+    .info-box {
       width: 100%;
     }
   }

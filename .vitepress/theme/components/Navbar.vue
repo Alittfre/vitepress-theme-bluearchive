@@ -4,7 +4,7 @@
       <span class="logo"><img src="../assets/icon/navLogo.svg" alt="" /></span>
       <span class="menu">
         <ul>
-          <li v-for="item in menu">
+          <li v-for="item in menuList">
             <a :href="base + item.url">{{ item.name }}</a>
           </li>
         </ul>
@@ -18,14 +18,8 @@
 <script setup lang="ts">
 import { useData } from 'vitepress'
 const base = useData().site.value.base
-interface MenuList {
-  name: string
-  url: string
-}
-const menu: MenuList[] = [
-  { name: '首页', url: '' },
-  { name: '标签', url: 'tags/' },
-]
+const themeConfig = useData().theme.value
+const menuList = themeConfig.menuList
 
 import { useStore } from '../store'
 const { state } = useStore()
@@ -53,6 +47,8 @@ header {
     top: 0;
     height: 72px;
     z-index: 100;
+    box-sizing: border-box;
+    padding: 0 16px;
     border-radius: 0 0 30px 30px;
     border-bottom: solid 2px white;
     border-left: solid 2px white;
@@ -63,8 +59,6 @@ header {
   }
 
   .logo {
-    padding-left: 16px;
-
     img {
       height: 36px;
       width: auto;
@@ -100,7 +94,6 @@ header {
   }
 
   .search {
-    padding-right: 16px;
     cursor: pointer;
     font-size: 36px;
     color: var(--icon-color);

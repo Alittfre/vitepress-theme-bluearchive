@@ -100,8 +100,6 @@ const finalPosts = computed(() => {
     padding: 0;
   }
 
-  color: var(--font-color-grey);
-
 }
 
 
