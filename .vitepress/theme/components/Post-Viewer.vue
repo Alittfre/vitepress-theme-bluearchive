@@ -57,7 +57,11 @@ const themeConfig = useData().theme.value
 }
 
 .content {
-
+  background-image:
+    linear-gradient(90deg, rgba(159, 219, 252, .15) 3%, transparent 0),
+    linear-gradient(1turn, rgba(159, 219, 252, .15) 3%, transparent 0);
+  background-size: 20px 20px;
+  background-position: 50%;
   /**
  * Paragraph and inline elements
  * -------------------------------------------------------------------------- */
@@ -73,8 +77,10 @@ const themeConfig = useData().theme.value
 
   blockquote {
     margin: 16px 0;
-    border-left: 2px solid #5cd3ff;
+    border-left: 3px solid #5cd3ff;
     padding-left: 16px;
+    background-color: #5cd4ff25;
+    border-radius: 8px;
   }
 
   blockquote>p {
@@ -94,6 +100,11 @@ const themeConfig = useData().theme.value
 
   strong {
     font-weight: 600;
+  }
+
+  code {
+    background-color: #f0f0f0;
+    border-radius: 3px;
   }
 
 
