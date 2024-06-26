@@ -44,7 +44,7 @@ export interface ThemeConfig {
   name: string // 首页名字
   welcomeText: string // 首页问候语
   motto: string // 首页签名
-  social: { icon: string; url: string }[] // 社交平台，icon可选ilibili，github，tw，weibo
+  social: { icon: string; url: string }[] // 社交平台，icon可选bilibili，github，tw，weibo, wechat, qq, netease_music
 
   //gitalk配置
   clientID: string
@@ -62,6 +62,13 @@ export interface ThemeConfig {
 title: 标题
 date: 日期
 tags: [标签1, 标签2]
+head:
+  - - meta
+    - name: description
+      content: SEO优化描述
+  - - meta
+    - name: keywords
+      content: SEO优化 关键词
 ---
 
 文章摘要，会在文章列表中显示
@@ -143,19 +150,21 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 # 如果未启用 lastUpdated，则不需要
-      # - uses: pnpm/action-setup@v3 # 如果使用 pnpm，请取消注释
+      - uses: pnpm/action-setup@v3 # 如果使用 pnpm，请取消注释
+        with:
+          version: 9
       # - uses: oven-sh/setup-bun@v1 # 如果使用 Bun，请取消注释
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: yarn # 或 pnpm / yarn
+          cache: pnpm # 或 pnpm / yarn
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Install dependencies
-        run: yarn install # 或 pnpm install / yarn install / bun install
+        run: pnpm install # 或 pnpm install / yarn install / bun install
       - name: Build with VitePress
-        run: yarn run build # 或 pnpm build / yarn build / bun run build
+        run: pnpm run build # 或 pnpm build / yarn build / bun run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
