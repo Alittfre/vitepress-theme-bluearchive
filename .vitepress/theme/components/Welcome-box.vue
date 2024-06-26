@@ -7,7 +7,7 @@
     }">
       <img src="../assets/banner/avatar.jpg" alt="" class="avatar" />
       <span class="name">{{ name }}</span>
-      <span>{{ motto }}</span>
+      <span class="motto">{{ mottoText }}</span>
       <ul>
         <li v-for="item in social">
           <a :href="item.url"><i :class="`iconfont icon-${item.icon} social`"></i></a>
@@ -54,6 +54,16 @@ function getMouseAngle(x, y) {
 }
 const reset = () => {
   calcX.value = calcY.value = angle.value = 0
+}
+
+let index = 0
+let mottoText = ref('')
+function addNextCharacter() {
+  if (index < motto.length) {
+    mottoText.value += motto[index];
+    index++;
+    setTimeout(addNextCharacter, Math.random() * 150 + 30);
+  }
 }
 </script>
 <style scoped lang="less">
@@ -110,13 +120,39 @@ const reset = () => {
     font-weight: normal;
   }
 
+  .motto {
+    background: linear-gradient(90deg, transparent, transparent calc(100% - 2px), var(--pointerColor) calc(100% - 2px), var(--pointerColor));
+    background-size: 100% 70%;
+    background-position: 0 3px;
+    background-repeat: no-repeat;
+    animation: colorChange .8s linear infinite;
+    padding-right: 4px;
+  }
+
+
+  @keyframes colorChange {
+
+    0%,
+    40% {
+      --pointerColor: var(--font-color-grey)
+    }
+
+    60%,
+    100% {
+      --pointerColor: transparent;
+    }
+  }
+
   span {
     margin-top: 10px;
     font-weight: bold;
     text-align: center;
     margin-right: 16px;
     margin-left: 16px;
+
   }
+
+
 
   ul {
     display: flex;
