@@ -5,9 +5,9 @@
       <button type="button" class="close-btn" @click="closeDialog">×</button>
       <span class="title">搜索</span>
       <input type="text" name="" id="search-input" placeholder="请输入关键字" v-model="searchStr" @input="search" />
-      <ul class="search-list" @click="closeDialog">
+      <ul class="search-list">
         <span>{{ status }}</span>
-        <li v-for="res in resultList">
+        <li v-for="res in resultList" @click="closeDialog">
           <a :href="base + res.href">{{ res.title }}</a>
         </li>
       </ul>
