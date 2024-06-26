@@ -30,6 +30,9 @@ export default defineConfigWithTheme<ThemeConfig>({
     ['script', { src: 'https://unpkg.com/gitalk/dist/gitalk.min.js' }],
   ],
   ignoreDeadLinks: true,
+  sitemap: {
+    hostname: 'https://vitepress-theme-bluearchive.vercel.app/',
+  },
   title: "Sensei's 部落格",
   description: "Sensei's 部落格",
   themeConfig: {
@@ -46,6 +49,8 @@ export default defineConfigWithTheme<ThemeConfig>({
     social: [
       { icon: 'github', url: 'https://github.com/' },
       { icon: 'bilibili', url: 'https://www.bilibili.com/' },
+      { icon: 'qq', url: 'https://im.qq.com/index/' },
+      { icon: 'wechat', url: 'https://weixin.qq.com/' },
     ],
 
     //footer配置
