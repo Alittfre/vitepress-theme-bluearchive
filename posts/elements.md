@@ -2,6 +2,13 @@
 title: Elements
 date: 2013-12-24
 tags: [elements, test]
+head:
+  - - meta
+    - name: description
+      content: vitepress-theme-bluearchive Elements
+  - - meta
+    - name: keywords
+      content: vitepress theme bluearchive Elements
 ---
 
 The purpose of this post is to help you make sure all of HTML elements can display properly. If you use CSS reset, don't forget to redefine the style by yourself.

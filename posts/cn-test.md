@@ -2,6 +2,13 @@
 title: 中文測試
 date: 2013-12-24
 tags: [Chinese, test]
+head:
+  - - meta
+    - name: description
+      content: vitepress-theme-bluearchive cn-test 中文测试
+  - - meta
+    - name: keywords
+      content: vitepress theme bluearchive 中文测试
 ---
 
 This is a Chinese test post.

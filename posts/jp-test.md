@@ -2,6 +2,13 @@
 title: 日本語テスト
 date: 2013-12-24
 tags: [Japanese, test]
+head:
+  - - meta
+    - name: description
+      content: vitepress-theme-bluearchive 日本語テスト
+  - - meta
+    - name: keywords
+      content: vitepress theme bluearchive 日本語テスト
 ---
 
 This is a Japanese test post.

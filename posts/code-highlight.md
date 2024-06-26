@@ -20,6 +20,13 @@ tags:
     bash,
     ini,
   ]
+head:
+  - - meta
+    - name: description
+      content: vitepress-theme-bluearchive Code Highlight Style test
+  - - meta
+    - name: keywords
+      content: vitepress theme bluearchive Code Highlight Style test
 ---
 
 Make sure all the code blocks highlighted correctly. All the code samples are come from the demo of https://highlightjs.org

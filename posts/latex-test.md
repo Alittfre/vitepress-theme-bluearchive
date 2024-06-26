@@ -2,6 +2,13 @@
 title: Latex公式测试
 date: 2020-01-01
 tags: [Latex, test]
+head:
+  - - meta
+    - name: description
+      content: vitepress-theme-bluearchive Latex公式测试
+  - - meta
+    - name: keywords
+      content: vitepress theme bluearchive Latex公式测试
 ---
 
 Latex 公式测试

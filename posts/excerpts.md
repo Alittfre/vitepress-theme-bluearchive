@@ -2,6 +2,13 @@
 title: Excerpts
 date: 2013-12-25
 tags: [Excerpts, test]
+head:
+  - - meta
+    - name: description
+      content: vitepress-theme-bluearchive Excerpts
+  - - meta
+    - name: keywords
+      content: vitepress theme bluearchive Excerpts
 ---
 
 The following contents should be invisible in home/archive page.
