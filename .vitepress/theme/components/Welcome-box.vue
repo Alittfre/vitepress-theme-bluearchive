@@ -65,6 +65,7 @@ function addNextCharacter() {
     setTimeout(addNextCharacter, Math.random() * 150 + 30);
   }
 }
+addNextCharacter()
 </script>
 <style scoped lang="less">
 .welcome-box {
