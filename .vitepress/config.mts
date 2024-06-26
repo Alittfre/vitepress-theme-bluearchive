@@ -31,7 +31,7 @@ export default defineConfigWithTheme<ThemeConfig>({
   ],
   ignoreDeadLinks: true,
   sitemap: {
-    hostname: 'https://vitepress-theme-bluearchive.vercel.app/',
+    hostname: 'https://vitepress-theme-bluearchive.vercel.app',
   },
   title: "Sensei's 部落格",
   description: "Sensei's 部落格",
