@@ -1,6 +1,6 @@
 <template>
   <template v-if="!page.isNotFound">
-    <main style="min-height: 100vh;">
+    <main style="min-height: 100vh">
       <Navbar></Navbar>
       <Banner>
         <transition name="opac" mode="out-in">
@@ -10,7 +10,9 @@
         </transition>
       </Banner>
       <transition name="opac" mode="out-in">
-        <PostsList v-if="page.filePath === 'index.md' || page.filePath === 'tags/index.md'"></PostsList>
+        <PostsList
+          v-if="page.filePath === 'index.md' || page.filePath === 'tags/index.md'"
+        ></PostsList>
         <PostViewer v-else></PostViewer>
       </transition>
     </main>
@@ -67,6 +69,7 @@ body {
   background-attachment: fixed;
   overflow-y: scroll;
   color: var(--font-color-grey);
+  font-family: Roboto, 'LXGW WenKai GB Screen', sans-serif;
 }
 
 ul {
