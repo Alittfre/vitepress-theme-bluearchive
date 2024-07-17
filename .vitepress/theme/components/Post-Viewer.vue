@@ -20,8 +20,6 @@ function getCurrpost() {
   state.currPost = posts[currPost]
 }
 
-function setImgRadius() {}
-
 onMounted(() => {
   getCurrpost()
 })
