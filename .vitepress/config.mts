@@ -19,9 +19,6 @@ export interface ThemeConfig {
   repo: string
   owner: string
   admin: string[]
-
-  //图片圆角
-  imgRadius: string
 }
 
 export default defineConfigWithTheme<ThemeConfig>({
@@ -77,9 +74,6 @@ export default defineConfigWithTheme<ThemeConfig>({
     repo: 'vitepress-theme-bluearchive',
     owner: 'Alittfre',
     admin: ['Alittfre'],
-
-    // 图片圆角
-    imgRadius: '16px',
   },
   markdown: {
     theme: 'github-light',
