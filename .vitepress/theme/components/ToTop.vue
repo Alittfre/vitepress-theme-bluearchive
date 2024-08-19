@@ -1,6 +1,7 @@
 <template>
-  <a href="#" class="totop" @click="toTop" :style="style" aria-label="to-top"><img src="../assets/toTop.svg"
-      alt="" /></a>
+  <a href="#" class="totop" @click="toTop" :style="style" aria-label="to-top"
+    ><img src="../assets/toTop.svg" alt=""
+  /></a>
 </template>
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
@@ -29,10 +30,17 @@ onUnmounted(() => {
 <style scoped lang="less">
 .totop {
   position: fixed;
-  width: 64px;
   z-index: 100;
-  right: 5%;
+  right: 3%;
   filter: drop-shadow(0 0 3px rgba(40, 42, 44, 0.42));
   transition: all 0.5s;
+  img {
+    width: 85px;
+  }
+}
+@media (max-width: 768px) {
+  .totop {
+    right: 5%;
+  }
 }
 </style>
