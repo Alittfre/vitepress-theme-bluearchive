@@ -4,6 +4,7 @@ import type { Theme } from 'vitepress'
 import 'normalize.css'
 import './assets/icon/iconfont.css'
 import './styles/index.less'
+import './components/Spine-Player/spine-player.css'
 
 export default {
   Layout,
