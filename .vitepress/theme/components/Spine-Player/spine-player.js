@@ -10823,9 +10823,9 @@ var spine
         var w = canvas.clientWidth
         var h = canvas.clientHeight
         // modfiy: antialias
-        let DPR = window.devicePixelRatio <= 1 ? 2 : Math.floor(window.devicePixelRatio)
+        let DPR = window.devicePixelRatio <= 2 ? 2 : Math.ceil(window.devicePixelRatio)
         if (canvas.width != w * DPR || canvas.height != h * DPR) {
-          console.log(DPR, canvas.width, w * DPR)
+          // console.log(DPR, window.devicePixelRatio, canvas.width, w * DPR)
           canvas.width = w * DPR
           canvas.height = h * DPR
         }
@@ -10834,6 +10834,7 @@ var spine
         if (resizeMode === ResizeMode.Stretch) {
         } else if (resizeMode === ResizeMode.Expand) {
           this.camera.setViewport(canvas.width, canvas.height)
+          // modfiy: antialias
         } else if (resizeMode === ResizeMode.Fit) {
           var sourceWidth = canvas.width,
             sourceHeight = canvas.height
