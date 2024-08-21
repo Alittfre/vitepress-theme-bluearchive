@@ -21,13 +21,13 @@ BA 主题博客，基于 VitePress，绝赞画饼中
 - [x] 点击烟花效果 🎉
 - [x] 底栏
 - [x] 优化 404
+- [x] Arona 的 spine 模型
 
 ## 画饼
 
 - [ ] RSS
-- [ ] 优化 md 浏览样式
 - [ ] 夜间模式
-- [ ] Arona 的 spine 模型
+- [ ] 为 Arona 添加更多交互
 - [ ] 让点击烟花更还原游戏效果
 - [ ] 首屏加载动画
 - [ ] more...
@@ -189,3 +189,4 @@ jobs:
 - [vitepress-theme-sakura](https://github.com/flaribbit/vitepress-theme-sakura) 提供参考
 - [vitepress X BA logo](https://github.com/nulla2011/bluearchive-logo) 非常好 BA logo 生成器
 - [Anime.js Fireworks canvas demo](https://codepen.io/juliangarnier/pen/gmOwJX) and [hexo-theme-yun](https://github.com/YunYouJun/hexo-theme-yun) 点击烟花效果 🎉
+- [spine-runtimes](https://github.com/esotericsoftware/spine-runtimes) spine 运行时
