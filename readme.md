@@ -190,3 +190,4 @@ jobs:
 - [vitepress X BA logo](https://github.com/nulla2011/bluearchive-logo) 非常好 BA logo 生成器
 - [Anime.js Fireworks canvas demo](https://codepen.io/juliangarnier/pen/gmOwJX) and [hexo-theme-yun](https://github.com/YunYouJun/hexo-theme-yun) 点击烟花效果 🎉
 - [spine-runtimes](https://github.com/esotericsoftware/spine-runtimes) spine 运行时
+- [Blueaka@kivo.fun](https://kivo.fun/) BA 游戏字体

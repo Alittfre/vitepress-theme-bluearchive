@@ -72,7 +72,7 @@ body {
   background-attachment: fixed;
   overflow-y: scroll;
   color: var(--font-color-grey);
-  font-family: Roboto, 'LXGW WenKai GB Screen', sans-serif;
+  font-family: 'Blueaka', sans-serif;
 }
 
 ul {
