@@ -34,7 +34,7 @@ BA 主题博客，基于 VitePress，绝赞画饼中
 
 ## 主题配置
 
-首页头图和头像在`.vitepress\theme\assets\banner`
+首页头图和头像在`.vitepress/theme/assets/banner`
 
 配置文件在`.vitepress/config.mts`
 
@@ -53,6 +53,17 @@ export interface ThemeConfig {
   owner: string
   admin: string[]
 }
+```
+
+## 站点地图配置(SEO 优化)
+
+配置文件在`.vitepress/config.mts`
+
+```ts
+  // 生成站点地图
+  sitemap: {
+    hostname: 'https://vitepress-theme-bluearchive.vercel.app', //替换为你自己的域名
+  }
 ```
 
 ## 文章配置
