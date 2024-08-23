@@ -10,7 +10,18 @@ const playerContainer = ref(null)
 let player = null
 let blinkInterval = null
 
+const handleScroll = () => {
+  const bottomReached = Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight
+  if (bottomReached) {
+    playerContainer.value.style.left = '-50%'
+  } else {
+    playerContainer.value.style.left = '0%'
+  }
+}
+
 onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+
   player = new spine.SpinePlayer(playerContainer.value, {
     skelUrl: "/spine_assets/arona_spr.skel",
     atlasUrl: "/spine_assets/arona_spr.atlas",
@@ -145,6 +156,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener('mousemove', moveBones)
+  window.removeEventListener('scroll', handleScroll)
   if (blinkInterval) clearTimeout(blinkInterval)
 })
 </script>
@@ -153,18 +165,18 @@ onUnmounted(() => {
 .playerContainer {
   position: fixed;
   bottom: 25px;
-  left: 1%;
+  left: 0%;
   z-index: 100;
   width: 200px;
   height: 400px;
   filter: drop-shadow(0 0 3px rgba(40, 42, 44, 0.42));
+  transition: all 1s;
 }
 
 @media (max-width: 768px) {
   .playerContainer {
-    left: 0;
-    width: 150px;
-    height: 300px;
+    width: 120px;
+    height: 240px;
   }
 }
 </style>

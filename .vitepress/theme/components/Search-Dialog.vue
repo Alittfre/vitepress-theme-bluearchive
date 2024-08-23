@@ -4,7 +4,14 @@
     <div class="dialog-content">
       <button type="button" class="close-btn" @click="closeDialog">×</button>
       <span class="title">搜索</span>
-      <input type="text" name="" id="search-input" placeholder="请输入关键字" v-model="searchStr" @input="search" />
+      <input
+        type="text"
+        name=""
+        id="search-input"
+        placeholder="请输入关键字"
+        v-model="searchStr"
+        @input="search"
+      />
       <ul class="search-list">
         <span>{{ status }}</span>
         <li v-for="res in resultList" @click="closeDialog">
@@ -59,7 +66,7 @@ function search(): void {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 100;
+  z-index: 200;
   display: flex;
   justify-content: center;
   align-items: center;

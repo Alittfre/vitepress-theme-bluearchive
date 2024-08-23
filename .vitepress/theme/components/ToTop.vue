@@ -41,6 +41,9 @@ onUnmounted(() => {
 @media (max-width: 768px) {
   .totop {
     right: 5%;
+    img {
+      width: 65px;
+    }
   }
 }
 </style>
