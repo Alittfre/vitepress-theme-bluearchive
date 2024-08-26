@@ -190,7 +190,7 @@ addNextCharacter()
     }
 
     .info-box {
-      width: 100%;
+      width: 95vw;
     }
   }
 }
