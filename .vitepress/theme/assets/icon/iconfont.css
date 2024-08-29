@@ -57,3 +57,10 @@
   content: "\e776";
 }
 
+.icon-continue:before {
+  content: "\1112";
+}
+
+.icon-stop:before {
+  content: "\1111";
+}

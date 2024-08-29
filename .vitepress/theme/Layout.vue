@@ -20,9 +20,14 @@
     <Fireworks></Fireworks>
     <SpinePlayer></SpinePlayer>
     <ToTop></ToTop>
+    <!-- 背景音乐元素 -->
+    <audio id="background-music" loop>
+      <source src="./assets/banner/bgm.mp3" type="audio/mpeg" />
+    </audio>
   </template>
   <NotFound v-else></NotFound>
 </template>
+
 <script setup lang="ts">
 // 组件导入
 import Navbar from './components/Navbar.vue'
