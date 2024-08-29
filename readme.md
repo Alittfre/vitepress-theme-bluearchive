@@ -43,7 +43,7 @@ export interface ThemeConfig {
   //banner
   name: string // 首页名字
   welcomeText: string // 首页问候语
-  motto: string // 首页签名
+  motto: [string 1 , string2]// 首页签名
   social: { icon: string; url: string }[] // 社交平台，icon可选bilibili，github，tw，weibo, wechat, qq, netease_music
 
   //gitalk配置
