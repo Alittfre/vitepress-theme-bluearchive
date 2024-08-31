@@ -154,7 +154,7 @@ onMounted(() => {
   border-radius: 50px;
   border: solid 2px white;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  backdrop-filter: var(--blur-val);
+  backdrop-filter: blur(6.5px) saturate(120%);
   
 
 
