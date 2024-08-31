@@ -142,6 +142,11 @@ onMounted(() => {
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
   text-align: center;
   margin-bottom: 100px;
+  transition: transform 0.5s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 .info-box {
@@ -168,11 +173,13 @@ onMounted(() => {
     border-radius: 50%;
     border: solid 3px white;
     margin-bottom: 20px;
-    transition: transform 0.6s ease;
+    transition: transform 0.6s ease, box-shadow 0.4s ease;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
     cursor: pointer;
 
     &:hover {
       transform: translateX(-50%) rotate(1turn) scale(1.1);
+      box-shadow: 0 0 7px rgba(0, 0, 0, 0.6);
     }
   }
 
