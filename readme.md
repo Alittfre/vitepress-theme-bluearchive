@@ -34,16 +34,18 @@ BA 主题博客，基于 VitePress，绝赞画饼中
 
 ## 主题配置
 
-首页头图和头像在`.vitepress/theme/assets/banner`
+**音乐** **首页背景** **头像**在`.vitepress/theme/assets/banner`  
 
-配置文件在`.vitepress/config.mts`
+>在 `.vitepress/theme/components/Banner.vue` 中修改背景类型(视频/图片)  
+
+**配置文件**在`.vitepress/config.mts`
 
 ```ts
 export interface ThemeConfig {
   //banner
   name: string // 首页名字
   welcomeText: string // 首页问候语
-  motto: string // 首页签名
+  motto: [string 1 , string2]// 首页签名
   social: { icon: string; url: string }[] // 社交平台，icon可选bilibili，github，tw，weibo, wechat, qq, netease_music
 
   //gitalk配置
