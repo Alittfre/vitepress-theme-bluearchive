@@ -4,9 +4,10 @@ export interface ThemeConfig {
   menuList: { name: string; url: string }[]
 
   //banner
+  videoBanner: boolean
   name: string
   welcomeText: string
-  motto: string
+  motto: string[]
   social: { icon: string; url: string }[]
 
   //footer
@@ -59,12 +60,10 @@ export default defineConfigWithTheme<ThemeConfig>({
     ],
 
     //banner区配置
+    videoBanner: false,
     name: "Sensei's 部落格",
     welcomeText: 'Hello, VitePress',
-    motto: [
-      '和你的日常，就是奇迹',
-      '何気ない日常で、ほんの少しの奇跡を見つける物語。',
-    ],
+    motto: ['和你的日常，就是奇迹', '何気ない日常で、ほんの少しの奇跡を見つける物語。'],
     social: [
       { icon: 'github', url: 'https://github.com/' },
       { icon: 'bilibili', url: 'https://www.bilibili.com/' },

@@ -1,158 +1,162 @@
 <template>
   <div class="banner" :class="{ postViewer: state.currPost.href }">
-    <!-- 若使用图片作为背景请取消注释 -->
-    <!-- <div class="banner" :class="{ postViewer: state.currPost.href }"></div> -->
-
-    <!-- 若使用视频作为背景请取消注释 -->
-    <video autoplay muted loop id="bg-video">
-      <source src="../assets/banner/banner_video.mp4" type="video/mp4">
+    <video autoplay muted loop id="bg-video" v-if="videoBanner">
+      <source src="../assets/banner/banner_video.mp4" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
-
+    <div class="banner" :class="{ postViewer: state.currPost.href }" v-else></div>
     <slot></slot>
     <canvas id="wave"></canvas>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useData } from 'vitepress'
+const themeConfig = useData().theme.value
+const videoBanner = themeConfig.videoBanner
+
 import { useStore } from '../store'
 const { state } = useStore()
-import { onMounted } from 'vue';
+import { onMounted } from 'vue'
 class SiriWave {
-  K: number;
-  F: number;
-  speed: number;
-  noise: number;
-  phase: number;
-  devicePixelRatio: number;
-  width: number;
-  height: number;
-  MAX: number;
-  canvas: HTMLCanvasElement;
-  ctx: CanvasRenderingContext2D;
-  run: boolean;
-  animationFrameID: number | null;
+  K: number
+  F: number
+  speed: number
+  noise: number
+  phase: number
+  devicePixelRatio: number
+  width: number
+  height: number
+  MAX: number
+  canvas: HTMLCanvasElement
+  ctx: CanvasRenderingContext2D
+  run: boolean
+  animationFrameID: number | null
 
   constructor() {
-    this.K = 1;
-    this.F = 15;
-    this.speed = 0.1;
-    this.noise = 30;
-    this.phase = 0;
-    this.devicePixelRatio = window.devicePixelRatio || 1;
-    this.width = this.devicePixelRatio * window.innerWidth;
-    this.height = this.devicePixelRatio * 100;
-    this.MAX = this.height / 2;
-    this.canvas = document.getElementById('wave') as HTMLCanvasElement;
-    this.canvas.width = this.width;
-    this.canvas.height = this.height;
-    this.canvas.style.width = (this.width / this.devicePixelRatio) + "px";
-    this.canvas.style.height = (this.height / this.devicePixelRatio) + "px";
-    this.ctx = this.canvas.getContext('2d')!;
-    this.run = false;
-    this.animationFrameID = null;
+    this.K = 1
+    this.F = 15
+    this.speed = 0.1
+    this.noise = 30
+    this.phase = 0
+    this.devicePixelRatio = window.devicePixelRatio || 1
+    this.width = this.devicePixelRatio * window.innerWidth
+    this.height = this.devicePixelRatio * 100
+    this.MAX = this.height / 2
+    this.canvas = document.getElementById('wave') as HTMLCanvasElement
+    this.canvas.width = this.width
+    this.canvas.height = this.height
+    this.canvas.style.width = this.width / this.devicePixelRatio + 'px'
+    this.canvas.style.height = this.height / this.devicePixelRatio + 'px'
+    this.ctx = this.canvas.getContext('2d')!
+    this.run = false
+    this.animationFrameID = null
   }
 
   _globalAttenuationFn(x: number) {
-    return Math.pow(this.K * 4 / (this.K * 4 + Math.pow(x, 4)), this.K * 2);
+    return Math.pow((this.K * 4) / (this.K * 4 + Math.pow(x, 4)), this.K * 2)
   }
 
   _drawLine(attenuation: number, color: string, width: number, noise: number, F: number) {
-    this.ctx.moveTo(0, 0);
-    this.ctx.beginPath();
-    this.ctx.strokeStyle = color;
-    this.ctx.lineWidth = width || 1;
-    F = F || this.F;
-    noise = noise * this.MAX || this.noise;
+    this.ctx.moveTo(0, 0)
+    this.ctx.beginPath()
+    this.ctx.strokeStyle = color
+    this.ctx.lineWidth = width || 1
+    F = F || this.F
+    noise = noise * this.MAX || this.noise
     for (let i = -this.K; i <= this.K; i += 0.01) {
-      i = parseFloat(i.toFixed(2));
-      const x = this.width * ((i + this.K) / (this.K * 2));
-      const y = this.height / 2 + noise * Math.pow(Math.sin(i * 10 * attenuation), 1) * Math.sin(F * i - this.phase);
-      this.ctx.lineTo(x, y);
+      i = parseFloat(i.toFixed(2))
+      const x = this.width * ((i + this.K) / (this.K * 2))
+      const y =
+        this.height / 2 +
+        noise * Math.pow(Math.sin(i * 10 * attenuation), 1) * Math.sin(F * i - this.phase)
+      this.ctx.lineTo(x, y)
     }
-    this.ctx.lineTo(this.width, this.height);
-    this.ctx.lineTo(0, this.height);
-    this.ctx.fillStyle = color;
-    this.ctx.fill();
+    this.ctx.lineTo(this.width, this.height)
+    this.ctx.lineTo(0, this.height)
+    this.ctx.fillStyle = color
+    this.ctx.fill()
   }
 
   _clear() {
-    this.ctx.globalCompositeOperation = "destination-out";
-    this.ctx.fillRect(0, 0, this.width, this.height);
-    this.ctx.globalCompositeOperation = "source-over";
+    this.ctx.globalCompositeOperation = 'destination-out'
+    this.ctx.fillRect(0, 0, this.width, this.height)
+    this.ctx.globalCompositeOperation = 'source-over'
   }
 
   _draw() {
     if (!this.run) {
-      return;
+      return
     }
-    this.phase = (this.phase + this.speed) % (Math.PI * 64);
-    this._clear();
-    this._drawLine(0.5, "rgba(234, 239, 245, 0.8)", 1, 0.35, 6);
-    this._drawLine(1, "rgba(234, 239, 245, 0.5)", 1, 0.25, 6);
-    this.animationFrameID = requestAnimationFrame(this._draw.bind(this));
+    this.phase = (this.phase + this.speed) % (Math.PI * 64)
+    this._clear()
+    this._drawLine(0.5, 'rgba(234, 239, 245, 0.8)', 1, 0.35, 6)
+    this._drawLine(1, 'rgba(234, 239, 245, 0.5)', 1, 0.25, 6)
+    this.animationFrameID = requestAnimationFrame(this._draw.bind(this))
   }
 
   start() {
-    this.phase = 0;
-    this.run = true;
-    this._draw();
+    this.phase = 0
+    this.run = true
+    this._draw()
   }
 
   stop() {
-    this.run = false;
-    this._clear();
+    this.run = false
+    this._clear()
     if (this.animationFrameID !== null) {
-      cancelAnimationFrame(this.animationFrameID);
-      this.animationFrameID = null;
+      cancelAnimationFrame(this.animationFrameID)
+      this.animationFrameID = null
     }
   }
 
   setNoise(v: number) {
-    this.noise = Math.min(v, 1) * this.MAX;
+    this.noise = Math.min(v, 1) * this.MAX
   }
 
   setSpeed(v: number) {
-    this.speed = v;
+    this.speed = v
   }
 
   set(noise: number, speed: number) {
-    this.setNoise(noise);
-    this.setSpeed(speed);
+    this.setNoise(noise)
+    this.setSpeed(speed)
   }
 }
 
-let currentWave: SiriWave | null = null;
+let currentWave: SiriWave | null = null
 
 function initAll() {
   if (currentWave) {
-    currentWave.stop();
+    currentWave.stop()
   }
-  currentWave = new SiriWave();
-  currentWave.setSpeed(0.01);
-  currentWave.start();
+  currentWave = new SiriWave()
+  currentWave.setSpeed(0.01)
+  currentWave.start()
 }
 
 function debounce(func: () => void, wait: number) {
-  let timeout: number | undefined;
+  let timeout: number | undefined
   return function () {
-    clearTimeout(timeout);
+    clearTimeout(timeout)
     timeout = window.setTimeout(() => {
-      func();
-    }, wait);
-  };
+      func()
+    }, wait)
+  }
 }
 
 onMounted(() => {
-  initAll();
-  window.addEventListener('resize', debounce(() => {
-    if (currentWave) {
-      currentWave.stop();
-    }
-    initAll();
-  }, 100));
-});
-
+  initAll()
+  window.addEventListener(
+    'resize',
+    debounce(() => {
+      if (currentWave) {
+        currentWave.stop()
+      }
+      initAll()
+    }, 100),
+  )
+})
 </script>
 <style scoped lang="less">
 .banner {
@@ -164,8 +168,7 @@ onMounted(() => {
   top: 0;
   width: 100%;
   height: 80vh;
-  // 若使用图片背景请取消注释
-  // background-image: url(../assets/banner/banner.jpg);
+  background-image: url(../assets/banner/banner.jpg);
   mask: linear-gradient(to top, transparent, var(--general-background-color) 5%);
   perspective: 1000px;
   overflow: hidden;
@@ -177,7 +180,6 @@ onMounted(() => {
   height: 50vh;
 }
 
-// 若使用视频背景请取消注释(整个#bg-video )
 #bg-video {
   position: absolute;
   top: 0;
