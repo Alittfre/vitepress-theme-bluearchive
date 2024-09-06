@@ -19,7 +19,7 @@
         }"
       >
         <transition name="fade-up" appear>
-          <img src="../assets/banner/avatar.jpg" alt="" class="avatar" />
+          <img @dragstart.prevent src="../assets/banner/avatar.jpg" alt="" class="avatar" />
         </transition>
 
         <transition name="fade-up" appear>
@@ -143,6 +143,7 @@ onMounted(() => {
   text-align: center;
   margin-bottom: 100px;
   transition: transform 0.5s ease;
+  user-select: none; 
 
   &:hover {
     transform: scale(1.05);

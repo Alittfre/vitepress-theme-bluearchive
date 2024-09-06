@@ -174,6 +174,7 @@ onMounted(() => {
   overflow: hidden;
   background-size: cover;
   background-position: center center;
+  user-drag: none; /* 禁用拖动 */
 }
 
 .postViewer {
@@ -187,6 +188,7 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  user-drag: none; /* 禁用视频拖动 */
   z-index: -1;
 }
 

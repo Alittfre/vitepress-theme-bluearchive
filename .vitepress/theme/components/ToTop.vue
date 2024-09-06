@@ -1,6 +1,6 @@
 <template>
   <a href="#" class="totop" @click="toTop" :style="style" aria-label="to-top"
-    ><img src="../assets/toTop.svg" alt=""
+    ><img @dragstart.prevent src="../assets/toTop.svg" alt=""
   /></a>
 </template>
 <script setup lang="ts">
