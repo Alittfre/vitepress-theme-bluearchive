@@ -7,7 +7,7 @@
         obj.name }}</a>{{ ind < poweredList.length - 1 ? ' & ' : '' }}</span></span>
     </div>
     <div class="footer-logo">
-      <img src="../assets/icon/footLogo.svg" alt="logo-vitepress">
+      <img @dragstart.prevent src="../assets/icon/footLogo.svg" alt="logo-vitepress">
     </div>
   </footer>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <header :class="{ postViewer: state.currPost.href }">
     <nav class="container">
-      <span class="logo"><img src="../assets/icon/navLogo.svg" alt="" /></span>
+      <span class="logo"><img @dragstart.prevent src="../assets/icon/navLogo.svg" alt="" /></span>
       <span class="menu">
         <ul>
           <li v-for="item in menuList">
