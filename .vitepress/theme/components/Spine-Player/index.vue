@@ -6,10 +6,23 @@
 import { onMounted, ref, onUnmounted } from 'vue'
 import { spine } from './spine-player.js'
 
+// 定义spine资产信息
+const spineAssets = {
+  skelUrl: "/spine_assets/arona_spr.skel",
+  atlasUrl: "/spine_assets/arona_spr.atlas",
+  idleAnimationName: "Idle_01",
+  eyeCloseAnimationName: "Eye_Close_01",
+  rightEyeBone: "R_Eye_01",
+  leftEyeBone: "L_Eye_01",
+  frontHeadBone: "Head_Rot",
+  backHeadBone: "Head_Back",
+  eyeRotationAngle: 76.307,
+}
 const playerContainer = ref(null)
 let player = null
 let blinkInterval = null
 
+//底部贴边
 const handleScroll = () => {
   const bottomReached = Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight
   if (bottomReached) {
@@ -19,26 +32,27 @@ const handleScroll = () => {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
+  // 延迟1秒后执行
+  await new Promise(r => setTimeout(r, 1000));
   window.addEventListener('scroll', handleScroll)
 
   player = new spine.SpinePlayer(playerContainer.value, {
-    skelUrl: "/spine_assets/arona_spr.skel",
-    atlasUrl: "/spine_assets/arona_spr.atlas",
+    skelUrl: spineAssets.skelUrl,
+    atlasUrl: spineAssets.atlasUrl,
     premultipliedAlpha: true,
     backgroundColor: '#00000000',
     alpha: true,
     showControls: false,
     success: function (playerInstance) {
-      playerInstance.setAnimation('Idle_01', true)
-
+      playerInstance.setAnimation(spineAssets.idleAnimationName, true)
       const skeleton = playerInstance.skeleton
       const animationState = playerInstance.animationState
 
-      const rightEyeBone = skeleton.findBone('R_Eye_01')
-      const leftEyeBone = skeleton.findBone('L_Eye_01')
-      const frontHeadBone = skeleton.findBone('Head_Rot')
-      const backHeadBone = skeleton.findBone('Head_Back')
+      const rightEyeBone = skeleton.findBone(spineAssets.rightEyeBone)
+      const leftEyeBone = skeleton.findBone(spineAssets.leftEyeBone)
+      const frontHeadBone = skeleton.findBone(spineAssets.frontHeadBone)
+      const backHeadBone = skeleton.findBone(spineAssets.backHeadBone)
 
       const rightEyeCenterX = rightEyeBone ? rightEyeBone.data.x : 0
       const rightEyeCenterY = rightEyeBone ? rightEyeBone.data.y : 0
@@ -49,11 +63,10 @@ onMounted(() => {
       const backHeadCenterX = backHeadBone ? backHeadBone.data.x : 0
       const backHeadCenterY = backHeadBone ? backHeadBone.data.y : 0
 
+      // 骨骼移动限制
       const maxRadius = 15
-      const frontHeadMaxRadius = 2 // 控制头部移动范围，较小以实现轻微移动
+      const frontHeadMaxRadius = 2
       const backHeadMaxRadius = 1
-
-      const eyeRotationAngle = 76 * (Math.PI / 180) // 76度转换为弧度
 
       function rotateVector(x, y, angle) {
         const cos = Math.cos(angle)
@@ -71,7 +84,8 @@ onMounted(() => {
         const mouseY = event.clientY - (containerRect.bottom - containerRect.height * 4 / 5)
 
         // 将鼠标坐标偏移量进行逆旋转
-        const rotatedMouse = rotateVector(mouseX, mouseY, -eyeRotationAngle)
+        const eyeRotation = spineAssets.eyeRotationAngle * (Math.PI / 180) // 眼睛旋转角度
+        const rotatedMouse = rotateVector(mouseX, mouseY, -eyeRotation)
         const offsetX = rotatedMouse.x
         const offsetY = rotatedMouse.y
         const distance = Math.sqrt(offsetX * offsetX + offsetY * offsetY)
@@ -112,33 +126,33 @@ onMounted(() => {
         skeleton.updateWorldTransform()
       }
 
-      function resetBones() {
-        if (rightEyeBone) {
-          rightEyeBone.x = rightEyeCenterX
-          rightEyeBone.y = rightEyeCenterY
-        }
+      // function resetBones() {
+      //   if (rightEyeBone) {
+      //     rightEyeBone.x = rightEyeCenterX
+      //     rightEyeBone.y = rightEyeCenterY
+      //   }
 
-        if (leftEyeBone) {
-          leftEyeBone.x = leftEyeCenterX
-          leftEyeBone.y = leftEyeCenterY
-        }
+      //   if (leftEyeBone) {
+      //     leftEyeBone.x = leftEyeCenterX
+      //     leftEyeBone.y = leftEyeCenterY
+      //   }
 
-        if (frontHeadBone) {
-          frontHeadBone.x = frontHeadCenterX
-          frontHeadBone.y = frontHeadCenterY
-        }
+      //   if (frontHeadBone) {
+      //     frontHeadBone.x = frontHeadCenterX
+      //     frontHeadBone.y = frontHeadCenterY
+      //   }
 
-        skeleton.updateWorldTransform()
-      }
+      //   skeleton.updateWorldTransform()
+      // }
 
       function playBlinkAnimation() {
         const randomTime = Math.random() * 3 + 3 // 5-8秒的随机间隔
         const shouldDoubleBlink = Math.random() > 0.5 // 随机决定是否连续播放两次
 
-        animationState.setAnimation(1, 'Eye_Close_01', false) // 在轨道1上播放眨眼动画
+        animationState.setAnimation(1, spineAssets.eyeCloseAnimationName, false) // 在轨道1上播放眨眼动画
 
         if (shouldDoubleBlink) {
-          animationState.addAnimation(1, 'Eye_Close_01', false, 0.1) // 短暂停留后再播放一次
+          animationState.addAnimation(1, spineAssets.eyeCloseAnimationName, false, 0.1) // 短暂停留后再播放一次
         }
 
         // 随机时间后再调用眨眼动画

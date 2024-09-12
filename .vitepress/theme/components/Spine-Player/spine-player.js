@@ -10822,19 +10822,17 @@ var spine
         var canvas = this.canvas
         var w = canvas.clientWidth
         var h = canvas.clientHeight
-        // modfiy: antialias
+        // 修改: 抗锯齿 start
         let DPR = window.devicePixelRatio <= 2 ? 2 : Math.ceil(window.devicePixelRatio)
         if (canvas.width != w * DPR || canvas.height != h * DPR) {
-          // console.log(DPR, window.devicePixelRatio, canvas.width, w * DPR)
           canvas.width = w * DPR
           canvas.height = h * DPR
         }
-        // this.context.gl.viewport(0, 0, w, h);
         this.context.gl.viewport(0, 0, canvas.width, canvas.height)
         if (resizeMode === ResizeMode.Stretch) {
         } else if (resizeMode === ResizeMode.Expand) {
           this.camera.setViewport(canvas.width, canvas.height)
-          // modfiy: antialias
+          // 修改: 抗锯齿 end
         } else if (resizeMode === ResizeMode.Fit) {
           var sourceWidth = canvas.width,
             sourceHeight = canvas.height
