@@ -32,11 +32,11 @@
 // 组件导入
 import Navbar from './components/Navbar/index.vue'
 import Banner from './components/Banner.vue'
-import WelcomeBox from './components/Welcome.vue'
+import WelcomeBox from './components/Welcome-Box.vue'
 import PostsList from './components/Posts-List.vue'
 import Tags from './components/Tags.vue'
 import PostViewer from './components/Post-Viewer.vue'
-import PostInnerBanner from './components/Post.vue'
+import PostInnerBanner from './components/Post-InnerBanner.vue'
 import NotFound from './components/NotFound.vue'
 import ToTop from './components/ToTop.vue'
 import Fireworks from './components/Fireworks.vue'
