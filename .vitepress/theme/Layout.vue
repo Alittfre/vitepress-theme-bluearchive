@@ -1,6 +1,6 @@
 <template>
   <template v-if="!page.isNotFound">
-    <main style="min-height: 100vh">
+    <main id="main" style="min-height: 100vh">
       <Navbar></Navbar>
       <Banner>
         <transition name="opac" mode="out-in">
@@ -30,13 +30,13 @@
 
 <script setup lang="ts">
 // 组件导入
-import Navbar from './components/Navbar.vue'
+import Navbar from './components/Navbar/index.vue'
 import Banner from './components/Banner.vue'
-import WelcomeBox from './components/Welcome-box.vue'
+import WelcomeBox from './components/Welcome-Box.vue'
 import PostsList from './components/Posts-List.vue'
 import Tags from './components/Tags.vue'
 import PostViewer from './components/Post-Viewer.vue'
-import PostInnerBanner from './components/Post-innerBanner.vue'
+import PostInnerBanner from './components/Post-InnerBanner.vue'
 import NotFound from './components/NotFound.vue'
 import ToTop from './components/ToTop.vue'
 import Fireworks from './components/Fireworks.vue'
@@ -76,6 +76,7 @@ body {
   background-position: center;
   background-attachment: fixed;
   overflow-y: scroll;
+  overflow-x: hidden;
   color: var(--font-color-grey);
   font-family: 'Blueaka', sans-serif;
 }

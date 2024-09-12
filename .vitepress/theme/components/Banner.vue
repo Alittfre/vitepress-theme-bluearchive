@@ -1,12 +1,12 @@
 <template>
   <div class="banner" :class="{ postViewer: state.currPost.href }">
-    <video autoplay muted loop id="bg-video" v-if="videoBanner">
+    <slot></slot>
+    <canvas id="wave"></canvas>
+    <video autoplay muted loop class="bg-video" v-if="videoBanner">
       <source src="../assets/banner/banner_video.mp4" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
-    <div class="banner" :class="{ postViewer: state.currPost.href }" v-else></div>
-    <slot></slot>
-    <canvas id="wave"></canvas>
+    <div class="bg-img" v-else></div>
   </div>
 </template>
 
@@ -168,32 +168,51 @@ onMounted(() => {
   top: 0;
   width: 100%;
   height: 80vh;
-  background-image: url(../assets/banner/banner.jpg);
   mask: linear-gradient(to top, transparent, var(--general-background-color) 5%);
   perspective: 1000px;
   overflow: hidden;
-  background-size: cover;
-  background-position: center center;
-  user-drag: none; /* 禁用拖动 */
+  -webkit-user-drag: none; /* 禁用拖动 */
+  transition: filter 0.3s, transform 0.3s;
+  animation: fade-blur-in 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes fade-blur-in {
+  from {
+    filter: var(--blur-val);
+    transform: scale(1.5);
+  }
+  to {
+    filter: blur(0);
+    transform: scale(1);
+  }
 }
 
 .postViewer {
   height: 50vh;
 }
 
-#bg-video {
+.bg-img {
+  background-image: url(../assets/banner/banner.jpg);
   position: absolute;
   top: 0;
-  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+}
+
+.bg-video {
+  position: absolute;
+  top: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  user-drag: none; /* 禁用视频拖动 */
-  z-index: -1;
+  -webkit-user-drag: none; /* 禁用视频拖动 */
 }
 
 #wave {
   position: absolute;
   bottom: 0;
+  z-index: 50;
 }
 </style>

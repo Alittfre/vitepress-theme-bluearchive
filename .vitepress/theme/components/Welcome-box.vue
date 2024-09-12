@@ -9,7 +9,6 @@
     <transition name="fade-up" appear>
       <span v-if="visible" class="welcome-text">{{ welcomeText }}</span>
     </transition>
-
     <transition name="fade-up" appear>
       <div
         v-if="visible"
@@ -18,92 +17,80 @@
           background: `linear-gradient(${angle}deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5))`,
         }"
       >
-        <transition name="fade-up" appear>
-          <img @dragstart.prevent src="../assets/banner/avatar.jpg" alt="" class="avatar" />
-        </transition>
-
-        <transition name="fade-up" appear>
-          <span class="name">{{ name }}</span>
-        </transition>
-
-        <transition name="fade-up" appear>
-          <span class="motto">
-            {{ mottoText }}
-            <span class="pointer"></span>
-          </span>
-        </transition>
-
-        <transition-group name="fade-up" tag="ul">
+        <img @dragstart.prevent src="../assets/banner/avatar.jpg" alt="" class="avatar" />
+        <span class="name">{{ name }}</span>
+        <span class="motto">
+          {{ mottoText }}
+          <span class="pointer"></span>
+        </span>
+        <ul>
           <li v-for="item in social" :key="item.url">
             <a :href="item.url" target="_blank" rel="noopener noreferrer">
               <i :class="`iconfont icon-${item.icon} social`"></i>
             </a>
           </li>
-        </transition-group>
+        </ul>
       </div>
     </transition>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useData } from 'vitepress';
-import { ref, onMounted, nextTick } from 'vue';
+import { useData } from 'vitepress'
+import { ref, onMounted } from 'vue'
 
-const themeConfig = useData().theme.value;
-const name = themeConfig.name;
-const welcomeText = themeConfig.welcomeText;
-const motto = themeConfig.motto;
-const social = themeConfig.social;
+const themeConfig = useData().theme.value
+const name = themeConfig.name
+const welcomeText = themeConfig.welcomeText
+const motto = themeConfig.motto
+const social = themeConfig.social
 
-const multiple = 30;
-const welcomeBoxRef = ref<HTMLElement | null>(null);
-const calcY = ref(0);
-const calcX = ref(0);
-const angle = ref(0);
-const visible = ref(false);
+const multiple = 30
+const welcomeBoxRef = ref<HTMLElement | null>(null)
+const calcY = ref(0)
+const calcX = ref(0)
+const angle = ref(0)
+const visible = ref(false)
 
 const parallax = (e: MouseEvent) => {
   if (welcomeBoxRef.value) {
     window.requestAnimationFrame(() => {
-      const box = welcomeBoxRef.value!.getBoundingClientRect();
-      calcY.value = (e.clientX - box.x - box.width / 2) / multiple;
-      calcX.value = -(e.clientY - box.y - box.height / 2) / multiple;
+      const box = welcomeBoxRef.value!.getBoundingClientRect()
+      calcY.value = (e.clientX - box.x - box.width / 2) / multiple
+      calcX.value = -(e.clientY - box.y - box.height / 2) / multiple
       angle.value = Math.floor(
-        getMouseAngle(
-          e.clientY - box.y - box.height / 2,
-          e.clientX - box.x - box.width / 2
-        )
-      );
-    });
+        getMouseAngle(e.clientY - box.y - box.height / 2, e.clientX - box.x - box.width / 2),
+      )
+    })
   }
-};
+}
 
 const getMouseAngle = (x: number, y: number) => {
-  const radians = Math.atan2(y, x);
-  let angle = radians * (180 / Math.PI);
+  const radians = Math.atan2(y, x)
+  let angle = radians * (180 / Math.PI)
 
   if (angle < 0) {
-    angle += 360;
+    angle += 360
   }
 
-  return angle;
-};
+  return angle
+}
 
 const reset = () => {
-  calcX.value = calcY.value = angle.value = 0;
-};
+  calcX.value = calcY.value = angle.value = 0
+}
 
-let index = 0;
-const mottoText = ref('');
-const randomMotto = motto[Math.floor(Math.random() * motto.length)];
+let index = 0
+const mottoText = ref('')
+const randomMotto = motto[Math.floor(Math.random() * motto.length)]
 
 const addNextCharacter = () => {
   if (index < randomMotto.length) {
-    mottoText.value += randomMotto[index];
-    index++;
-    setTimeout(addNextCharacter, Math.random() * 150 + 50);
+    mottoText.value += randomMotto[index]
+    index++
+    setTimeout(addNextCharacter, Math.random() * 150 + 50)
   }
-};
+}
 
 onMounted(() => {
   addNextCharacter()
@@ -143,7 +130,7 @@ onMounted(() => {
   text-align: center;
   margin-bottom: 100px;
   transition: transform 0.5s ease;
-  user-select: none; 
+  user-select: none;
 
   &:hover {
     transform: scale(1.05);
@@ -160,9 +147,7 @@ onMounted(() => {
   border-radius: 50px;
   border: solid 2px white;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(6.5px) saturate(120%);
-  
-
+  backdrop-filter: var(--blur-val) saturate(120%);
 
   .avatar {
     position: absolute;
@@ -192,9 +177,10 @@ onMounted(() => {
   .motto {
     font-size: 19px;
     font-weight: bold;
-    animation: colorChange 0.8s linear infinite;
+    animation: color-change 0.8s linear infinite;
     padding-right: 4px;
     margin-bottom: 1px;
+    text-align: center;
     .pointer {
       display: inline-block;
       margin: -5px 0 0 2px;
@@ -202,10 +188,10 @@ onMounted(() => {
       vertical-align: middle;
       width: 2px;
       height: 16px;
-      animation: colorChange 0.8s linear infinite;
+      animation: color-change 0.8s linear infinite;
       background-color: var(--pointerColor);
     }
-    @keyframes colorChange {
+    @keyframes color-change {
       0%,
       40% {
         --pointerColor: var(--font-color-grey);
@@ -226,23 +212,6 @@ onMounted(() => {
     width: 200px;
     padding: 0;
 
-    li {
-      opacity: 0;
-      transform: translateY(16px); /* 初始上浮位置 */
-      animation: fadeUp 0.6s forwards; /* 上浮动画 */
-      animation-delay: calc(0.1s * var(--index)); /* 自动化延迟时间 */
-      --index: 1;
-    }
-
-    li:nth-child(1) { --index: 1; }
-    li:nth-child(2) { --index: 2; }
-    li:nth-child(3) { --index: 3; }
-    li:nth-child(4) { --index: 4; }
-    li:nth-child(5) { --index: 5; }
-    li:nth-child(6) { --index: 6; }
-    li:nth-child(7) { --index: 7; }
-    /* 可以继续添加 */
-    
     .social {
       font-size: 32px;
       transition: all 0.5s;
@@ -251,13 +220,6 @@ onMounted(() => {
       &:hover {
         filter: drop-shadow(0 0 5px var(--font-color-grey));
       }
-    }
-  }
-
-  @keyframes fadeUp {
-    to {
-      opacity: 1;
-      transform: translateY(0); /* 结束位置 */
     }
   }
 }
