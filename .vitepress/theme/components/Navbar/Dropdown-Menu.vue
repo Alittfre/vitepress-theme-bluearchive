@@ -15,36 +15,43 @@ import SearchButton from './Search-Button.vue'
 <style scoped lang="less">
 .dropdown-menu {
   position: fixed;
-  right: 0;
+  right: 1px;
   z-index: 95;
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: scale(0.9);
-  transition: top 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  transition:
+    top 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+    transform 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+    opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 
   .menu-content {
     position: relative;
     width: auto;
     max-width: 768px;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     border-radius: 16px;
-    padding: 30px;
+    padding: 22px;
+    padding-top: 60px;
     gap: 10px;
     display: flex;
     flex-direction: column;
+    box-shadow: 0px 0px 4px rgba(40, 135, 200, 0.6);
     align-items: center;
-    transform: scale(0.9);
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    transition:
+      transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
   }
 }
 
 .dropdown-menu[showmenu='true'] {
-  top: 100%;
-  transform: scale(1);
+  top: -110%;
+  transform: translateY(80px);
+  opacity: 1;
 }
 
 .dropdown-menu[showmenu='false'] {
-  top: -200%;
+  top: -60%;
+  transform: scaleY(0.1);
+  opacity: 0;
 }
 </style>
