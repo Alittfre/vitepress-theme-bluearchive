@@ -1,5 +1,8 @@
 <template>
-  <div class="banner" :class="{ postViewer: state.currPost.href }">
+  <div
+    class="banner"
+    :class="{ postViewer: state.currPost.href, loadingComplete: !state.splashLoading }"
+  >
     <slot></slot>
     <canvas id="wave"></canvas>
     <video autoplay muted loop class="bg-video" v-if="videoBanner">
@@ -172,8 +175,10 @@ onMounted(() => {
   perspective: 1000px;
   overflow: hidden;
   -webkit-user-drag: none; /* 禁用拖动 */
-  transition: filter 0.3s, transform 0.3s;
-  animation: fade-blur-in 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  &.loadingComplete {
+    transition: filter 0.3s, transform 0.3s;
+    animation: fade-blur-in 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
 }
 
 @keyframes fade-blur-in {

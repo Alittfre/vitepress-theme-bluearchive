@@ -1,10 +1,11 @@
 <template>
+  <Splash></Splash>
   <template v-if="!page.isNotFound">
-    <main id="main" style="min-height: 100vh">
+    <main style="min-height: 100vh">
       <Navbar></Navbar>
       <Banner>
         <transition name="opac" mode="out-in">
-          <WelcomeBox v-if="page.filePath === 'index.md'"></WelcomeBox>
+          <WelcomeBox v-if="!state.splashLoading && page.filePath === 'index.md'"></WelcomeBox>
           <Tags v-else-if="page.filePath === 'tags/index.md'"></Tags>
           <PostInnerBanner v-else></PostInnerBanner>
         </transition>
@@ -30,6 +31,7 @@
 
 <script setup lang="ts">
 // 组件导入
+import Splash from './components/Splash.vue'
 import Navbar from './components/Navbar/index.vue'
 import Banner from './components/Banner.vue'
 import WelcomeBox from './components/Welcome-Box.vue'
@@ -46,6 +48,9 @@ import SpinePlayer from './components/Spine-Player/index.vue'
 // 路径切换
 import { useData } from 'vitepress'
 const { page } = useData()
+
+import { useStore } from './store'
+const { state } = useStore()
 </script>
 
 <style lang="less">

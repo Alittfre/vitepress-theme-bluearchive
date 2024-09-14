@@ -96,7 +96,7 @@ onMounted(() => {
   addNextCharacter()
   setTimeout(() => {
     visible.value = true
-  }, 100)
+  }, 50)
 })
 </script>
 
@@ -155,7 +155,7 @@ onMounted(() => {
     left: 50%;
     transform: translateX(-50%);
     width: 128px;
-    height: auto;
+    height: 128px;
     border-radius: 50%;
     border: solid 3px white;
     margin-bottom: 20px;
