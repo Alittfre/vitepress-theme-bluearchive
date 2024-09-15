@@ -22,7 +22,7 @@
           </svg>
         </label>
       </span>
-      <DropdownMenu :showMenu="showDropdownMenu" @close-dialog="closeDropdownMenu"></DropdownMenu>
+      <DropdownMenu :showMenu="state.showDropdownMenu"></DropdownMenu>
     </nav>
   </header>
   <SearchDialog v-if="state.searchDialog" @close-dialog="closeDialog"></SearchDialog>
@@ -42,18 +42,11 @@ const { state } = useStore()
 import SearchDialog from './Search-Dialog.vue'
 import DropdownMenu from './Dropdown-Menu.vue'
 
-const showDropdownMenu = ref(false)
-
 const closeDialog = () => {
   state.searchDialog = false
 }
-
-const closeDropdownMenu = () => {
-  showDropdownMenu.value = false
-}
-
 const toggleDropdownMenu = () => {
-  showDropdownMenu.value = !showDropdownMenu.value
+  state.showDropdownMenu = !state.showDropdownMenu
 }
 </script>
 

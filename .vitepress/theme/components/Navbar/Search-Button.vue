@@ -8,6 +8,7 @@ const { state } = useStore()
 
 const showDialog = () => {
   state.searchDialog = true
+  state.showDropdownMenu = false
 }
 </script>
 
