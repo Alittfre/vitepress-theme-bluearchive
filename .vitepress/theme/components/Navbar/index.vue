@@ -96,7 +96,7 @@ header {
     ul {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       padding: 0;
       margin: 0;
 
@@ -131,11 +131,23 @@ header {
     margin: 0;
 
     .hamburger {
+      position: relative;
       cursor: pointer;
       transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-      // &:hover {
-      //   transform: translateY(-3px);
-      // }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: -100%;
+        left: -20px;
+        right: -15px;
+        bottom: 15px;
+        border-radius: 5px;
+        background-color: white;
+        z-index: -1;
+        // 下部虚化
+        box-shadow: -5px 8px 8px 0 white; 
+      }
 
       input {
         display: none;
@@ -152,8 +164,8 @@ header {
         stroke-linecap: round;
         stroke-linejoin: round;
         stroke-width: 3;
-        transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
-          stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+        transition: stroke-dasharray 500ms cubic-bezier(0.4, 0, 0.2, 1),
+          stroke-dashoffset 500ms cubic-bezier(0.4, 0, 0.2, 1);
       }
 
       .line-top-bottom {
