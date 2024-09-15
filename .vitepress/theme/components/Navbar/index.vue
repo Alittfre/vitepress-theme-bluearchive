@@ -93,6 +93,7 @@ header {
   }
 
   .menu {
+    z-index: 200;
     ul {
       display: flex;
       align-items: center;
@@ -110,7 +111,6 @@ header {
           color: var(--font-color-grey);
           transition: all 0.5s;
           transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-
           &:hover {
             color: var(--font-color-gold);
             background-color: var(--btn-background);
@@ -137,12 +137,12 @@ header {
       &:hover {
         transform: translateY(-2px);
       }
-      
+      // 伪元素遮罩
       &::before {
         content: '';
         position: absolute;
         top: -100%;
-        left: -20px;
+        left: -60px;
         right: -15px;
         bottom: 15px;
         border-radius: 5px;

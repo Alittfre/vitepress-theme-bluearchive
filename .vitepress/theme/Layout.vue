@@ -18,8 +18,8 @@
       </transition>
     </main>
     <Footer></Footer>
-    <Fireworks></Fireworks>
-    <SpinePlayer></SpinePlayer>
+    <Fireworks v-if="state.fireworksEnabled"></Fireworks>
+    <SpinePlayer v-show="state.SpinePlayerEnabled"></SpinePlayer>
     <ToTop></ToTop>
     <!-- 背景音乐元素 -->
     <audio id="background-music" loop>

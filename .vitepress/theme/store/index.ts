@@ -7,6 +7,8 @@ interface StoreState {
   currPost: PostData
   searchDialog: boolean
   splashLoading: boolean
+  fireworksEnabled: boolean
+  SpinePlayerEnabled: boolean
 }
 
 const state: StoreState = reactive({
@@ -26,6 +28,8 @@ const state: StoreState = reactive({
   },
   searchDialog: false,
   splashLoading: true,
+  fireworksEnabled: true,
+  SpinePlayerEnabled: true,
 })
 
 export function useStore() {
