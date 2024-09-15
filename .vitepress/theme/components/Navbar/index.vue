@@ -134,7 +134,10 @@ header {
       position: relative;
       cursor: pointer;
       transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-
+      &:hover {
+        transform: translateY(-2px);
+      }
+      
       &::before {
         content: '';
         position: absolute;

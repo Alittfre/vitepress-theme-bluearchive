@@ -31,7 +31,7 @@ import SearchButton from './Search-Button.vue'
     gap: 10px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 1.5px 0 rgba(40, 135, 200, 0.6);
+    box-shadow: 0 0.8px 0 rgba(40, 135, 200, 0.6);
     align-items: center;
   }
 }
