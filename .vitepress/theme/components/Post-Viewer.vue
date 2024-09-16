@@ -451,7 +451,9 @@ const themeConfig = useData().theme.value
     max-width: 100%;
   }
 
-  img {
+  img,
+  video,
+  iframe {
     border-radius: 8px;
   }
 }

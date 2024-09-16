@@ -30,7 +30,6 @@
 
 <script setup lang="ts">
 import { useData } from 'vitepress'
-import { ref } from 'vue'
 
 const base = useData().site.value.base
 const themeConfig = useData().theme.value
