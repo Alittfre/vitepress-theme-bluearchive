@@ -118,8 +118,9 @@ header {
   .MenuMask {
     position: fixed;
     top: 0;
-    left: 85%;
+    left: 1;
     right: -2px;
+    width: 150px;
     bottom: -2px;
     background-color: white;
     border-radius: 0 0 30px 30px;
