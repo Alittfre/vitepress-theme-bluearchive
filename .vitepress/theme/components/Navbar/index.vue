@@ -137,12 +137,12 @@ header {
         top: -100%;
         left: -60px;
         right: -15px;
-        bottom: 15px;
-        border-radius: 5px;
+        bottom: 0;
+        border-radius: 0 0 30px 30px;
         background-color: white;
         z-index: -1;
         // 下部虚化
-        box-shadow: -5px 8px 8px 0 white; 
+        box-shadow: -5px 5px 8px 0 white; 
       }
 
       input {

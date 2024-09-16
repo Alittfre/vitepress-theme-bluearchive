@@ -5,7 +5,7 @@
         <MusicControl></MusicControl>
         <SearchButton></SearchButton>
       </div>
-      <SwitchFireworks></SwitchFireworks>
+      <ToggleSwitch></ToggleSwitch>
     </div>
   </div>
 </template>
@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import MusicControl from './Music-Control.vue'
 import SearchButton from './Search-Button.vue'
-import SwitchFireworks from './ToggleSwitch.vue'
+import ToggleSwitch from './ToggleSwitch.vue'
 </script>
 
 <style scoped lang="less">
@@ -40,10 +40,22 @@ import SwitchFireworks from './ToggleSwitch.vue'
   }
   .first-row {
     display: flex;
-    gap: 10px;
+    gap: 5px;
+    padding: 5px;
+    padding-bottom: 10px;
     width: 100%;
     justify-content: space-between;
     align-items: center;
+    &::after {
+      content: '';
+      position: fixed;
+      top: 56%;
+      left: 24%;
+      width: 52%;
+      height: 1px;
+      background-color: var(--font-color-grey);
+      border-radius: 50%; 
+    }
   }
 }
 
