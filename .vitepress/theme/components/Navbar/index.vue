@@ -11,17 +11,16 @@
           </li>
         </ul>
       </span>
-      <span class="control">
-        <label class="hamburger">
-          <input type="checkbox" :checked="state.showDropdownMenu" @change="toggleDropdownMenu" />
-          <svg viewBox="0 0 32 32">
-            <path class="line line-top-bottom"
-              d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22">
-            </path>
-            <path class="line" d="M7 16 27 16"></path>
-          </svg>
-        </label>
-      </span>
+      <span class="MenuMask"></span>
+      <label class="hamburger">
+        <input type="checkbox" :checked="state.showDropdownMenu" @change="toggleDropdownMenu" />
+        <svg viewBox="0 0 32 32">
+          <path class="line line-top-bottom"
+            d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22">
+          </path>
+          <path class="line" d="M7 16 27 16"></path>
+        </svg>
+      </label>
       <DropdownMenu :showMenu="state.showDropdownMenu"></DropdownMenu>
     </nav>
   </header>
@@ -86,6 +85,7 @@ header {
 
   .menu {
     z-index: 200;
+
     ul {
       display: flex;
       align-items: center;
@@ -103,6 +103,7 @@ header {
           color: var(--font-color-grey);
           transition: all 0.5s;
           transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+
           &:hover {
             color: var(--font-color-gold);
             background-color: var(--btn-background);
@@ -113,68 +114,57 @@ header {
     }
   }
 
-  // 控制栏
-  .control {
-    display: flex;
-    z-index: 100;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0;
-    margin: 0;
+  // 菜单遮罩
+  .MenuMask {
+    position: fixed;
+    top: 0;
+    left: 85%;
+    right: -2px;
+    bottom: -2px;
+    background-color: white;
+    border-radius: 0 0 30px 30px;
+  }
 
-    .hamburger {
-      position: relative;
-      cursor: pointer;
-      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-      &:hover {
-        transform: translateY(-2px);
-      }
-      // 伪元素遮罩
-      &::before {
-        content: '';
-        position: absolute;
-        top: -100%;
-        left: -60px;
-        right: -15px;
-        bottom: 0;
-        border-radius: 0 0 30px 30px;
-        background-color: white;
-        z-index: -1;
-        // 下部虚化
-        box-shadow: -5px 5px 8px 0 white; 
-      }
 
-      input {
-        display: none;
-      }
+  .hamburger {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 
-      svg {
-        height: 3em;
-        transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
-      }
+    &:hover {
+      transform: translateY(-2px);
+    }
 
-      .line {
-        fill: none;
-        stroke: rgb(76, 88, 102);
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        stroke-width: 3;
-        transition: stroke-dasharray 500ms cubic-bezier(0.4, 0, 0.2, 1),
-          stroke-dashoffset 500ms cubic-bezier(0.4, 0, 0.2, 1);
-      }
+    input {
+      display: none;
+    }
 
-      .line-top-bottom {
-        stroke-dasharray: 12 63;
-      }
+    svg {
+      height: 3em;
+      transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-      input:checked + svg {
-        transform: rotate(-45deg);
-      }
+    .line {
+      fill: none;
+      stroke: rgb(76, 88, 102);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 3;
+      transition: stroke-dasharray 500ms cubic-bezier(0.4, 0, 0.2, 1),
+        stroke-dashoffset 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-      input:checked + svg .line-top-bottom {
-        stroke-dasharray: 20 300;
-        stroke-dashoffset: -32.42;
-      }
+    .line-top-bottom {
+      stroke-dasharray: 12 63;
+    }
+
+    input:checked+svg {
+      transform: rotate(-45deg);
+    }
+
+    input:checked+svg .line-top-bottom {
+      stroke-dasharray: 20 300;
+      stroke-dashoffset: -32.42;
     }
   }
 }
