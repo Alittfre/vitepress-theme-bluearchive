@@ -119,9 +119,9 @@ header {
     position: fixed;
     top: 0;
     left: 1;
-    right: -2px;
-    width: 150px;
-    bottom: -2px;
+    right: -1.8px;
+    width: 170px;
+    bottom: -1.5px;
     background-color: white;
     border-radius: 0 0 30px 30px;
   }

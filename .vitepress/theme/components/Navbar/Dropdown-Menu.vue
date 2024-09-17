@@ -102,7 +102,7 @@ watch(
 }
 
 .dropdown-menu[showmenu='false'] {
-  transform: translateY(-95px);
+  transform: translateY(-91px);
   .menu-content {
     box-shadow: none;
     transition: box-shadow 3s;
