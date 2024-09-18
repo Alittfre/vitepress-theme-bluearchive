@@ -15,7 +15,16 @@ This is a image test post.
 
 ---
 
-![](/wallpaper-2572384.jpg)
+::: tip
+img 标签的图片灯箱效果需要加入属性选择器：
+
+```md
+<img src="/wallpaper-2572384.jpg" data-fancybox="gallery"/>
+```
+
+:::
+
+> `![](/wallpaper-2572384.jpg)` ![](/wallpaper-2572384.jpg) `<img src="/wallpaper-2572384.jpg" data-fancybox="gallery"/>` <img src="/wallpaper-2572384.jpg" data-fancybox="gallery"/>
 
 ![Caption](/wallpaper-2311325.jpg)
 
