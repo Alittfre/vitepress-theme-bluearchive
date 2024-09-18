@@ -34,7 +34,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 38px;
+  font-size: 32px;
   color: var(--font-color-grey);
   cursor: pointer;
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
