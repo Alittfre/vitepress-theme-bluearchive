@@ -40,21 +40,41 @@ BA 主题博客，基于 VitePress，绝赞画饼中
 **配置文件**在`.vitepress/config.mts`
 
 ```ts
-export interface ThemeConfig {
-  //banner
-  videoBanner: boolean, // 首页背景类型，默认为图片，可选视频
-  name: string // 首页名字
-  welcomeText: string // 首页问候语
-  motto: [string 1 , string2]// 首页签名,可填多个，随机显示
-  social: { icon: string; url: string }[] // 社交平台，icon可选bilibili，github，tw，weibo, wechat, qq, netease_music
+export default defineConfigWithTheme<ThemeConfig>({
+  //...
 
-  //gitalk配置
-  clientID: string
-  clientSecret: string
-  repo: string
-  owner: string
-  admin: string[]
-}
+  // 站点标题配置
+  title: "Sensei's 部落格",
+  description: "Sensei's 部落格",
+
+  themeConfig: {
+    //banner区配置
+    videoBanner: false, //是否显示视频背景
+    name: "Sensei's 部落格", //首页标题
+    welcomeText: 'Hello, VitePress', //首页欢迎语
+    motto: ['和你的日常，就是奇迹', '何気ない日常で、ほんの少しの奇跡を見つける物語。'], //首页motto
+    social: [ //社交链接配置
+      { icon: 'github', url: 'https://github.com/' },
+      { icon: 'bilibili', url: 'https://www.bilibili.com/' },
+      { icon: 'qq', url: 'https://im.qq.com/index/' },
+      { icon: 'wechat', url: 'https://weixin.qq.com/' },
+    ],
+
+    //footer配置
+    footerName: 'Sensei',
+    poweredList: [
+      { name: 'VitePress', url: 'https://github.com/vuejs/vitepress' },
+      { name: 'GitHub Pages', url: 'https://docs.github.com/zh/pages' },
+    ],
+
+    //gitalk配置
+    clientID: 'YourClientID',
+    clientSecret: 'YourClientSecret',
+    repo: 'YourRepoName',
+    owner: 'YourGitHubName',
+    admin: ['YourGitHubName'],
+  }
+}),
 ```
 
 ## 站点地图配置(SEO 优化)
