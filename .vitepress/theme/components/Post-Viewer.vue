@@ -447,14 +447,17 @@ const themeConfig = useData().theme.value
  * -------------------------------------------------------------------------- */
 
   img,
-  svg {
-    max-width: 100%;
-  }
-
-  img,
+  svg,
   video,
   iframe {
+    max-width: 100%;
     border-radius: 8px;
+  }
+
+  code,
+  kbd,
+  samp {
+    font-family: 'Blueaka', sans-serif;
   }
 }
 
