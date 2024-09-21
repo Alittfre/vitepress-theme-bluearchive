@@ -19,7 +19,7 @@ const base = useData().site.value.base
   margin: 100px auto;
   padding: 16px;
   border-radius: 32px;
-  border: solid 2px white;
+  border: solid 2px var(--foreground-color);
   backdrop-filter: var(--blur-val);
 
 

@@ -22,7 +22,7 @@ const { state } = useStore()
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: var(--foreground-color);
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
   z-index: 100;
 

@@ -29,10 +29,10 @@ footer {
   padding: 0 16px;
   box-sizing: border-box;
   border-radius: 30px 30px 0 0;
-  border-top: solid 2px white;
-  border-left: solid 2px white;
-  border-right: solid 2px white;
-  background: linear-gradient(0.75turn, transparent, white 25%), var(--triangle-background);
+  border-top: solid 2px var(--foreground-color);
+  border-left: solid 2px var(--foreground-color);
+  border-right: solid 2px var(--foreground-color);
+  background: linear-gradient(0.75turn, transparent, var(--foreground-color) 25%), var(--triangle-background);
   backdrop-filter: var(--blur-val);
   box-shadow: var(--blue-shadow);
 }

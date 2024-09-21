@@ -112,7 +112,7 @@ const finalPosts = computed(() => {
     flex-direction: column;
     margin: 0 0 50px 0;
     padding-bottom: 16px;
-    background-color: white;
+    background-color: var(--foreground-color);
     border-radius: 32px;
     border-left: solid 16px #c7e4f6;
     background-image: var(--deco1);

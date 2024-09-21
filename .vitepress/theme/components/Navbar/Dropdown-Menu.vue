@@ -57,7 +57,7 @@ watch(
     position: relative;
     width: auto;
     max-width: 768px;
-    background-color: white;
+    background-color: var(--foreground-color);
     border-radius: 0 0 30px 30px;
     padding: 23px;
     padding-top: 70px;
