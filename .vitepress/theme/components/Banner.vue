@@ -7,7 +7,6 @@
     <canvas id="wave"></canvas>
     <video autoplay muted loop class="bg-video" v-if="videoBanner">
       <source src="../assets/banner/banner_video.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
     </video>
     <div class="bg-img" v-else></div>
   </div>
@@ -170,7 +169,7 @@ onMounted(() => {
   position: absolute;
   top: 0;
   width: 100%;
-  height: 80vh;
+  height: 110vh;
   mask: linear-gradient(to top, transparent, var(--general-background-color) 5%);
   perspective: 1000px;
   overflow: hidden;

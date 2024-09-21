@@ -106,6 +106,7 @@ const finalPosts = computed(() => {
 .posts-list {
   position: relative;
   overflow-wrap: break-word;
+  padding-top: 30vh;
 
   .post {
     display: flex;

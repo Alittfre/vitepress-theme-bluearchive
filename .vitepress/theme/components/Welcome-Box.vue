@@ -106,11 +106,11 @@ onMounted(() => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 50px 8px 0 8px;
   z-index: 100;
   transform-style: preserve-3d;
   transition: all 0.2s;
   perspective: 1000px;
+  padding-bottom: 15vh;
 }
 
 .fade-up-enter-active {
