@@ -106,7 +106,7 @@ const finalPosts = computed(() => {
 .posts-list {
   position: relative;
   overflow-wrap: break-word;
-  padding-top: 30vh;
+  margin-top: 25vh; /* 向下移动 20vh */
 
   .post {
     display: flex;

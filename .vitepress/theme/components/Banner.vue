@@ -1,9 +1,9 @@
 <template>
-  <div
-    class="banner"
-    :class="{ postViewer: state.currPost.href, loadingComplete: !state.splashLoading }"
-  >
+  <div class="banner" :class="{ postViewer: state.currPost.href, loadingComplete: !state.splashLoading }">
     <slot></slot>
+    <div class="downarrow-container" @click="move">
+      <span class="iconfont icon-downarrow downarrow"></span>
+    </div>
     <canvas id="wave"></canvas>
     <video autoplay muted loop class="bg-video" v-if="videoBanner">
       <source src="../assets/banner/banner_video.mp4" type="video/mp4" />
@@ -159,6 +159,11 @@ onMounted(() => {
     }, 100),
   )
 })
+
+const move = () => {
+  window.scrollTo({ top: 850, behavior: 'smooth' })
+}
+
 </script>
 <style scoped lang="less">
 .banner {
@@ -169,14 +174,40 @@ onMounted(() => {
   position: absolute;
   top: 0;
   width: 100%;
-  height: 110vh;
+  height: 102vh;
   mask: linear-gradient(to top, transparent, var(--general-background-color) 5%);
   perspective: 1000px;
   overflow: hidden;
-  -webkit-user-drag: none; /* 禁用拖动 */
+  -webkit-user-drag: none;
+
+  .downarrow-container {
+    position: absolute;
+    bottom: 90px;
+    cursor: pointer;
+    z-index: 100;
+    animation: float-fade 2s ease-in-out infinite; /* 合并动画 */
+
+    .downarrow {
+      font-size: 65px;
+      color: #eaebed;
+    }
+  }
+
   &.loadingComplete {
     transition: filter 0.3s, transform 0.3s;
     animation: fade-blur-in 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+}
+
+@keyframes float-fade {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  
+  50% {
+    transform: translateY(10px);
+    opacity: 1;
   }
 }
 
