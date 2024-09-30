@@ -161,7 +161,8 @@ onMounted(() => {
 })
 
 const move = () => {
-  window.scrollTo({ top: 850, behavior: 'smooth' })
+  const scrollHeight = window.innerHeight * (100 / 100);
+  window.scrollTo({ top: scrollHeight, behavior: 'smooth' });
 }
 
 </script>
