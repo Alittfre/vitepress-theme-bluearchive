@@ -186,11 +186,14 @@ const move = () => {
     bottom: 90px;
     cursor: pointer;
     z-index: 100;
-    animation: float-fade 2s ease-in-out infinite; /* 合并动画 */
+    animation: float-fade 2.3s ease-in-out infinite;
 
     .downarrow {
       font-size: 65px;
-      color: #eaebed;
+      color: #e9ebee;
+      text-shadow:
+        1px 0.8px 4px rgba(40, 135, 200, 1),
+        0 0 2px rgba(40, 135, 200, 0.2);
     }
   }
 
@@ -201,11 +204,13 @@ const move = () => {
 }
 
 @keyframes float-fade {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
     opacity: 0.8;
   }
-  
+
   50% {
     transform: translateY(10px);
     opacity: 1;
@@ -217,6 +222,7 @@ const move = () => {
     filter: var(--blur-val);
     transform: scale(1.5);
   }
+
   to {
     filter: blur(0);
     transform: scale(1);
@@ -243,7 +249,8 @@ const move = () => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  -webkit-user-drag: none; /* 禁用视频拖动 */
+  /* 禁用视频拖动 */
+  -webkit-user-drag: none;
 }
 
 #wave {
