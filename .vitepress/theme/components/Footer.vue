@@ -34,7 +34,7 @@ footer {
   border-right: solid 2px var(--foreground-color);
   background: linear-gradient(0.75turn, transparent, var(--foreground-color) 25%), var(--triangle-background);
   backdrop-filter: var(--blur-val);
-  box-shadow: var(--blue-shadow);
+  box-shadow: 0px 0px 8px rgb(var(--blue-shadow-color), 0.8);
 }
 
 .footer-info {

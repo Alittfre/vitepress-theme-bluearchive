@@ -56,7 +56,7 @@ const themeConfig = useData().theme.value
   border-radius: 32px;
   border: solid 2px var(--foreground-color);
   background: var(--foreground-color);
-  box-shadow: var(--blue-shadow);
+  box-shadow: 0px 0px 8px rgb(var(--blue-shadow-color), 0.8);
 }
 
 .content {

@@ -120,7 +120,7 @@ const finalPosts = computed(() => {
     background-size: contain;
     background-position: right;
     background-repeat: no-repeat;
-    box-shadow: var(--blue-shadow);
+    box-shadow: 0px 0px 8px rgb(var(--blue-shadow-color), 0.8);
   }
 
 

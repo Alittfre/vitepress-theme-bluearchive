@@ -1,9 +1,10 @@
 <template>
   <div class="banner" :class="{ postViewer: state.currPost.href, loadingComplete: !state.splashLoading }">
     <slot></slot>
-    <div class="downarrow-container" @click="move">
-      <span class="iconfont icon-downarrow downarrow"></span>
-    </div>
+    <transition name="fade-slide">
+    <span class="iconfont icon-downarrow downarrow" @click="move"
+      v-if="!state.splashLoading && page.filePath === 'index.md'"></span>
+    </transition>
     <canvas id="wave"></canvas>
     <video autoplay muted loop class="bg-video" v-if="videoBanner">
       <source src="../assets/banner/banner_video.mp4" type="video/mp4" />
@@ -14,6 +15,7 @@
 
 <script setup lang="ts">
 import { useData } from 'vitepress'
+const { page } = useData()
 const themeConfig = useData().theme.value
 const videoBanner = themeConfig.videoBanner
 
@@ -181,20 +183,18 @@ const move = () => {
   overflow: hidden;
   -webkit-user-drag: none;
 
-  .downarrow-container {
+  .downarrow {
     position: absolute;
     bottom: 90px;
     cursor: pointer;
     z-index: 100;
     animation: float-fade 2.3s ease-in-out infinite;
-
-    .downarrow {
-      font-size: 65px;
-      color: #e9ebee;
-      text-shadow:
-        1px 0.8px 4px rgba(40, 135, 200, 1),
-        0 0 2px rgba(40, 135, 200, 0.2);
-    }
+    animation-delay: 2.2s;
+    font-size: 60px;
+    color: #e9ebee;
+    text-shadow:
+      1px 0.8px 4px rgba(var(--blue-shadow-color), 1),
+      0 0 2px rgba(40, 135, 200, 0.2);
   }
 
   &.loadingComplete {
@@ -208,12 +208,10 @@ const move = () => {
   0%,
   100% {
     transform: translateY(0);
-    opacity: 0.8;
   }
 
   50% {
     transform: translateY(10px);
-    opacity: 1;
   }
 }
 
@@ -251,6 +249,21 @@ const move = () => {
   object-fit: cover;
   /* 禁用视频拖动 */
   -webkit-user-drag: none;
+}
+
+.fade-slide-enter-active {
+  transition: opacity 1s, transform 1s;
+  transition-delay: 1.2s;
+}
+
+.fade-slide-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.fade-slide-enter-from,
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(15px);
 }
 
 #wave {

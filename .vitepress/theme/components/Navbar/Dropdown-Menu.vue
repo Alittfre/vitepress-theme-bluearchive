@@ -93,7 +93,7 @@ watch(
 .dropdown-menu[showmenu='true'] {
   transform: translateY(40px);
   .menu-content {
-    box-shadow: var(--blue-shadow);
+    box-shadow: 0px 0px 8px rgb(var(--blue-shadow-color), 0.8);
     transition: box-shadow 0.2s;
   }
   transition:
