@@ -20,7 +20,7 @@
     <Footer></Footer>
     <Fireworks v-if="state.fireworksEnabled"></Fireworks>
     <SpinePlayer v-show="state.SpinePlayerEnabled"></SpinePlayer>
-    <ToTop></ToTop>
+    <ToTop v-if="state.toTopEnabled"></ToTop>
     <!-- 背景音乐元素 -->
     <audio id="background-music" loop>
       <source src="./assets/banner/bgm.mp3" type="audio/mpeg" />

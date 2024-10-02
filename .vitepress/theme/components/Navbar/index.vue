@@ -71,8 +71,8 @@ header {
     border-left: solid 2px var(--foreground-color);
     border-right: solid 2px var(--foreground-color);
     background: linear-gradient(0.25turn, transparent, var(--foreground-color) 25%), var(--triangle-background);
-    backdrop-filter: var(--blur-val);
     box-shadow: 0px 0px 8px rgb(var(--blue-shadow-color), 0.8);
+    backdrop-filter: var(--blur-val);
   }
 
   .logo {
@@ -125,7 +125,6 @@ header {
     background-color: var(--foreground-color);
     border-radius: 0 0 30px 30px;
   }
-
 
   .hamburger {
     position: relative;
