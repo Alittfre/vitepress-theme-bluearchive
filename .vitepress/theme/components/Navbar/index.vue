@@ -67,12 +67,12 @@ header {
     box-sizing: border-box;
     padding: 0 16px;
     border-radius: 0 0 30px 30px;
-    border-bottom: solid 2px white;
-    border-left: solid 2px white;
-    border-right: solid 2px white;
-    background: linear-gradient(0.25turn, transparent, white 25%), var(--triangle-background);
+    border-bottom: solid 2px var(--foreground-color);
+    border-left: solid 2px var(--foreground-color);
+    border-right: solid 2px var(--foreground-color);
+    background: linear-gradient(0.25turn, transparent, var(--foreground-color) 25%), var(--triangle-background);
     backdrop-filter: var(--blur-val);
-    box-shadow: var(--blue-shadow);
+    box-shadow: 0px 0px 8px rgb(var(--blue-shadow-color), 0.8);
   }
 
   .logo {
@@ -122,7 +122,7 @@ header {
     right: -1.8px;
     width: 170px;
     bottom: -1.5px;
-    background-color: white;
+    background-color: var(--foreground-color);
     border-radius: 0 0 30px 30px;
   }
 

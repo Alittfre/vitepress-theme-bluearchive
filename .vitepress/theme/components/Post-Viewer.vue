@@ -54,9 +54,9 @@ const themeConfig = useData().theme.value
   position: relative;
   padding: 36px;
   border-radius: 32px;
-  border: solid 2px white;
-  background: white;
-  box-shadow: var(--blue-shadow);
+  border: solid 2px var(--foreground-color);
+  background: var(--foreground-color);
+  box-shadow: 0px 0px 8px rgb(var(--blue-shadow-color), 0.8);
 }
 
 .content {
@@ -274,7 +274,7 @@ const themeConfig = useData().theme.value
     flex-direction: row-reverse;
     position: relative;
     background-color: #efefef;
-    border: 2px solid white;
+    border: 2px solid var(--foreground-color);
     border-radius: 16px;
     box-shadow: 0px 0px 5px #c1c1c1;
     overflow: hidden;

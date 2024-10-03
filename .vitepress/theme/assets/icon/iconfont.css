@@ -64,3 +64,7 @@
 .icon-stop:before {
   content: "\1111";
 }
+
+.icon-downarrow:before {
+  content: "\E802";
+}

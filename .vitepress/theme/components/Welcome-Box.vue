@@ -106,11 +106,11 @@ onMounted(() => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 50px 8px 0 8px;
   z-index: 100;
   transform-style: preserve-3d;
   transition: all 0.2s;
   perspective: 1000px;
+  padding-bottom: 12vh;
 }
 
 .fade-up-enter-active {
@@ -125,7 +125,7 @@ onMounted(() => {
 .welcome-text {
   font-size: 80px;
   font-weight: bold;
-  color: white;
+  color: var(--foreground-color);
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
   text-align: center;
   margin-bottom: 100px;
@@ -145,7 +145,7 @@ onMounted(() => {
   padding: 60px 40px 35px 40px;
   width: 720px;
   border-radius: 50px;
-  border: solid 2px white;
+  border: solid 2px var(--foreground-color);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   backdrop-filter: var(--blur-val) saturate(120%);
 
@@ -157,7 +157,7 @@ onMounted(() => {
     width: 128px;
     height: 128px;
     border-radius: 50%;
-    border: solid 3px white;
+    border: solid 3px var(--foreground-color);
     margin-bottom: 20px;
     transition: transform 0.6s ease, box-shadow 0.4s ease;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);

@@ -83,7 +83,7 @@ const SwitchSpinePlayer = (event: Event) => {
     border-radius: 50%;
     transition-duration: .2s;
     box-shadow: 5px 2px 7px rgba(8, 8, 8, 0.26);
-    border: 3px solid white;
+    border: 3px solid var(--foreground-color);
     transition: 
         transform 0.25s cubic-bezier(0.27, 0.2, 0.25, 1.51);
 }
@@ -92,7 +92,7 @@ const SwitchSpinePlayer = (event: Event) => {
 #spinePlayerCheckbox:checked + .toggleSwitch::after {
     transform: translateX(85%);
     transition-duration: .2s;
-    background-color: white;
+    background-color: var(--foreground-color);
     transition: 
         transform 0.25s cubic-bezier(0.27, 0.2, 0.25, 1.51);
 }

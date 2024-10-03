@@ -106,20 +106,21 @@ const finalPosts = computed(() => {
 .posts-list {
   position: relative;
   overflow-wrap: break-word;
+  margin-top: 25vh; /* 向下移动 20vh */
 
   .post {
     display: flex;
     flex-direction: column;
     margin: 0 0 50px 0;
     padding-bottom: 16px;
-    background-color: white;
+    background-color: var(--foreground-color);
     border-radius: 32px;
     border-left: solid 16px #c7e4f6;
     background-image: var(--deco1);
     background-size: contain;
     background-position: right;
     background-repeat: no-repeat;
-    box-shadow: var(--blue-shadow);
+    box-shadow: 0px 0px 8px rgb(var(--blue-shadow-color), 0.8);
   }
 
 
