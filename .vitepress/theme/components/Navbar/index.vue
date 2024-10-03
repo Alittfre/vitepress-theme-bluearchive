@@ -15,9 +15,10 @@
       <label class="hamburger">
         <input type="checkbox" :checked="state.showDropdownMenu" @change="toggleDropdownMenu" />
         <svg viewBox="0 0 32 32">
-          <path class="line line-top-bottom"
-            d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22">
-          </path>
+          <path
+            class="line line-top-bottom"
+            d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"
+          ></path>
           <path class="line" d="M7 16 27 16"></path>
         </svg>
       </label>
@@ -54,7 +55,7 @@ const toggleDropdownMenu = () => {
 }
 
 header {
-  height: 80vh;
+  height: 100vh;
 
   nav {
     display: flex;
@@ -70,7 +71,8 @@ header {
     border-bottom: solid 2px var(--foreground-color);
     border-left: solid 2px var(--foreground-color);
     border-right: solid 2px var(--foreground-color);
-    background: linear-gradient(0.25turn, transparent, var(--foreground-color) 25%), var(--triangle-background);
+    background: linear-gradient(0.25turn, transparent, var(--foreground-color) 25%),
+      var(--triangle-background);
     backdrop-filter: var(--blur-val);
     box-shadow: 0px 0px 8px rgb(var(--blue-shadow-color), 0.8);
   }
@@ -126,7 +128,6 @@ header {
     border-radius: 0 0 30px 30px;
   }
 
-
   .hamburger {
     position: relative;
     cursor: pointer;
@@ -159,11 +160,11 @@ header {
       stroke-dasharray: 12 63;
     }
 
-    input:checked+svg {
+    input:checked + svg {
       transform: rotate(-45deg);
     }
 
-    input:checked+svg .line-top-bottom {
+    input:checked + svg .line-top-bottom {
       stroke-dasharray: 20 300;
       stroke-dashoffset: -32.42;
     }

@@ -1,7 +1,7 @@
 <template>
   <Splash></Splash>
   <template v-if="!page.isNotFound">
-    <main style="min-height: 100vh">
+    <main>
       <Navbar></Navbar>
       <Banner>
         <transition name="opac" mode="out-in">

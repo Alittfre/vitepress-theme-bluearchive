@@ -1,9 +1,15 @@
 <template>
-  <div class="banner" :class="{ postViewer: state.currPost.href, loadingComplete: !state.splashLoading }">
+  <div
+    class="banner"
+    :class="{ postViewer: state.currPost.href, loadingComplete: !state.splashLoading }"
+  >
     <slot></slot>
     <transition name="fade-slide">
-    <span class="iconfont icon-downarrow downarrow" @click="move"
-      v-if="!state.splashLoading && page.filePath === 'index.md'"></span>
+      <span
+        class="iconfont icon-downarrow downarrow"
+        @click="move"
+        v-if="!state.splashLoading && page.filePath === 'index.md'"
+      ></span>
     </transition>
     <canvas id="wave"></canvas>
     <video autoplay muted loop class="bg-video" v-if="videoBanner">
@@ -163,13 +169,12 @@ onMounted(() => {
 })
 
 const move = () => {
-  const scrollHeight = window.innerHeight * (100 / 100);
-  window.scrollTo({ top: scrollHeight, behavior: 'smooth' });
+  window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
 }
-
 </script>
 <style scoped lang="less">
 .banner {
+  transform: translateZ(0);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -177,7 +182,7 @@ const move = () => {
   position: absolute;
   top: 0;
   width: 100%;
-  height: 102vh;
+  height: 100vh;
   mask: linear-gradient(to top, transparent, var(--general-background-color) 5%);
   perspective: 1000px;
   overflow: hidden;
@@ -188,23 +193,18 @@ const move = () => {
     bottom: 90px;
     cursor: pointer;
     z-index: 100;
-    animation: float-fade 2.3s ease-in-out infinite;
-    animation-delay: 2.2s;
+    animation: float-fade 2s ease-in-out infinite;
     font-size: 60px;
     color: #e9ebee;
-    text-shadow:
-      1px 0.8px 4px rgba(var(--blue-shadow-color), 1),
-      0 0 2px rgba(40, 135, 200, 0.2);
+    text-shadow: 1px 0.8px 4px rgba(var(--blue-shadow-color), 1), 0 0 2px rgba(40, 135, 200, 0.2);
   }
 
   &.loadingComplete {
-    transition: filter 0.3s, transform 0.3s;
     animation: fade-blur-in 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   }
 }
 
 @keyframes float-fade {
-
   0%,
   100% {
     transform: translateY(0);
@@ -222,7 +222,7 @@ const move = () => {
   }
 
   to {
-    filter: blur(0);
+    filter: none;
     transform: scale(1);
   }
 }
@@ -253,7 +253,7 @@ const move = () => {
 
 .fade-slide-enter-active {
   transition: opacity 1s, transform 1s;
-  transition-delay: 1.2s;
+  transition-delay: 1s;
 }
 
 .fade-slide-leave-active {
