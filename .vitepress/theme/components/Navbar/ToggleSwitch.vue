@@ -1,44 +1,52 @@
 <template>
-    <div v-for="(label, id) in toggles" :key="id">
-        <input type="checkbox" :id="id" :checked="state[id]" @change="toggleSwitch(id)">
-        <label :for="id" class="toggleSwitch">
-            <span class="text">{{ label }}</span>
-        </label>
+    <div>
+        <input type="checkbox" id="fireworksCheckbox" :checked="state.fireworksEnabled" @change="SwitchFireworks">
+        <label for="fireworksCheckbox" class="toggleSwitch"><span class="text">烟花</span></label>
+    </div>
+    <div>
+        <input type="checkbox" id="spinePlayerCheckbox" :checked="state.SpinePlayerEnabled" @change="SwitchSpinePlayer">
+        <label for="spinePlayerCheckbox" class="toggleSwitch"><span class="text">阿罗娜</span></label>
     </div>
 </template>
+
+
 
 <script setup lang="ts">
 import { useStore } from '../../store'
 import { onMounted } from 'vue'
 const { state } = useStore()
 
-// 定义可切换的项
-const toggles = {
-    fireworksEnabled: '烟花',
-    SpinePlayerEnabled: '阿罗娜',
-    toTopEnabled: '回顶'
-}
-
 // 页面加载时从 localStorage 读取状态并应用
 onMounted(() => {
-    Object.keys(toggles).forEach((key) => {
-        const storedValue = localStorage.getItem(key);
-        if (storedValue !== null) {
-            state[key] = JSON.parse(storedValue);
-        }
-    });
+    const fireworkslocal = localStorage.getItem('fireworksEnabled');
+    const spinePlayerlocal = localStorage.getItem('SpinePlayerEnabled');
+    // 如果 localStorage 中有存储的状态，应用到 state
+    if (fireworkslocal!== null) {
+        state.fireworksEnabled = JSON.parse(fireworkslocal);
+    }
+    if (spinePlayerlocal!== null) {
+        state.SpinePlayerEnabled = JSON.parse(spinePlayerlocal);
+    }
 });
 
-// 切换开关状态并保存到 localStorage
-const toggleSwitch = (key: string) => {
-    const isChecked = state[key];
-    state[key] = !isChecked;
-    localStorage.setItem(key, JSON.stringify(!isChecked));
+const SwitchFireworks = (event: Event) => {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    state.fireworksEnabled = isChecked;
+    // 保存状态到 localStorage
+    localStorage.setItem('fireworksEnabled', JSON.stringify(isChecked));
+};
+
+const SwitchSpinePlayer = (event: Event) => {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    state.SpinePlayerEnabled = isChecked;
+    localStorage.setItem('SpinePlayerEnabled', JSON.stringify(isChecked));
 };
 </script>
 
+
+
 <style scoped lang="less">
-input[type="checkbox"] {
+#fireworksCheckbox, #spinePlayerCheckbox {
     display: none;
 }
 
@@ -73,17 +81,25 @@ input[type="checkbox"] {
     left: 5px;
     background-color: transparent;
     border-radius: 50%;
-    transition: transform 0.26s cubic-bezier(0.27, 0.2, 0.25, 1.51), background-color 0.1s;
+    transition-duration: .2s;
     box-shadow: 5px 2px 7px rgba(8, 8, 8, 0.26);
     border: 3px solid var(--foreground-color);
+    transition: 
+        transform 0.25s cubic-bezier(0.27, 0.2, 0.25, 1.51);
 }
 
-input:checked + .toggleSwitch::after {
+#fireworksCheckbox:checked + .toggleSwitch::after,
+#spinePlayerCheckbox:checked + .toggleSwitch::after {
     transform: translateX(85%);
+    transition-duration: .2s;
     background-color: var(--foreground-color);
+    transition: 
+        transform 0.25s cubic-bezier(0.27, 0.2, 0.25, 1.51);
 }
 
-input:checked + .toggleSwitch {
+#fireworksCheckbox:checked + .toggleSwitch,
+#spinePlayerCheckbox:checked + .toggleSwitch {
     background-color: rgb(66, 92, 139);
+    transition-duration: .2s;
 }
 </style>
