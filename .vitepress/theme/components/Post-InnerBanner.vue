@@ -1,15 +1,17 @@
 <template>
-  <div class="post-banner">
+  <div class="post-banner" v-show="state.currPost.title">
     <h1 class="title">{{ state.currPost.title }}</h1>
-    <span class="status">发布于
+    <span class="status"
+      >发布于
       {{
-      Intl.DateTimeFormat('zh-CN', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-      }).format(new Date(state.currPost.create))
-    }}
-      | 约{{ state.currPost.wordCount }}字</span>
+        Intl.DateTimeFormat('zh-CN', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+        }).format(new Date(state.currPost.create))
+      }}
+      | 约{{ state.currPost.wordCount }}字</span
+    >
   </div>
 </template>
 <script setup lang="ts">

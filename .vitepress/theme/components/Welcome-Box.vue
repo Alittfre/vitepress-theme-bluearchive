@@ -6,12 +6,9 @@
     @mouseleave="reset"
     :style="{ transform: `rotateY(${calcY}deg) rotateX(${calcX}deg)` }"
   >
-    <transition name="fade-up" appear>
-      <span v-if="visible" class="welcome-text">{{ welcomeText }}</span>
-    </transition>
-    <transition name="fade-up" appear>
+    <span class="welcome-text">{{ welcomeText }}</span>
+    <transition name="fade" appear>
       <div
-        v-if="visible"
         class="info-box"
         :style="{
           background: `linear-gradient(${angle}deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5))`,
@@ -21,7 +18,6 @@
         <span class="name">{{ name }}</span>
         <span class="motto">
           {{ mottoText }}
-          <span class="pointer"></span>
         </span>
         <ul>
           <li v-for="item in social" :key="item.url">
@@ -50,7 +46,6 @@ const welcomeBoxRef = ref<HTMLElement | null>(null)
 const calcY = ref(0)
 const calcX = ref(0)
 const angle = ref(0)
-const visible = ref(false)
 
 const parallax = (e: MouseEvent) => {
   if (welcomeBoxRef.value) {
@@ -94,9 +89,6 @@ const addNextCharacter = () => {
 
 onMounted(() => {
   addNextCharacter()
-  setTimeout(() => {
-    visible.value = true
-  }, 50)
 })
 </script>
 
@@ -107,16 +99,7 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   z-index: 100;
-  transition: all 0.2s;
-}
-
-.fade-up-enter-active {
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-}
-
-.fade-up-enter-from {
-  opacity: 0;
-  transform: translateY(30px);
+  transition: transform 0.2s;
 }
 
 .welcome-text {
@@ -126,12 +109,7 @@ onMounted(() => {
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
   text-align: center;
   margin-bottom: 100px;
-  transition: transform 0.5s ease;
   user-select: none;
-
-  &:hover {
-    transform: scale(1.05);
-  }
 }
 
 .info-box {

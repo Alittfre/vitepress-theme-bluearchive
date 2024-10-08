@@ -4,11 +4,14 @@
     :class="{ postViewer: state.currPost.href, loadingComplete: !state.splashLoading }"
   >
     <slot></slot>
-    <transition name="fade-slide">
+    <transition name="fade">
       <span
         class="iconfont icon-downarrow downarrow"
         @click="move"
-        v-if="!state.splashLoading && page.filePath === 'index.md'"
+        v-if="
+          !state.splashLoading &&
+          (page.filePath === 'index.md' || page.filePath === 'tags/index.md')
+        "
       ></span>
     </transition>
     <canvas id="wave"></canvas>
@@ -187,6 +190,7 @@ const move = () => {
   perspective: 1000px;
   overflow: hidden;
   -webkit-user-drag: none;
+  transition: height 0.3s;
 
   .downarrow {
     position: absolute;
@@ -249,21 +253,6 @@ const move = () => {
   object-fit: cover;
   /* 禁用视频拖动 */
   -webkit-user-drag: none;
-}
-
-.fade-slide-enter-active {
-  transition: opacity 1s, transform 1s;
-  transition-delay: 1s;
-}
-
-.fade-slide-leave-active {
-  transition: opacity 0.3s, transform 0.3s;
-}
-
-.fade-slide-enter-from,
-.fade-slide-leave-to {
-  opacity: 0;
-  transform: translateY(15px);
 }
 
 #wave {

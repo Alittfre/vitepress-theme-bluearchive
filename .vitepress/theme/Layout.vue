@@ -4,13 +4,13 @@
     <main>
       <Navbar></Navbar>
       <Banner>
-        <transition name="opac" mode="out-in">
+        <transition name="fade" mode="out-in">
           <WelcomeBox v-if="!state.splashLoading && page.filePath === 'index.md'"></WelcomeBox>
           <Tags v-else-if="page.filePath === 'tags/index.md'"></Tags>
           <PostInnerBanner v-else></PostInnerBanner>
         </transition>
       </Banner>
-      <transition name="opac" mode="out-in">
+      <transition name="fade" mode="out-in">
         <PostsList
           v-if="page.filePath === 'index.md' || page.filePath === 'tags/index.md'"
         ></PostsList>
@@ -54,13 +54,13 @@ const { state } = useStore()
 </script>
 
 <style lang="less">
-.opac-enter-active,
-.opac-leave-active {
-  transition: all 0.2s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
 
-.opac-enter-from,
-.opac-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 
