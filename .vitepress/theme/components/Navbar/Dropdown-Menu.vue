@@ -21,10 +21,10 @@ const { state } = useStore()
 const dropdownMenu = ref(null)
 // 监听点击事件并判断是否在元素内
 const handleClickOutside = (event: MouseEvent) => {
-  if (dropdownMenu.value && !dropdownMenu.value.contains(event.target as Node)) {
+  if (dropdownMenu.value && !(event.target as Node).contains(dropdownMenu.value)) {
     setTimeout(() => {
-      state.showDropdownMenu = false;
-    }, 1); // 避免与点击菜单控件时相冲突
+      state.showDropdownMenu = false
+    }, 1) // 避免与点击菜单控件时相冲突
   }
 }
 
@@ -34,33 +34,30 @@ watch(
   (newValue) => {
     if (newValue) {
       // showDropdownMenu 为 true 时，添加全局点击监听
-      document.addEventListener('click', handleClickOutside);
+      document.addEventListener('click', handleClickOutside)
     } else {
       // showDropdownMenu 为 false 时，移除全局点击监听
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('click', handleClickOutside)
     }
-  }
-);
+  },
+)
 </script>
 
 <style scoped lang="less">
 .dropdown-menu {
-  position: fixed;
-  top: -60.7%;
-  right: -2.1px;
-  z-index: -1;
+  position: absolute;
+  z-index: 50;
+  bottom: 100%;
+  right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
 
   .menu-content {
     position: relative;
-    width: auto;
-    max-width: 768px;
     background-color: var(--foreground-color);
-    border-radius: 0 0 30px 30px;
-    padding: 23px;
-    padding-top: 70px;
+    border-radius: 30px;
+    padding: 20px;
     gap: 10px;
     display: flex;
     flex-direction: column;
@@ -75,40 +72,26 @@ watch(
     width: 100%;
     justify-content: space-between;
     align-items: center;
-
-    // 分隔条
-    &::after {
-      content: '';
-      position: fixed;
-      top: 58%;
-      left: 24%;
-      width: 52%;
-      height: 1px;
-      background-color: var(--font-color-grey);
-      border-radius: 1px;
-    }
+    border-bottom: 1px dashed var(--font-color-grey);
   }
 }
 
 .dropdown-menu[showmenu='true'] {
-  transform: translateY(40px);
+  transform: translateY(150%);
   .menu-content {
     box-shadow: 0px 0px 8px rgb(var(--blue-shadow-color), 0.8);
     transition: box-shadow 0.2s;
   }
-  transition:
-    top 0.6s cubic-bezier(0.25, 1, 0.5, 1),
-    transform 0.63s cubic-bezier(.7, .5, .2, 1.24);
+  transition: top 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+    transform 0.63s cubic-bezier(0.7, 0.5, 0.2, 1.24);
 }
 
 .dropdown-menu[showmenu='false'] {
-  transform: translateY(-91px);
   .menu-content {
     box-shadow: none;
     transition: box-shadow 3s;
   }
-  transition: 
-    top 0.6s cubic-bezier(0.25, 1, 0.5, 1),
-    transform 0.6s cubic-bezier(.9, -0.33, .51, 1.07);
+  transition: top 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+    transform 0.6s cubic-bezier(0.9, -0.33, 0.51, 1.07);
 }
 </style>

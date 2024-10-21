@@ -1,6 +1,6 @@
 <template>
-  <header :class="{ postViewer: state.currPost.href }">
-    <nav class="container">
+  <header :class="{ postViewer: state.currPost.href }" class="container">
+    <nav>
       <span class="logo">
         <img @dragstart.prevent src="../../assets/icon/navLogo.svg" alt="" />
       </span>
@@ -11,7 +11,7 @@
           </li>
         </ul>
       </span>
-      <span class="MenuMask"></span>
+      <!-- <span class="MenuMask"></span> -->
       <label class="hamburger">
         <input type="checkbox" :checked="state.showDropdownMenu" @change="toggleDropdownMenu" />
         <svg viewBox="0 0 32 32">
@@ -22,9 +22,10 @@
           <path class="line" d="M7 16 27 16"></path>
         </svg>
       </label>
-      <DropdownMenu :showMenu="state.showDropdownMenu"></DropdownMenu>
     </nav>
+    <DropdownMenu :showMenu="state.showDropdownMenu"></DropdownMenu>
   </header>
+
   <SearchDialog v-if="state.searchDialog" @close-dialog="closeDialog"></SearchDialog>
 </template>
 
@@ -56,7 +57,7 @@ const toggleDropdownMenu = () => {
 
 header {
   height: 80vh;
-
+  position: relative;
   nav {
     display: flex;
     align-items: center;
@@ -86,8 +87,6 @@ header {
   }
 
   .menu {
-    z-index: 200;
-
     ul {
       display: flex;
       align-items: center;
@@ -98,7 +97,7 @@ header {
       li {
         a {
           display: block;
-          padding: 10px 16px 10px 16px;
+          padding: 10px 16px;
           border-radius: 8px;
           font-size: 20px;
           font-weight: 600;
@@ -116,20 +115,7 @@ header {
     }
   }
 
-  // 菜单遮罩
-  .MenuMask {
-    position: fixed;
-    top: 0;
-    left: 1;
-    right: -1.8px;
-    width: 170px;
-    bottom: -1.5px;
-    background-color: var(--foreground-color);
-    border-radius: 0 0 30px 30px;
-  }
-
   .hamburger {
-    position: relative;
     cursor: pointer;
     transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 
@@ -171,13 +157,23 @@ header {
   }
 }
 
-@media (min-width: 768px) {
-  .menu {
-    li {
-      margin: 0 50px;
-
-      a {
-        font-size: 18px;
+@media (max-width: 768px) {
+  header {
+    nav {
+      height: 64px;
+    }
+    .logo {
+      img {
+        height: 32px;
+      }
+    }
+    .menu {
+      ul {
+        li {
+          a {
+            font-size: 16px;
+          }
+        }
       }
     }
   }
