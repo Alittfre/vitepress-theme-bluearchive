@@ -1,7 +1,7 @@
 <template>
   <Splash></Splash>
   <template v-if="!page.isNotFound">
-    <main>
+    <main style="min-height: 100vh">
       <Navbar></Navbar>
       <Banner>
         <transition name="fade" mode="out-in">

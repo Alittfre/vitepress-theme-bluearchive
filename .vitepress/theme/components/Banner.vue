@@ -4,16 +4,7 @@
     :class="{ postViewer: state.currPost.href, loadingComplete: !state.splashLoading }"
   >
     <slot></slot>
-    <transition name="fade">
-      <span
-        class="iconfont icon-downarrow downarrow"
-        @click="move"
-        v-if="
-          !state.splashLoading &&
-          (page.filePath === 'index.md' || page.filePath === 'tags/index.md')
-        "
-      ></span>
-    </transition>
+
     <canvas id="wave"></canvas>
     <video autoplay muted loop class="bg-video" v-if="videoBanner">
       <source src="../assets/banner/banner_video.mp4" type="video/mp4" />
@@ -24,7 +15,6 @@
 
 <script setup lang="ts">
 import { useData } from 'vitepress'
-const { page } = useData()
 const themeConfig = useData().theme.value
 const videoBanner = themeConfig.videoBanner
 
@@ -170,10 +160,6 @@ onMounted(() => {
     }, 100),
   )
 })
-
-const move = () => {
-  window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
-}
 </script>
 <style scoped lang="less">
 .banner {
@@ -185,23 +171,12 @@ const move = () => {
   position: absolute;
   top: 0;
   width: 100%;
-  height: 100vh;
+  height: 80vh;
   mask: linear-gradient(to top, transparent, var(--general-background-color) 5%);
   perspective: 1000px;
   overflow: hidden;
   -webkit-user-drag: none;
   transition: height 0.3s;
-
-  .downarrow {
-    position: absolute;
-    bottom: 90px;
-    cursor: pointer;
-    z-index: 100;
-    animation: float-fade 2s ease-in-out infinite;
-    font-size: 60px;
-    color: #e9ebee;
-    text-shadow: 1px 0.8px 4px rgba(var(--blue-shadow-color), 1), 0 0 2px rgba(40, 135, 200, 0.2);
-  }
 
   &.loadingComplete {
     animation: fade-blur-in 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
