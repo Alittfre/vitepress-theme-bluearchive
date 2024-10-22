@@ -126,9 +126,9 @@ onMounted(() => {
 
   .avatar {
     position: absolute;
-    top: -25%;
+    top: 0;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     width: 128px;
     height: 128px;
     border-radius: 50%;
@@ -150,7 +150,7 @@ onMounted(() => {
     margin-top: 24px;
   }
   .motto {
-    font-size: 19px;
+    font-size: 18px;
     font-weight: bold;
     animation: color-change 0.8s linear infinite;
     padding-right: 4px;
@@ -203,23 +203,32 @@ onMounted(() => {
   .banner {
     .welcome-text {
       font-size: 45px;
-      margin-top: -20px;
     }
 
     .info-box {
-      width: 78vw;
+      width: 75vw;
+      border-radius: 36px;
+      padding: 48px 20px 20px 20px;
+
+      .avatar {
+        width: 100px;
+        height: 100px;
+      }
     }
 
     .name {
-      font-size: 22px;
+      font-size: 20px;
     }
 
     .motto {
-      font-size: 17px;
+      font-size: 12px;
     }
 
     ul {
       width: 180px;
+      .social {
+        font-size: 24px;
+      }
     }
   }
 }

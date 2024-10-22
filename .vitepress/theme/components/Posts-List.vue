@@ -272,5 +272,18 @@ const finalPosts = computed(() => {
     margin: 0 8px 30px 8px !important;
     background-size: cover !important;
   }
+  .post-header {
+    padding: 20px 35px 0;
+    .name {
+      font-size: 26px;
+    }
+    .title {
+      margin-bottom: 6px;
+      .title-dot {
+        height: 18px;
+        top: 6px;
+      }
+    }
+  }
 }
 </style>

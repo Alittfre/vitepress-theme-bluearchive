@@ -86,6 +86,7 @@ header {
 
   .menu {
     ul {
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -93,6 +94,7 @@ header {
       margin: 0;
 
       li {
+        margin: 0 50px;
         a {
           display: block;
           padding: 10px 16px;
@@ -114,6 +116,9 @@ header {
   }
 
   .hamburger {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 36px;
     cursor: pointer;
   }
@@ -153,6 +158,7 @@ header {
     .menu {
       ul {
         li {
+          margin: 0 10px;
           a {
             font-size: 16px;
           }
