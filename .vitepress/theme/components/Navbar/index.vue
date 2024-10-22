@@ -50,11 +50,11 @@ const toggleDropdownMenu = () => {
 
 <style scoped lang="less">
 .postViewer {
-  margin-bottom: 40vh;
+  height: 50vh;
 }
 
 header {
-  margin-bottom: 75vh;
+  height: 80vh;
   position: relative;
   nav {
     display: flex;
