@@ -11,17 +11,15 @@
           </li>
         </ul>
       </span>
-      <!-- <span class="MenuMask"></span> -->
-      <label class="hamburger">
-        <input type="checkbox" :checked="state.showDropdownMenu" @change="toggleDropdownMenu" />
-        <svg viewBox="0 0 32 32">
-          <path
-            class="line line-top-bottom"
-            d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"
-          ></path>
-          <path class="line" d="M7 16 27 16"></path>
-        </svg>
-      </label>
+      <div
+        class="hamburger"
+        :class="{ active: state.showDropdownMenu }"
+        @click="toggleDropdownMenu"
+      >
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
     </nav>
     <DropdownMenu :showMenu="state.showDropdownMenu"></DropdownMenu>
   </header>
@@ -52,11 +50,11 @@ const toggleDropdownMenu = () => {
 
 <style scoped lang="less">
 .postViewer {
-  height: 50vh;
+  margin-bottom: 40vh;
 }
 
 header {
-  height: 80vh;
+  margin-bottom: 75vh;
   position: relative;
   nav {
     display: flex;
@@ -116,44 +114,29 @@ header {
   }
 
   .hamburger {
+    width: 36px;
     cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
 
-    &:hover {
-      transform: translateY(-2px);
-    }
+  .hamburger .line {
+    display: block;
+    width: 80%;
+    height: 4px;
+    border-radius: 4px;
+    background-color: var(--font-color-grey);
+    margin-bottom: 4px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
 
-    input {
-      display: none;
-    }
-
-    svg {
-      height: 3em;
-      transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .line {
-      fill: none;
-      stroke: rgb(76, 88, 102);
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      stroke-width: 3;
-      transition: stroke-dasharray 500ms cubic-bezier(0.4, 0, 0.2, 1),
-        stroke-dashoffset 500ms cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .line-top-bottom {
-      stroke-dasharray: 12 63;
-    }
-
-    input:checked + svg {
-      transform: rotate(-45deg);
-    }
-
-    input:checked + svg .line-top-bottom {
-      stroke-dasharray: 20 300;
-      stroke-dashoffset: -32.42;
-    }
+  .hamburger.active .line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.active .line:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active .line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
   }
 }
 
@@ -175,6 +158,9 @@ header {
           }
         }
       }
+    }
+    .hamburger {
+      width: 32px;
     }
   }
 }

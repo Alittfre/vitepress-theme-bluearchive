@@ -11,36 +11,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
 import MusicControl from './Music-Control.vue'
 import SearchButton from './Search-Button.vue'
 import ToggleSwitch from './ToggleSwitch.vue'
-import { useStore } from '../../store'
-const { state } = useStore()
-
-const dropdownMenu = ref(null)
-// 监听点击事件并判断是否在元素内
-const handleClickOutside = (event: MouseEvent) => {
-  if (dropdownMenu.value && !(event.target as Node).contains(dropdownMenu.value)) {
-    setTimeout(() => {
-      state.showDropdownMenu = false
-    }, 1) // 避免与点击菜单控件时相冲突
-  }
-}
-
-// 监听 showDropdownMenu 的变化
-watch(
-  () => state.showDropdownMenu,
-  (newValue) => {
-    if (newValue) {
-      // showDropdownMenu 为 true 时，添加全局点击监听
-      document.addEventListener('click', handleClickOutside)
-    } else {
-      // showDropdownMenu 为 false 时，移除全局点击监听
-      document.removeEventListener('click', handleClickOutside)
-    }
-  },
-)
 </script>
 
 <style scoped lang="less">
