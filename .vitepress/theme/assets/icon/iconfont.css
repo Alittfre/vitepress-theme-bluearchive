@@ -21,6 +21,10 @@
   content: "\e76c";
 }
 
+.icon-coolapk:before {
+  content: "\E760";
+}
+
 .icon-reddit:before {
   content: "\e76d";
 }
