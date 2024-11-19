@@ -53,7 +53,7 @@ export default defineConfigWithTheme<ThemeConfig>({
     name: "Sensei's 部落格", //首页标题
     welcomeText: 'Hello, VitePress', //首页欢迎语
     motto: ['和你的日常，就是奇迹', '何気ない日常で、ほんの少しの奇跡を見つける物語。'], //首页motto
-    social: [ //社交链接配置
+    social: [ //社交链接配置(netease_music,coolapk,reddit)
       { icon: 'github', url: 'https://github.com/' },
       { icon: 'bilibili', url: 'https://www.bilibili.com/' },
       { icon: 'qq', url: 'https://im.qq.com/index/' },
