@@ -18,6 +18,7 @@
         <span class="name">{{ name }}</span>
         <span class="motto">
           {{ mottoText }}
+          <span class="pointer"></span>
         </span>
         <ul>
           <li v-for="item in social" :key="item.url">
