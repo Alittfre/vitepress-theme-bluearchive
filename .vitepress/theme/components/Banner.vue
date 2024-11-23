@@ -171,7 +171,7 @@ onMounted(() => {
   position: absolute;
   top: 0;
   width: 100%;
-  height: 80vh;
+  height: 75vh;
   mask: linear-gradient(to top, transparent, var(--general-background-color) 5%);
   perspective: 1000px;
   overflow: hidden;

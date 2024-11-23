@@ -52,25 +52,29 @@ onUnmounted(() => {
   justify-content: center;
   flex-wrap: wrap;
   box-sizing: border-box;
-  padding: 16px;
+  padding: 1vw;
   background-color: rgba(255, 255, 255, 0.25);
-  border-radius: 32px;
+  border-radius: 3vw;
   border: solid 2px var(--foreground-color);
   backdrop-filter: var(--blur-val);
-  margin: 50px 8px 0 8px;
   width: 768px;
   z-index: 100;
 
   li {
-    margin: 8px;
+    margin: 0.5vw;
 
     a {
+      font-size: 1vw;
       color: var(--font-color-grey);
-      padding: 3px 5px 3px 5px;
+      padding: 0.5vh 0.3vw;
       color: var(--font-color-gold);
       background-color: var(--btn-background);
       border-radius: 5px;
       transition: background-color 0.5s;
+
+      .icon-tag {
+        font-size: 1vw;
+      }
 
       &:hover {
         background-color: var(--btn-hover);
@@ -81,7 +85,22 @@ onUnmounted(() => {
 
 @media (max-width: 768px) {
   .tags {
-    width: auto;
+    padding: 1vh;
+    border-radius: 4vh;
+
+    width: 95%;
+    li {
+      margin: 1vh;
+
+      a {
+        font-size: 1.8vh;
+        padding: 0.7vh 2vw;
+
+        .icon-tag {
+          font-size: 1.8vh;
+        }
+      }
+    }
   }
 }
 </style>

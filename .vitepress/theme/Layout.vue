@@ -69,7 +69,7 @@ html {
 }
 
 .container {
-  max-width: 1200px;
+  width: 75vw;
   margin: 0 auto;
 }
 
@@ -103,5 +103,11 @@ a {
   border-radius: 3px;
   background: var(--color-blue);
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100vw;
+  }
 }
 </style>

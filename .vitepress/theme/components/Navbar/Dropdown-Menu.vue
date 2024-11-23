@@ -29,9 +29,9 @@ import ToggleSwitch from './ToggleSwitch.vue'
   .menu-content {
     position: relative;
     background-color: var(--foreground-color);
-    border-radius: 30px;
-    padding: 20px;
-    gap: 10px;
+    border-radius: 2vw;
+    padding: 1.2vw;
+    gap: 0.8vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -39,9 +39,9 @@ import ToggleSwitch from './ToggleSwitch.vue'
 
   .first-row {
     display: flex;
-    gap: 5px;
-    padding: 5px;
-    padding-bottom: 10px;
+    gap: 0.4vw;
+    padding: 0.3vw;
+    padding-bottom: 1vh;
     width: 100%;
     justify-content: space-between;
     align-items: center;
@@ -66,5 +66,21 @@ import ToggleSwitch from './ToggleSwitch.vue'
   }
   transition: top 0.6s cubic-bezier(0.25, 1, 0.5, 1),
     transform 0.6s cubic-bezier(0.9, -0.33, 0.51, 1.07);
+}
+
+@media (max-width: 768px) {
+  .dropdown-menu {
+    .menu-content {
+      border-radius: 3vh;
+      padding: 2vh;
+      gap: 1vh;
+    }
+
+    .first-row {
+      gap: 0.5vh;
+      padding: 0.3vh;
+      padding-bottom: 1vh;
+    }
+  }
 }
 </style>

@@ -95,6 +95,7 @@ onMounted(() => {
 
 <style scoped lang="less">
 .welcome-box {
+  margin-top: 4.2vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,12 +105,12 @@ onMounted(() => {
 }
 
 .welcome-text {
-  font-size: 80px;
+  font-size: 4.5vw;
   font-weight: bold;
   color: var(--foreground-color);
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
   text-align: center;
-  margin-bottom: 100px;
+  margin-bottom: 5vw;
   user-select: none;
 }
 
@@ -118,9 +119,9 @@ onMounted(() => {
   flex-direction: column;
   align-items: center;
   position: relative;
-  padding: 60px 40px 35px 40px;
-  width: 720px;
-  border-radius: 50px;
+  padding: 6vh 2vw 3vh;
+  width: 40vw;
+  border-radius: 3vw;
   border: solid 2px var(--foreground-color);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   backdrop-filter: var(--blur-val) saturate(120%);
@@ -130,11 +131,10 @@ onMounted(() => {
     top: 0;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 128px;
-    height: 128px;
+    width: 7.5vw;
+    height: 7.5vw;
     border-radius: 50%;
     border: solid 3px var(--foreground-color);
-    margin-bottom: 20px;
     transition: transform 0.6s ease, box-shadow 0.4s ease;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
     cursor: pointer;
@@ -146,24 +146,22 @@ onMounted(() => {
   }
 
   .name {
-    font-size: 25px;
-    margin-bottom: 28px;
-    margin-top: 24px;
+    font-size: 1.5vw;
+    margin-top: 3vh;
   }
   .motto {
-    font-size: 18px;
+    font-size: 1vw;
     font-weight: bold;
     animation: color-change 0.8s linear infinite;
-    padding-right: 4px;
-    margin-bottom: 1px;
+    margin-top: 3vh;
     text-align: center;
     .pointer {
       display: inline-block;
-      margin: -5px 0 0 2px;
+      margin: -0.5vh 0 0;
       padding: 0;
       vertical-align: middle;
       width: 2px;
-      height: 16px;
+      height: 1vw;
       animation: color-change 0.8s linear infinite;
       background-color: var(--pointerColor);
     }
@@ -184,12 +182,12 @@ onMounted(() => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 30px;
-    width: 200px;
+    margin-top: 3.5vh;
+    width: 12vw;
     padding: 0;
 
     .social {
-      font-size: 25px;
+      font-size: 1.5vw;
       font-weight: 600;
       transition: all 0.5s;
       color: var(--font-color-grey);
@@ -202,34 +200,39 @@ onMounted(() => {
 }
 
 @media (max-width: 768px) {
-  .banner {
-    .welcome-text {
-      font-size: 45px;
-    }
+  .welcome-text {
+    font-size: 5vh;
+    margin-bottom: 10vh;
+  }
 
-    .info-box {
-      width: 75vw;
-      border-radius: 36px;
-      padding: 48px 20px 20px 20px;
+  .info-box {
+    padding: 5vh 6vw 2vh;
+    width: 75vw;
+    border-radius: 4vh;
 
-      .avatar {
-        width: 100px;
-        height: 100px;
-      }
+    .avatar {
+      width: 10vh;
+      height: 10vh;
     }
 
     .name {
-      font-size: 20px;
+      font-size: 2.5vh;
+      margin-top: 1.8vh;
     }
-
     .motto {
-      font-size: 12px;
+      font-size: 1.5vh;
+      margin-top: 1.5vh;
+      .pointer {
+        height: 1.5vh;
+      }
     }
 
     ul {
-      width: 180px;
+      margin-top: 1.8vh;
+      width: 32vw;
+
       .social {
-        font-size: 19px;
+        font-size: 2vh;
       }
     }
   }

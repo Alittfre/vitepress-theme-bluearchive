@@ -181,16 +181,16 @@ onUnmounted(() => {
   bottom: 25px;
   left: 0%;
   z-index: 100;
-  width: 200px;
-  height: 400px;
+  width: 12vw;
+  height: 24vw;
   filter: drop-shadow(0 0 3px rgba(40, 42, 44, 0.42));
   transition: all 1s;
 }
 
 @media (max-width: 768px) {
   .playerContainer {
-    width: 120px;
-    height: 240px;
+    width: 15vh;
+    height: 30vh;
   }
 }
 </style>
