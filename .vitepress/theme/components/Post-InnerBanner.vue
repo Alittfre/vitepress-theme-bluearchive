@@ -30,18 +30,22 @@ const { state } = useStore()
   transition: color 0.5s;
 
   .title {
-    font-size: 80px;
-    margin-bottom: 50px;
+    font-size: 4.5vw;
+    margin-bottom: 5vh;
     text-align: center;
   }
 
   .status {
+    font-size: 1vw;
     font-weight: bold;
   }
 
   @media (max-width: 768px) {
     .title {
-      font-size: 30px;
+      font-size: 6vh;
+    }
+    .status {
+      font-size: 2vh;
     }
   }
 }

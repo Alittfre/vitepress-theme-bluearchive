@@ -69,7 +69,7 @@ html {
 }
 
 .container {
-  max-width: 1200px;
+  width: 75vw;
   margin: 0 auto;
 }
 

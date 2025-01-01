@@ -52,8 +52,8 @@ const themeConfig = useData().theme.value
 .view-box {
   box-sizing: border-box;
   position: relative;
-  padding: 36px;
-  border-radius: 32px;
+  padding: 2vw;
+  border-radius: 2vw;
   border: solid 2px var(--foreground-color);
   background: var(--foreground-color);
   box-shadow: 0px 0px 8px rgb(var(--blue-shadow-color), 0.8);
@@ -514,8 +514,8 @@ const themeConfig = useData().theme.value
 
 @media (max-width: 768px) {
   .view-box {
-    padding: 16px;
-    margin: 0 8px !important;
+    border-radius: 4vh;
+    padding: 2.5vh;
   }
 }
 </style>

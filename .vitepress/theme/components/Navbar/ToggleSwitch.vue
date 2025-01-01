@@ -63,17 +63,17 @@ input[type="checkbox"] {
 }
 
 .toggleSwitch {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    right: 22px;
-    width: 35px;
-    height: 20px;
-    background-color: rgb(82, 82, 82);
-    border-radius: 20px;
-    cursor: pointer;
-    transition-duration: .2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  right: 1.2vw;
+  width: 2vw;
+  height: 1.2vw;
+  background-color: rgb(82, 82, 82);
+  border-radius: 1vw;
+  cursor: pointer;
+  transition-duration: 0.2s;
 
     .text {
         position: relative;

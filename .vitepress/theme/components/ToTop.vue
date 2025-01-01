@@ -35,14 +35,14 @@ onUnmounted(() => {
   filter: drop-shadow(0 0 3px rgba(40, 42, 44, 0.42));
   transition: all 0.5s;
   img {
-    width: 85px;
+    width: 5vw;
   }
 }
 @media (max-width: 768px) {
   .totop {
     right: 5%;
     img {
-      width: 65px;
+      width: 8vh;
     }
   }
 }
