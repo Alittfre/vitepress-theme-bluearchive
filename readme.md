@@ -36,6 +36,7 @@ BA 主题博客，基于 VitePress，绝赞画饼中
 ## 主题配置
 
 **音乐** **首页背景** **头像**在`.vitepress/theme/assets/banner`
+可单独设置暗色模式首页背景，命名为`banner_dark.jpg`
 
 **配置文件**在`.vitepress/config.mts`
 

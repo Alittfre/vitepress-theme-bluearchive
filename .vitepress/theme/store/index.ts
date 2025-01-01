@@ -10,6 +10,7 @@ interface StoreState {
   fireworksEnabled: boolean
   SpinePlayerEnabled: boolean
   showDropdownMenu: boolean
+  darkMode: boolean
 }
 
 const state: StoreState = reactive({
@@ -32,6 +33,7 @@ const state: StoreState = reactive({
   fireworksEnabled: true,
   SpinePlayerEnabled: true,
   showDropdownMenu: false,
+  darkMode: false,
 })
 
 export function useStore() {

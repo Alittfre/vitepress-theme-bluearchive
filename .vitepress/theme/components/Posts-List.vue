@@ -127,12 +127,13 @@ const finalPosts = computed(() => {
     margin-bottom: 5vh;
     background-color: var(--foreground-color);
     border-radius: 2vw;
-    border-left: solid 1vw #c7e4f6;
+    border-left: solid 1vw var(--pot-border-left);
     background-image: var(--deco1);
     background-size: contain;
     background-position: right;
     background-repeat: no-repeat;
     box-shadow: 0px 0px 8px rgb(var(--blue-shadow-color), 0.8);
+    transition: all 0.5s;
   }
 }
 
@@ -150,13 +151,14 @@ const finalPosts = computed(() => {
       position: absolute;
       left: -1vw;
       top: 1vh;
-      background: #c7e4f6;
+      background: var(--pot-border-left);
       border-radius: 2px;
+      transition: background 0.5s;
     }
 
     a {
       color: var(--font-color-grey);
-      transition: text-shadow 0.5s;
+      transition: text-shadow 0.5s, color 0.5s;
 
       &:hover {
         text-shadow: 0 0 3px var(--font-color-grey);

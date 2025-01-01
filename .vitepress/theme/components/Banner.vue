@@ -93,8 +93,12 @@ class SiriWave {
     }
     this.phase = (this.phase + this.speed) % (Math.PI * 64)
     this._clear()
-    this._drawLine(0.5, 'rgba(234, 239, 245, 0.8)', 1, 0.35, 6)
-    this._drawLine(1, 'rgba(234, 239, 245, 0.5)', 1, 0.25, 6)
+       // 获取计算后的 CSS 变量值
+    const wave1Color = getComputedStyle(document.documentElement).getPropertyValue('--wave-color1').trim()
+    const wave2Color = getComputedStyle(document.documentElement).getPropertyValue('--wave-color2').trim()
+    
+    this._drawLine(0.5, wave1Color, 1, 0.35, 6)
+    this._drawLine(1, wave2Color, 1, 0.25, 6)
     this.animationFrameID = requestAnimationFrame(this._draw.bind(this))
   }
 
@@ -212,12 +216,17 @@ onMounted(() => {
 
 .bg-img {
   background-image: url(../assets/banner/banner.jpg);
+  html[theme="dark"] & {
+      background-image: url(../assets/banner/banner_dark.jpg), url(../assets/banner/banner.jpg);
+    }
   position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
   background-size: cover;
   background-position: center center;
+  filter: var(--img-brightness); /* 添加亮度过滤器 */
+  transition: filter 0.5s, background-image 0.5s; /* 添加过渡效果 */
 }
 
 .bg-video {

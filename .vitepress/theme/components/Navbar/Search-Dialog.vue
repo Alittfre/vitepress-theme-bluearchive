@@ -95,7 +95,7 @@ onMounted(() => {
 }
 // 遮罩
 .dialog-cover {
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.614);
   position: absolute;
   top: 0;
   left: 0;
@@ -110,7 +110,7 @@ onMounted(() => {
   width: 90%;
   max-width: 768px;
   height: auto;
-  background-color: rgb(239, 239, 239);
+  background-color: var(--search-dialog-bg);
   border-radius: 16px;
   padding: 10px;
   overflow: hidden;
@@ -129,8 +129,8 @@ onMounted(() => {
   left: 0;
   right: 0;
   height: 56px;
-  border-bottom: 3px solid rgb(213, 217, 219);
-  background-color: rgb(239, 242, 244);
+  border-bottom: 3px solid var(--search-dialog-border);
+  background-color: var(--search-dialog-header-bg);
   background-image: var(--deco2);
   background-repeat: no-repeat;
   background-position: left;
@@ -158,17 +158,18 @@ onMounted(() => {
 }
 
 #search-input {
+  color: var(--font-color-grey);
   width: 100%;
   height: 48px;
   margin: 10px;
   padding: 0 16px;
-  background-color: rgb(230, 234, 235);
-  border: 3px solid rgb(209, 213, 218);
+  background-color: var(--search-input-bg);
+  border: 3px solid var(--search-input-border);
   border-radius: 5px;
   box-sizing: border-box;
 
   &:focus {
-    outline: 3px solid rgba(209, 213, 218, 0.539);
+    outline: 3px solid var(--search-input-border);
   }
 }
 
@@ -176,7 +177,7 @@ onMounted(() => {
   width: 100%;
   min-height: 100px;
   box-sizing: border-box;
-  background-color: rgb(174, 193, 202);
+  background-color: var(--search-list-bg);
   border-radius: 8px;
   padding: 10px;
   margin: 0;
@@ -190,9 +191,9 @@ onMounted(() => {
 }
 
 li {
-  background-color: #fff;
+  background-color: var(--search-item-bg);
   border-radius: 5px;
-  box-shadow: 3px 3px 3px rgba(69, 73, 78, 0.548);
+  box-shadow: 3px 3px 3px var(--search-item-shadow);
   padding: 10px;
   height: 50px;
   display: flex;
