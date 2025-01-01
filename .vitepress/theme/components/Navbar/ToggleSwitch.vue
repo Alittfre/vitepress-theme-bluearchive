@@ -67,9 +67,9 @@ input[type="checkbox"] {
   align-items: center;
   justify-content: center;
   position: relative;
-  right: 1.2vw;
-  width: 2vw;
-  height: 1.2vw;
+  right: 1.5vw;
+  width: 2.4vw;
+  height: 1.3vw;
   background-color: rgb(82, 82, 82);
   border-radius: 1vw;
   cursor: pointer;
@@ -91,7 +91,7 @@ input[type="checkbox"] {
     position: absolute;
     height: 8px;
     width: 8px;
-    left: 5px;
+    left: 4px;
     background-color: transparent;
     border-radius: 50%;
     transition: transform 0.26s cubic-bezier(0.27, 0.2, 0.25, 1.51), background-color 0.1s;

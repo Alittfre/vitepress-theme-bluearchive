@@ -57,6 +57,7 @@ const themeConfig = useData().theme.value
   border: solid 2px var(--foreground-color);
   background: var(--foreground-color);
   box-shadow: 0px 0px 8px rgb(var(--blue-shadow-color), 0.8);
+  transition: opacity 0.5s ease-out, transform 1s cubic-bezier(.61,.15,.26,1), border 0.5s, background 0.5s, box-shadow 0.5s;
 }
 
 .content {
