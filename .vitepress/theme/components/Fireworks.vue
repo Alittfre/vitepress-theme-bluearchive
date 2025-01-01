@@ -3,7 +3,8 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, watch, onUnmounted } from 'vue'
+import { useStore } from '../store'
 import anime from 'animejs'
 
 interface MinMax {
@@ -32,10 +33,27 @@ interface Particle {
   draw?: () => void
 }
 
+const { state } = useStore()
+
+// 清理函数
+function cleanup() {
+  document.removeEventListener('mousedown', handleMouseDown)
+  window.removeEventListener('resize', handleResize)
+}
+
+// 将事件处理函数提取出来以便解绑
+let handleMouseDown: (e: MouseEvent) => void
+let handleResize: () => void
+
 function createFireworks() {
-  const defaultColors = ['102, 167, 221', '62, 131, 225', '33, 78, 194']
+  // 确保在重新创建前清理
+  cleanup()
+  
+  const lightColors = ['102, 167, 221', '62, 131, 225', '33, 78, 194']
+  const darkColors = ['252, 146, 174', '202, 180, 190', '207, 198, 255']
+  
   const defaultConfig: FireworksConfig = {
-    colors: defaultColors,
+    colors: state.darkMode ? darkColors : lightColors,
     numberOfParticles: 20,
     orbitRadius: { min: 50, max: 100 },
     circleRadius: { min: 10, max: 20 },
@@ -101,7 +119,7 @@ function createFireworks() {
     const p: Particle = {
       x,
       y,
-      color: 'rgb(106, 159, 255)',
+      color: state.darkMode ? 'rgb(233, 179, 237)' : 'rgb(106, 159, 255)',
       radius: 0.1,
       alpha: 0.5,
       lineWidth: 6,
@@ -163,18 +181,30 @@ function createFireworks() {
     },
   })
 
-  document.addEventListener('mousedown', (e) => {
+  handleResize = () => setCanvasSize(canvasEl)
+  handleMouseDown = (e: MouseEvent) => {
     render.play()
     updateCoords(e)
     animateParticles(pointerX, pointerY)
-  })
+  }
 
+  document.addEventListener('mousedown', handleMouseDown)
+  window.addEventListener('resize', handleResize)
   setCanvasSize(canvasEl)
-  window.addEventListener('resize', () => setCanvasSize(canvasEl))
 }
 
 onMounted(() => {
   createFireworks()
+})
+
+// 监听暗色模式变化
+watch(() => state.darkMode, () => {
+  createFireworks()
+})
+
+// 组件卸载时清理
+onUnmounted(() => {
+  cleanup()
 })
 </script>
 

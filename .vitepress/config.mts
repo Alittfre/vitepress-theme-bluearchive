@@ -101,7 +101,10 @@ export default defineConfigWithTheme<ThemeConfig>({
     admin: ['Alittfre'],
   },
   markdown: {
-    theme: 'github-light',
+    theme: {
+      light: 'github-light',
+      dark: 'github-dark'
+    },
     lineNumbers: true,
     math: true,
     config: (md) => {

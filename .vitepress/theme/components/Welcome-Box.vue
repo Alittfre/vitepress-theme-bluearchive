@@ -11,7 +11,7 @@
       <div
         class="info-box"
         :style="{
-          background: `linear-gradient(${angle}deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5))`,
+          background: `linear-gradient(${angle}deg, var(--infobox-background-initial), var(--infobox-background-final))`,
         }"
       >
         <img @dragstart.prevent src="../assets/banner/avatar.jpg" alt="" class="avatar" />
@@ -100,14 +100,14 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   z-index: 100;
-  transition: transform 0.2s;
+  transition: transform 0.2s, color 0.5s, text-shadow 0.5s;
 }
 
 .welcome-text {
   font-size: 80px;
   font-weight: bold;
-  color: var(--foreground-color);
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+  color: var(--welcome-text-color);
+  text-shadow: var(--welcome-text-shadow);
   text-align: center;
   margin-bottom: 100px;
   user-select: none;
@@ -121,8 +121,7 @@ onMounted(() => {
   padding: 60px 40px 35px 40px;
   width: 720px;
   border-radius: 50px;
-  border: solid 2px var(--foreground-color);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--info-box-shadow);
   backdrop-filter: var(--blur-val) saturate(120%);
 
   .avatar {
@@ -133,11 +132,13 @@ onMounted(() => {
     width: 128px;
     height: 128px;
     border-radius: 50%;
-    border: solid 3px var(--foreground-color);
+    border: solid 3px var(--infobox-border-color);
     margin-bottom: 20px;
-    transition: transform 0.6s ease, box-shadow 0.4s ease;
+    transition: transform 0.6s ease, box-shadow 0.4s ease, filter 0.5s;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
     cursor: pointer;
+    user-select: none;
+    filter: var(--img-brightness);
 
     &:hover {
       transform: translate(-50%, -50%) rotate(1turn) scale(1.1);
@@ -223,13 +224,14 @@ onMounted(() => {
     }
 
     .motto {
-      font-size: 12px;
+      font-size: 14px;
     }
 
     ul {
       width: 180px;
       .social {
-        font-size: 19px;
+        font-size: 18px;
+        font-weight: 600;
       }
     }
   }

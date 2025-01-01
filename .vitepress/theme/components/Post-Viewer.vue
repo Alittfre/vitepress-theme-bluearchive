@@ -83,8 +83,11 @@ const themeConfig = useData().theme.value
     padding-left: 16px;
     background-color: #5cd4ff25;
     border-radius: 8px;
+    html[theme='dark'] & {
+      background-color: rgba(157, 124, 216, 0.1); // 更改引用块背景色
+      border-left: 3px solid #9d7cd8; // 更改引用块边框颜色
+    }
   }
-
   blockquote > p {
     margin: 0;
     font-size: 16px;
@@ -105,6 +108,9 @@ const themeConfig = useData().theme.value
   code {
     background-color: #f0f0f0;
     border-radius: 3px;
+    html[theme='dark'] & {
+      background-color: rgba(157, 124, 216, 0.1);
+    }
   }
 
   /**
@@ -201,6 +207,9 @@ const themeConfig = useData().theme.value
   hr {
     border: 0;
     border-top: 2px dashed #ced4da;
+    html[theme='dark'] & {
+      border-top: 2px dashed rgba(157, 124, 216, 0.3); // 更改分割线颜色
+    }
   }
 
   /**
@@ -238,6 +247,9 @@ const themeConfig = useData().theme.value
     width: 100%;
     border-collapse: collapse;
     border: 2px solid #cad4d5;
+    html[theme='dark'] & {
+      border: 2px solid #383852; // 更改表格边框颜色
+    }
   }
 
   th,
@@ -251,18 +263,32 @@ const themeConfig = useData().theme.value
   th {
     background-color: #e7f6fa;
     color: var(--btn-hover);
+    html[theme='dark'] & {
+      background-color: rgba(157, 124, 216, 0.1);
+      color: #e0e0e6; 
+    }
   }
 
   th:nth-child(odd) {
     background-color: #e0f0f2;
+    html[theme='dark'] & {
+      background-color: rgba(157, 124, 216, 0.15);
+    }
   }
 
   td {
     background-color: #f7f7f6;
+    html[theme='dark'] & {
+      background-color: rgba(31, 31, 44, 0.6);
+      color: #c8c8dc;
+    }
   }
 
   td:nth-child(odd) {
     background-color: #ececeb;
+    html[theme='dark'] & {
+      background-color: rgba(31, 31, 44, 0.8);
+    }
   }
 
   /**
@@ -280,6 +306,11 @@ const themeConfig = useData().theme.value
     overflow: hidden;
     padding-top: 48px;
     margin-bottom: 10px;
+    html[theme='dark'] & {
+      background-color: #1f1f2c;
+      border: 2px solid #383852;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    }
 
     .lang {
       position: absolute;
@@ -327,6 +358,10 @@ const themeConfig = useData().theme.value
       background-repeat: no-repeat;
       background-position: left;
       background-size: contain;
+      html[theme='dark'] & {
+        border-bottom: 3px solid #383852;
+        background-color: rgba(31, 31, 44, 0.8); 
+      }
     }
 
     pre {
@@ -344,6 +379,9 @@ const themeConfig = useData().theme.value
       border-right: 2px solid #dfdfdf;
       text-align: center;
       user-select: none;
+      html[theme='dark'] & {
+        border-right: 2px solid #383852;
+      }
     }
 
     pre,
@@ -356,16 +394,18 @@ const themeConfig = useData().theme.value
  * Custom Block
  * -------------------------------------------------------------------------- */
 
-  .custom-block {
+ .custom-block {
+    transition: background-color 0.5s, border-color 0.5s, color 0.5s;
+
     &.tip,
     &.info,
     &.warning,
     &.danger {
       margin: 1rem 0;
-      border-left: 0.5rem solid;
+      border-left: 0.35rem solid;
       padding: 0.1rem 1.5rem;
       overflow-x: auto;
-      border-radius: 16px;
+      border-radius: 8px;
     }
 
     .custom-block-title {
@@ -380,9 +420,13 @@ const themeConfig = useData().theme.value
       border-color: #57b6f6;
       color: #005e86;
 
-      .custom-block-title {
-        &::before {
-          content: var(--icon-tip);
+      html[theme='dark'] & {
+        background-color: rgba(158, 124, 216, 0.18);
+        border-color: #9e7cd8ae;
+        color: #e0e0e6;
+
+        .custom-block-title {
+          color: #b8a5e3;
         }
       }
     }
@@ -391,9 +435,13 @@ const themeConfig = useData().theme.value
       background-color: #f3f5f7;
       border-color: var(--font-color-grey);
 
-      .custom-block-title {
-        &::before {
-          content: var(--icon-info);
+      html[theme='dark'] & {
+        background-color: rgba(108, 182, 255, 0.161);
+        border-color: #6cb6ffcf;
+        color: #e0e0e6;
+
+        .custom-block-title {
+          color: #89c4ff;
         }
       }
     }
@@ -403,11 +451,12 @@ const themeConfig = useData().theme.value
       color: #6b5900;
       background-color: #fff7d0;
 
-      .custom-block-title {
-        color: #b29400;
+      html[theme='dark'] & {
+        background-color: rgba(231, 192, 0, 0.1);
+        color: #f0d87d;
 
-        &::before {
-          content: var(--icon-warning);
+        .custom-block-title {
+          color: #e7c000;
         }
       }
     }
@@ -417,26 +466,24 @@ const themeConfig = useData().theme.value
       color: #4d0000;
       background-color: #ffe6e6;
 
-      .custom-block-title {
-        color: #900000;
+      html[theme='dark'] & {
+        background-color: rgba(213, 141, 134, 0.1);
+        color: #ffc4c0;
 
-        &::before {
-          content: var(--icon-danger);
+        .custom-block-title {
+          color: #ff9b93;
         }
       }
     }
 
     &.details {
-      summary {
-        font-weight: bold;
-      }
-
-      margin: 1rem 0;
-      padding: 1rem 1.5rem;
-      overflow-x: auto;
-      border-radius: 16px;
       background-color: #f3f5f7;
       border-color: var(--font-color-grey);
+
+      html[theme='dark'] & {
+        background-color: rgba(158, 124, 216, 0.168);
+        border-color: #383852;
+      }
     }
   }
 
@@ -454,6 +501,8 @@ const themeConfig = useData().theme.value
   iframe {
     max-width: 100%;
     border-radius: 8px;
+    filter: var(--img-brightness);
+    transition: filter 0.5s;
   }
 
   code,
