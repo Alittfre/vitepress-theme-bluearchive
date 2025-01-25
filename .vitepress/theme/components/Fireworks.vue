@@ -53,7 +53,7 @@ function createFireworks() {
   const darkColors = ['252, 146, 174', '202, 180, 190', '207, 198, 255']
   
   const defaultConfig: FireworksConfig = {
-    colors: state.darkMode ? darkColors : lightColors,
+    colors: state.darkMode === 'dark' ? darkColors : lightColors,
     numberOfParticles: 20,
     orbitRadius: { min: 50, max: 100 },
     circleRadius: { min: 10, max: 20 },
@@ -119,7 +119,7 @@ function createFireworks() {
     const p: Particle = {
       x,
       y,
-      color: state.darkMode ? 'rgb(233, 179, 237)' : 'rgb(106, 159, 255)',
+      color: state.darkMode === 'dark' ? 'rgb(233, 179, 237)' : 'rgb(106, 159, 255)',
       radius: 0.1,
       alpha: 0.5,
       lineWidth: 6,
