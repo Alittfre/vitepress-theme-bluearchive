@@ -5,7 +5,7 @@
         <div class="select-wrapper">
           <select v-model="selectedTheme" @change="changeTheme">
             <option value="light">Arona</option>
-            <option value="dark">Prana</option>
+            <option value="dark">Plana</option>
             <option value="system">System</option>
           </select>
           <span class="select-arrow">▼</span>

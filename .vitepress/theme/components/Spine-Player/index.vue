@@ -11,9 +11,9 @@ const { state } = useStore()
 
 // 定义两套spine资产信息
 const spineAssets = {
-  prana: {
-    skelUrl: "/spine_assets/prana_spr.skel",
-    atlasUrl: "/spine_assets/prana_spr.atlas",
+  plana: {
+    skelUrl: "/spine_assets/plana_spr.skel",
+    atlasUrl: "/spine_assets/plana_spr.atlas",
     idleAnimationName: "Idle_01",
     eyeCloseAnimationName: "Eye_Close_01",
     rightEyeBone: "R_Eye_01",
@@ -205,13 +205,13 @@ const initializeSpinePlayer = async (assets) => {
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
   // 初始化时根据当前主题选择模型
-  const assets = state.darkMode === 'dark' ? spineAssets.prana : spineAssets.arona
+  const assets = state.darkMode === 'dark' ? spineAssets.plana : spineAssets.arona
   initializeSpinePlayer(assets)
 })
 
 // 主题切换监听
 watch(() => state.darkMode, async (newTheme) => {
-  const assets = newTheme === 'dark' ? spineAssets.prana : spineAssets.arona;
+  const assets = newTheme === 'dark' ? spineAssets.plana : spineAssets.arona;
   await initializeSpinePlayer(assets);
 });
 
