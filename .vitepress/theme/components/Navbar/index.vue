@@ -62,11 +62,11 @@ header {
     justify-content: space-between;
     position: sticky;
     top: 0;
-    height: 4.2vw;
+    height: 72px;
     z-index: 100;
     box-sizing: border-box;
-    padding: 0 1vw;
-    border-radius: 0 0 2vw 2vw;
+    padding: 0 16px;
+    border-radius: 0 0 32px 32px;
     border-bottom: solid 2px var(--foreground-color);
     border-left: solid 2px var(--foreground-color);
     border-right: solid 2px var(--foreground-color);
@@ -78,7 +78,7 @@ header {
 
   .logo {
     img {
-      height: 2vw;
+      height: 32px;
       width: auto;
       filter: drop-shadow(0 0 5px rgba(18, 138, 250, 0.5));
     }
@@ -94,12 +94,12 @@ header {
       margin: 0;
 
       li {
-        margin: 0 3vw;
+        margin: 0 64px;
         a {
           display: block;
-          padding: 1vh 0.8vw;
+          padding: 10px 16px;
           border-radius: 8px;
-          font-size: 1.2vw;
+          font-size: 20px;
           font-weight: 600;
           color: var(--font-color-grey);
           transition: all 0.5s;
@@ -119,73 +119,57 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 2vw;
+    width: 32px;
     cursor: pointer;
   }
 
   .hamburger .line {
     display: block;
     width: 80%;
-    height: 0.25vw;
+    height: 4px;
     border-radius: 4px;
     background-color: var(--font-color-grey);
-    margin-bottom: 0.25vw;
+    margin-bottom: 4px;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
   }
 
   .hamburger.active .line:nth-child(1) {
-    transform: translateY(0.5vw) rotate(45deg);
+    transform: translateY(8px) rotate(45deg);
   }
   .hamburger.active .line:nth-child(2) {
     opacity: 0;
   }
   .hamburger.active .line:nth-child(3) {
-    transform: translateY(-0.5vw) rotate(-45deg);
+    transform: translateY(-8px) rotate(-45deg);
   }
 }
 
 @media (max-width: 768px) {
   header {
     nav {
-      height: 7vh;
-      padding: 0 3.6vw;
-      border-radius: 0 0 3vh 3vh;
+      height: 64px;
     }
 
     .logo {
       img {
-        height: 3.2vh;
+        height: 32px;
       }
     }
 
     .menu {
       ul {
         li {
-          margin: 0 5vw;
+          margin: 0 10px;
           a {
-            padding: 1vh 3vw;
-            font-size: 1.8vh;
+            font-size: 16px;
           }
         }
       }
     }
 
     .hamburger {
-      width: 3.2vh;
-    }
-
-    .hamburger .line {
-      height: 0.45vh;
-      margin-bottom: 0.5vh;
-    }
-
-    .hamburger.active .line:nth-child(1) {
-      transform: translateY(0.95vh) rotate(45deg);
-    }
-
-    .hamburger.active .line:nth-child(3) {
-      transform: translateY(-0.95vh) rotate(-45deg);
+      width: 32px;
     }
   }
 }

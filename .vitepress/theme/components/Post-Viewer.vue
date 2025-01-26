@@ -52,12 +52,13 @@ const themeConfig = useData().theme.value
 .view-box {
   box-sizing: border-box;
   position: relative;
-  padding: 2vw;
-  border-radius: 2vw;
+  padding: 36px;
+  border-radius: 32px;
   border: solid 2px var(--foreground-color);
   background: var(--foreground-color);
   box-shadow: 0px 0px 8px rgb(var(--blue-shadow-color), 0.8);
-  transition: opacity 0.5s ease-out, transform 1s cubic-bezier(.61,.15,.26,1), border 0.5s, background 0.5s, box-shadow 0.5s;
+  transition: opacity 0.5s ease-out, transform 1s cubic-bezier(0.61, 0.15, 0.26, 1), border 0.5s,
+    background 0.5s, box-shadow 0.5s;
 }
 
 .content {
@@ -266,7 +267,7 @@ const themeConfig = useData().theme.value
     color: var(--btn-hover);
     html[theme='dark'] & {
       background-color: rgba(157, 124, 216, 0.1);
-      color: #e0e0e6; 
+      color: #e0e0e6;
     }
   }
 
@@ -361,7 +362,7 @@ const themeConfig = useData().theme.value
       background-size: contain;
       html[theme='dark'] & {
         border-bottom: 3px solid #383852;
-        background-color: rgba(31, 31, 44, 0.8); 
+        background-color: rgba(31, 31, 44, 0.8);
       }
     }
 
@@ -393,9 +394,10 @@ const themeConfig = useData().theme.value
 
   /**
  * Custom Block
+ * todo: 恢复暗色icon
  * -------------------------------------------------------------------------- */
 
- .custom-block {
+  .custom-block {
     transition: background-color 0.5s, border-color 0.5s, color 0.5s;
 
     &.tip,
@@ -406,7 +408,7 @@ const themeConfig = useData().theme.value
       border-left: 0.35rem solid;
       padding: 0.1rem 1.5rem;
       overflow-x: auto;
-      border-radius: 8px;
+      border-radius: 16px;
     }
 
     .custom-block-title {
@@ -478,6 +480,13 @@ const themeConfig = useData().theme.value
     }
 
     &.details {
+      summary {
+        font-weight: bold;
+      }
+      margin: 1rem 0;
+      padding: 1rem 1.5rem;
+      overflow-x: auto;
+      border-radius: 16px;
       background-color: #f3f5f7;
       border-color: var(--font-color-grey);
 
@@ -515,8 +524,37 @@ const themeConfig = useData().theme.value
 
 @media (max-width: 768px) {
   .view-box {
-    border-radius: 4vh;
-    padding: 2.5vh;
+    padding: 24px;
+    border-radius: 32px;
+  }
+  .content {
+    /**
+ * Code
+ * -------------------------------------------------------------------------- */
+
+    div[class*='language-'] {
+      padding-top: 36px;
+      font-size: 12px;
+
+      .lang {
+        transform: translate(-50%, -32px);
+        padding-bottom: 5px;
+        border-bottom: 4px solid var(--font-color-gold);
+      }
+
+      .line {
+        line-height: 12px;
+      }
+
+      button.copy {
+        width: 36px;
+        height: 36px;
+      }
+
+      &::before {
+        height: 36px;
+      }
+    }
   }
 }
 </style>

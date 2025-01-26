@@ -69,7 +69,7 @@ html {
 }
 
 .container {
-  width: 75vw;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -84,7 +84,7 @@ body {
   overflow-x: hidden;
   color: var(--font-color-grey);
   font-family: 'Blueaka', sans-serif;
-  transition: background-image 0.5s , background-color 0.5s;
+  transition: background-image 0.5s, background-color 0.5s;
 }
 
 :root[theme='light'] {

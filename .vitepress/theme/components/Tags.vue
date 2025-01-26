@@ -52,29 +52,24 @@ onUnmounted(() => {
   justify-content: center;
   flex-wrap: wrap;
   box-sizing: border-box;
-  padding: 1vw;
+  padding: 16px;
   background-color: var(--infobox-background-initial);
-  border-radius: 3vw;
+  border-radius: 32px;
   border: solid 2px var(--foreground-color);
   backdrop-filter: var(--blur-val);
   width: 768px;
   z-index: 100;
 
   li {
-    margin: 0.5vw;
+    margin: 8px;
 
     a {
-      font-size: 1vw;
       color: var(--font-color-grey);
-      padding: 0.5vh 0.3vw;
+      padding: 3px 5px;
       color: var(--font-color-gold);
       background-color: var(--btn-background);
       border-radius: 5px;
       transition: background-color 0.5s;
-
-      .icon-tag {
-        font-size: 1vw;
-      }
 
       &:hover {
         background-color: var(--btn-hover);
@@ -85,19 +80,13 @@ onUnmounted(() => {
 
 @media (max-width: 768px) {
   .tags {
-    padding: 1vh;
-    border-radius: 4vh;
-
-    width: 95%;
+    width: auto;
     li {
-      margin: 1vh;
-
+      margin: 4px;
       a {
-        font-size: 1.8vh;
-        padding: 0.7vh 2vw;
-
+        font-size: 12px;
         .icon-tag {
-          font-size: 1.8vh;
+          font-size: 12px;
         }
       }
     }

@@ -27,13 +27,12 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 1vw;
-  height: 4.2vw;
+  height: 72px;
   z-index: 100;
-  margin-top: 5vh;
-  padding: 0 1vw;
+  margin-top: 50px;
+  padding: 0 16px;
   box-sizing: border-box;
-  border-radius: 2vw 2vw 0 0;
+  border-radius: 32px 32px 0 0;
   border-top: solid 2px var(--foreground-color);
   border-left: solid 2px var(--foreground-color);
   border-right: solid 2px var(--foreground-color);
@@ -51,21 +50,17 @@ footer {
 
 .footer-logo {
   img {
-    height: 2vw;
+    height: 36px;
   }
 }
 
 @media (max-width: 768px) {
-  footer {
-    font-size: 1.5vh;
-    height: 7vh;
-    padding: 0 3vw;
-    border-radius: 3vh 3vh 0 0;
+  .footer-info {
+    font-size: 12px;
   }
-
   .footer-logo {
     img {
-      height: 3vh;
+      height: 26px;
     }
   }
 }
