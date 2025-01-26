@@ -1,3 +1,9 @@
+<!--
+ todo:
+ 1. 优化暗色描边
+ 2. 优化对话框三角布局
+ 3. 整理代码结构
+ -->
 <template>
   <template v-if="state.SpinePlayerEnabled">
     <div
@@ -207,7 +213,6 @@ const preloadAudio = async () => {
 const handleScroll = () => {
   if (!clientReady.value) return
   const bottomReached = window.innerHeight + window.scrollY + 1 >= document.body.offsetHeight
-  console.log(window.innerHeight + window.scrollY,document.body.offsetHeight)
   const chatDialog = document.querySelector('.chatdialog')
 
   if (bottomReached) {
@@ -217,9 +222,6 @@ const handleScroll = () => {
     }
   } else {
     playerContainer.value.style.left = '0%'
-    if (chatDialog) {
-      chatDialog.style.left = isMobileDevice() ? '10px' : '50px'
-    }
   }
 }
 
@@ -563,18 +565,16 @@ onUnmounted(() => {
   bottom: 25px;
   left: 0%;
   z-index: 100;
-  width: 200px;
-  height: 400px;
+  width: 12vw;
+  height: 24vw;
   filter: drop-shadow(0 0 3px rgba(40, 42, 44, 0.42));
   transition: all 1s;
   cursor: pointer;
 }
 .chatdialog {
   position: fixed;
-  bottom: 150px;
-  left: 50px;
-  min-width: 100px;
-  max-width: 200px;
+  bottom: 10vw;
+  left: 2vw;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 25px;
   padding: 12px 24px;
@@ -584,15 +584,15 @@ onUnmounted(() => {
   white-space: pre-wrap;
   line-height: 1.4;
   color: #000000;
-  font-size: 12px;
+  font-size: 0.8vw;
   user-select: none;
   transition: all 1s;
 
   &:after {
     content: '';
     position: absolute;
-    left: 75px;
-    top: -10px;
+    left: 2vw;
+    top: -8px;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid rgba(255, 255, 255, 0.9);
@@ -613,23 +613,23 @@ onUnmounted(() => {
 
 @media (max-width: 768px) {
   .chatdialog {
-    left: 10px;
-    bottom: 110px;
+    left: 2vh;
+    bottom: 10vh;
     min-width: auto;
     padding: 12px 20px;
-    font-size: 8px;
+    font-size: 1vh;
     border-radius: 20px;
 
     &:after {
       left: 35px;
       border-width: 8px;
-      top: -8px;
+      top: -7px;
     }
   }
 
   .playerContainer {
-    width: 120px;
-    height: 240px;
+    width: 15vh;
+    height: 30vh;
   }
 }
 </style>
