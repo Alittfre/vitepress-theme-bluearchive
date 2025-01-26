@@ -279,7 +279,7 @@ const finalPosts = computed(() => {
     .post {
       margin-bottom: 3vh;
       border-radius: 3vh;
-      border-left: solid 1.5vh #c7e4f6;
+      border-left: solid 1.5vh var(--pot-border-left);
     }
   }
 
