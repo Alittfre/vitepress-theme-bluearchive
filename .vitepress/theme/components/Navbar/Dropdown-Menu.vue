@@ -50,7 +50,7 @@ import ToggleSwitch from './ToggleSwitch.vue'
 }
 
 .dropdown-menu[showmenu='true'] {
-  transform: translateY(150%);
+  transform: translateY(135%);
   .menu-content {
     box-shadow: 0px 0px 8px rgb(var(--blue-shadow-color), 0.8);
     transition: box-shadow 0.2s;
