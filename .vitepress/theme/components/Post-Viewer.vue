@@ -542,7 +542,7 @@ const themeConfig = useData().theme.value
         border-bottom: 4px solid var(--font-color-gold);
       }
 
-      .line {
+      code {
         line-height: 12px;
       }
 
