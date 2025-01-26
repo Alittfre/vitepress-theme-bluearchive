@@ -1,9 +1,14 @@
 <template>
-  <div ref="playerContainer" class="playerContainer"></div>
+  <template v-if="state.SpinePlayerEnabled">
+    <div ref="playerContainer" class="playerContainer" @click="handlePlayerClick" @touchstart="handlePlayerClick"></div>
+    <transition name="fade">
+      <div v-if="showDialog" class="chatdialog">{{ currentDialog }}</div>
+    </transition>
+  </template>
 </template>
 
 <script setup lang="js">
-import { onMounted, ref, onUnmounted, watch } from 'vue'
+import { onMounted, ref, onUnmounted, watch, computed } from 'vue'
 import { spine } from './spine-player.js'
 import { useStore } from '../../store'
 
@@ -21,6 +26,33 @@ const spineAssets = {
     frontHeadBone: "Head_Rot",
     backHeadBone: "Head_Back",
     eyeRotationAngle: 76.307,
+    voiceConfig: [
+      {
+        audio: '/spine_assets/audio/plana_02.ogg',
+        animation: '06',
+        text: '我明白了，\n老师现在无事可做，很无聊。'
+      },
+      {
+        audio: '/spine_assets/audio/plana_01.ogg',
+        animation: '13',
+        text: '混乱，该行动无法理解。\n请不要戳我，会出现故障。'
+      },
+      {
+        audio: '/spine_assets/audio/plana_03.ogg',
+        animation: '15',
+        text: '确认连接。'
+      },
+      {
+        audio: '/spine_assets/audio/plana_04.ogg',
+        animation: '99',
+        text: '正在待命，\n需要解决的任务还有很多。'
+      },
+      {
+        audio: '/spine_assets/audio/plana_05.ogg',
+        animation: '17',
+        text: '等您很久了'
+      },
+    ]
   },
   arona: {
     skelUrl: "/spine_assets/arona_spr.skel",
@@ -32,27 +64,238 @@ const spineAssets = {
     frontHeadBone: "Head_01",
     backHeadBone: "Head_Back",
     eyeRotationAngle: 76.307,
+    voiceConfig: [
+      {
+        audio: '/spine_assets/audio/arona_01.ogg',
+        animation: '12',
+        text: '您回来了？我等您很久啦！'
+      },
+      {
+        audio: '/spine_assets/audio/arona_02.ogg',
+        animation: '03',
+        text: '嗯，不错，今天也是个好天气。'
+      },
+      {
+        audio: '/spine_assets/audio/arona_03.ogg',
+        animation: '02',
+        text: '天空真是广啊……\n另一边会有些什么呢？。'
+      },
+      {
+        audio: '/spine_assets/audio/arona_04.ogg',
+        animation: '18',
+        text: '偶尔也要为自己的健康着想啊，\n老师，我会很担心的。'
+      },
+      {
+        audio: '/spine_assets/audio/arona_05.ogg',
+        animation: '25',
+        text: '来，加油吧，老师！'
+      },
+      {
+        audio: '/spine_assets/audio/arona_06.ogg',
+        animation: '11',
+        text: '今天又会有什么事情在等着我呢？'
+      }
+    ]
   }
 }
 
 const playerContainer = ref(null)
 let player = null
 let blinkInterval = null
+let isEyeControlDisabled = ref(false)
+let eyeControlTimer = null
+let currentAnimationState = null  // 添加动画状态引用
+let audioPlayer = null
+let currentCharacter = ref('arona')
+let audioPlayers = []
 
-//底部贴边
-const handleScroll = () => {
-  const bottomReached = Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight
-  if (bottomReached) {
-    playerContainer.value.style.left = '-50%'
-  } else {
-    playerContainer.value.style.left = '0%'
+// 添加客户端就绪状态
+const clientReady = ref(false)
+
+// 添加音频上下文管理器
+const AudioManager = {
+  context: null,
+  buffers: new Map(),
+  currentSource: null,
+
+  initialize() {
+    if (!clientReady.value) return
+    if (!this.context) {
+      this.context = new (window.AudioContext || window.webkitAudioContext)();
+    }
+  },
+
+  async loadAudioFile(url) {
+    if (this.buffers.has(url)) {
+      const entry = this.buffers.get(url);
+      entry.lastUsed = Date.now();
+      return entry.buffer;
+    }
+
+    try {
+      const response = await fetch(url);
+      const arrayBuffer = await response.arrayBuffer();
+      const audioBuffer = await this.context.decodeAudioData(arrayBuffer);
+      this.buffers.set(url, { buffer: audioBuffer, lastUsed: Date.now() });
+      return audioBuffer;
+    } catch (error) {
+      console.error('音频加载失败:', error);
+      return null;
+    }
+  },
+
+  async playAudio(buffer) {
+    if (this.currentSource) {
+      this.currentSource.stop();
+    }
+
+    return new Promise((resolve) => {
+      const source = this.context.createBufferSource();
+      source.buffer = buffer;
+      source.connect(this.context.destination);
+      source.onended = () => {
+        if (this.currentSource === source) {
+          this.currentSource = null;
+        }
+        resolve();
+      };
+      this.currentSource = source;
+      source.start();
+    });
+  },
+
+  clear() {
+    if (this.currentSource) {
+      this.currentSource.stop();
+      this.currentSource = null;
+    }
+    this.buffers.clear();
+  },
+
+  gc() {
+    // 清除超过5分钟未使用的音频缓存
+    const now = Date.now()
+    for (const [url, entry] of this.buffers.entries()) {
+      if (now - entry.lastUsed > 300000) { // 5分钟
+        this.buffers.delete(url)
+      }
+    }
   }
 }
 
-// 添加移动端检测函数
+// 修改预加载音频函数
+const preloadAudio = async () => {
+  if (!currentAssets.value) return false
+  
+  AudioManager.initialize()
+  AudioManager.gc() // 清理过期缓存
+  
+  const loadPromises = currentAssets.value.voiceConfig.map(pair => 
+    AudioManager.loadAudioFile(pair.audio)
+  )
+
+  return Promise.all(loadPromises).catch(error => {
+    console.error('音频预加载失败:', error)
+    return false
+  })
+}
+
+const handleScroll = () => {
+  if (!clientReady.value) return
+  const bottomReached = Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight
+  const chatDialog = document.querySelector('.chatdialog')
+  
+  if (bottomReached) {
+    playerContainer.value.style.left = '-50%'
+    if (chatDialog) {
+      chatDialog.style.left = '-50%'
+    }
+  } else {
+    playerContainer.value.style.left = '0%'
+    if (chatDialog) {
+      chatDialog.style.left = isMobileDevice() ? '10px' : '50px'
+    }
+  }
+}
+
 const isMobileDevice = () => {
+  if (!clientReady.value) return false
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
+
+let isPlaying = false // 添加播放状态标志
+
+const showDialog = ref(false)
+const currentDialog = ref('')
+
+let lastPlayedIndex = -1 // 添加上一次播放的索引记录
+
+// 添加防抖处理
+const debounce = (fn, delay) => {
+  let timer = null
+  return function (...args) {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() => {
+      fn.apply(this, args)
+      timer = null
+    }, delay)
+  }
+}
+
+// 在组件作用域添加重置状态引用
+const resetBonesState = ref(null)
+
+// 点击处理函数
+const handlePlayerClick = debounce(async (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+
+  // 检查是否正在播放
+  if (!isPlaying) {
+    isPlaying = true
+    isEyeControlDisabled.value = true
+    
+    // 点击时重置眼睛位置
+    resetBonesState.value?.()
+    
+    const currentConfig = spineAssets[currentCharacter.value].voiceConfig
+    let randomIndex
+    do {
+      randomIndex = Math.floor(Math.random() * currentConfig.length)
+    } while (randomIndex === lastPlayedIndex && currentConfig.length > 1)
+    
+    lastPlayedIndex = randomIndex
+    const selectedPair = currentConfig[randomIndex]
+    
+    try {
+      const buffer = await AudioManager.loadAudioFile(selectedPair.audio);
+      if (!buffer) throw new Error('音频加载失败');
+      
+      currentDialog.value = selectedPair.text;
+      showDialog.value = true;
+      
+      currentAnimationState.addAnimation(2, selectedPair.animation, false, 0);
+      
+      // 播放音频并等待结束
+      await AudioManager.playAudio(buffer);
+      
+      // 音频播放结束后清理状态
+      isPlaying = false;
+      isEyeControlDisabled.value = false;
+      currentAnimationState.setEmptyAnimation(2, 0);
+      showDialog.value = false;
+      
+    } catch (error) {
+      console.error('音频播放失败:', error);
+      isPlaying = false;
+      isEyeControlDisabled.value = false;
+      showDialog.value = false;
+    }
+  }
+}, 300)
+
+// 提升 moveBones 函数到组件作用域以便在其他地方使用
+let moveBonesHandler = null
 
 const initializeSpinePlayer = async (assets) => {
   try {
@@ -77,6 +320,7 @@ const initializeSpinePlayer = async (assets) => {
         playerInstance.setAnimation(assets.idleAnimationName, true)
         const skeleton = playerInstance.skeleton
         const animationState = playerInstance.animationState
+        currentAnimationState = animationState  // 保存动画状态引用
 
         const rightEyeBone = skeleton.findBone(assets.rightEyeBone)
         const leftEyeBone = skeleton.findBone(assets.leftEyeBone)
@@ -107,6 +351,9 @@ const initializeSpinePlayer = async (assets) => {
         }
 
         function moveBones(event) {
+          // 如果眼睛控制被禁用，直接返回
+          if (isEyeControlDisabled.value) return
+          
           const containerRect = playerContainer.value.getBoundingClientRect()
 
           const mouseX = event.clientX - (containerRect.right - containerRect.width / 2)
@@ -155,24 +402,32 @@ const initializeSpinePlayer = async (assets) => {
           skeleton.updateWorldTransform()
         }
 
-        // function resetBones() {
-        //   if (rightEyeBone) {
-        //     rightEyeBone.x = rightEyeCenterX
-        //     rightEyeBone.y = rightEyeCenterY
-        //   }
-
-        //   if (leftEyeBone) {
-        //     leftEyeBone.x = leftEyeCenterX
-        //     leftEyeBone.y = leftEyeCenterY
-        //   }
-
-        //   if (frontHeadBone) {
-        //     frontHeadBone.x = frontHeadCenterX
-        //     frontHeadBone.y = frontHeadCenterY
-        //   }
-
-        //   skeleton.updateWorldTransform()
-        // }
+        function resetBones() {
+          if (rightEyeBone) {
+            rightEyeBone.x = rightEyeCenterX
+            rightEyeBone.y = rightEyeCenterY
+          }
+      
+          if (leftEyeBone) {
+            leftEyeBone.x = leftEyeCenterX
+            leftEyeBone.y = leftEyeCenterY
+          }
+      
+          if (frontHeadBone) {
+            frontHeadBone.x = frontHeadCenterX
+            frontHeadBone.y = frontHeadCenterY
+          }
+      
+          if (backHeadBone) {
+            backHeadBone.x = backHeadCenterX
+            backHeadBone.y = backHeadCenterY
+          }
+      
+          skeleton.updateWorldTransform()
+        }
+      
+        // 保存重置函数引用
+        resetBonesState.value = resetBones
 
         function playBlinkAnimation() {
           const randomTime = Math.random() * 3 + 3 // 5-8秒的随机间隔
@@ -188,8 +443,10 @@ const initializeSpinePlayer = async (assets) => {
           blinkInterval = setTimeout(playBlinkAnimation, randomTime * 1000)
         }
 
+        // 修改鼠标移动监听器的添加逻辑
         if (!isMobileDevice()) {
-          window.addEventListener('mousemove', moveBones)
+          moveBonesHandler = moveBones
+          window.addEventListener('mousemove', moveBonesHandler)
         }
         playBlinkAnimation()
       },
@@ -202,31 +459,98 @@ const initializeSpinePlayer = async (assets) => {
   }
 }
 
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-  // 初始化时根据当前主题选择模型
-  const assets = state.darkMode === 'dark' ? spineAssets.plana : spineAssets.arona
-  initializeSpinePlayer(assets)
-})
+// 将需要监听的状态提取为响应式引用
+const isDarkMode = computed(() => state.darkMode === 'dark')
+const isEnabled = computed(() => state.SpinePlayerEnabled)
+const currentAssets = computed(() => spineAssets[currentCharacter.value])
 
-// 主题切换监听
-watch(() => state.darkMode, async (newTheme) => {
-  const assets = newTheme === 'dark' ? spineAssets.plana : spineAssets.arona;
-  await initializeSpinePlayer(assets);
-});
-
-onUnmounted(() => {
-  if (!isMobileDevice()) {
-    window.removeEventListener('mousemove', moveBones)
-  }
-  window.removeEventListener('scroll', handleScroll)
+// 统一的清理函数
+const cleanup = () => {
   if (blinkInterval) clearTimeout(blinkInterval)
+  if (eyeControlTimer) clearTimeout(eyeControlTimer)
+  
+  // 清理鼠标移动监听
+  if (moveBonesHandler && !isMobileDevice()) {
+    window.removeEventListener('mousemove', moveBonesHandler)
+    moveBonesHandler = null
+  }
   
   if (playerContainer.value) {
-    playerContainer.value.innerHTML = '';
+    playerContainer.value.innerHTML = ''
   }
-  player = null;
+  if (player) {
+    AudioManager.clear()
+    player = null
+    currentAnimationState = null
+  }
+
+  // 使用 WeakRef 来管理音频资源
+  if (clientReady.value && window.WeakRef) {
+    audioPlayers = audioPlayers.filter(player => {
+      const ref = new WeakRef(player)
+      return ref.deref() !== null
+    })
+  }
+}
+
+// 初始化函数 
+const initializeCharacter = async () => {
+  cleanup()
+  
+  if (!isEnabled.value || !playerContainer.value) return
+  
+  currentCharacter.value = isDarkMode.value ? 'plana' : 'arona'
+  
+  try {
+    await Promise.all([
+      preloadAudio(),
+      initializeSpinePlayer(currentAssets.value)
+    ])
+  } catch (err) {
+    console.error('初始化失败:', err)
+  }
+}
+
+const debouncedInitialize = debounce(initializeCharacter, 300)
+
+// 监听器
+watch([isDarkMode, isEnabled], async ([dark, enabled], [prevDark, prevEnabled]) => {
+  if (enabled !== prevEnabled || (enabled && dark !== prevDark)) {
+    debouncedInitialize()
+  }
+}, { immediate: true })
+
+// 事件委托
+const handleEvents = (event) => {
+  if (event.type === 'scroll') {
+    handleScroll()
+  } else if (['mousemove', 'touchmove'].includes(event.type)) {
+    moveBonesHandler?.(event)
+  }
+}
+
+onMounted(() => {
+  // 设置客户端就绪状态
+  clientReady.value = true
+  
+  const options = { passive: true }
+  window.addEventListener('scroll', handleEvents, options)
+  if (!isMobileDevice()) {
+    window.addEventListener('mousemove', handleEvents, options)
+  }
+  
+  // 如果启用了Spine播放器，初始化
+  if (state.SpinePlayerEnabled) {
+    debouncedInitialize()
+  }
 })
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleEvents)
+  window.removeEventListener('mousemove', handleEvents)
+  cleanup()
+})
+
 </script>
 
 <style scoped lang="less">
@@ -235,13 +559,70 @@ onUnmounted(() => {
   bottom: 25px;
   left: 0%;
   z-index: 100;
-  width: 200px;
-  height: 400px;
+  width: 300px;
+  height: 500px;
   filter: drop-shadow(0 0 3px rgba(40, 42, 44, 0.42));
   transition: all 1s;
+  cursor: pointer;
+}
+.chatdialog {
+  position: fixed;
+  bottom: 150px;
+  left: 50px; 
+  min-width: 120px;
+  max-width: 300px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 50px;
+  padding: 18px 28px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 101;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  line-height: 1.4;
+  color: #000000;
+  font-size: 16px;
+  user-select: none;
+  transition: all 1s;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    left: 75px;
+    top: -10px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid rgba(255, 255, 255, 0.9);
+    border-top: none;
+  }
+}
+
+// 添加淡入淡出动画
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 
 @media (max-width: 768px) {
+  .chatdialog {
+    left: 10px;
+    bottom: 110px;
+    min-width: auto; 
+    padding: 12px 20px;
+    font-size: 8px;
+    border-radius: 20px;
+    
+    &:after {
+      left: 35px;
+      border-width: 8px;
+      top: -8px;
+    }
+  }
+  
   .playerContainer {
     width: 120px;
     height: 240px;
