@@ -206,7 +206,8 @@ const preloadAudio = async () => {
 
 const handleScroll = () => {
   if (!clientReady.value) return
-  const bottomReached = Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight
+  const bottomReached = window.innerHeight + window.scrollY + 1 >= document.body.offsetHeight
+  console.log(window.innerHeight + window.scrollY,document.body.offsetHeight)
   const chatDialog = document.querySelector('.chatdialog')
 
   if (bottomReached) {
