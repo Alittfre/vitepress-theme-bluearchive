@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, onUnmounted } from 'vue'
 import anime from 'animejs'
 
 const svgContent =
@@ -69,19 +69,29 @@ const fadeOutSplash = () => {
     easing: 'easeInOutQuad',
     complete: () => {
       isVisible.value = false // 隐藏splash
-      // 恢复页面滚动
-      document.body.style.overflow = 'auto'
     },
   })
   state.splashLoading = false
 }
 
+const preventDefault = (e) => {
+  e.preventDefault()
+}
+
 onMounted(() => {
-  document.body.style.overflow = 'hidden'
   createBreathingAnimation()
+  // 禁用滚轮事件
+  window.addEventListener('wheel', preventDefault, { passive: false })
   setTimeout(() => {
     fadeOutSplash()
+    // 启用滚轮事件
+    window.removeEventListener('wheel', preventDefault)
   }, Math.floor(Math.random() * 300) + 1200) // 随机等待时间
+})
+
+onUnmounted(() => {
+  // 确保组件卸载时移除事件监听
+  window.removeEventListener('wheel', preventDefault)
 })
 </script>
 
