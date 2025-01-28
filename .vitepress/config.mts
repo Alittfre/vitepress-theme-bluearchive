@@ -11,6 +11,9 @@ export interface ThemeConfig {
   motto: string[]
   social: { icon: string; url: string }[]
 
+  //spine
+  spineVoiceLang: 'zh' | 'jp'
+
   //footer
   footerName: string
   poweredList: { name: string; url: string }[]
@@ -85,6 +88,9 @@ export default defineConfigWithTheme<ThemeConfig>({
       { icon: 'qq', url: 'https://im.qq.com/index/' },
       { icon: 'wechat', url: 'https://weixin.qq.com/' },
     ],
+
+    //spine语音配置，可选zh/jp
+    spineVoiceLang: 'jp',
 
     //footer配置
     footerName: 'Sensei',
