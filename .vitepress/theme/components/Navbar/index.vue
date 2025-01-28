@@ -80,7 +80,7 @@ header {
     img {
       height: 32px;
       width: auto;
-      filter: drop-shadow(0 0 5px rgba(18, 138, 250, 0.5));
+      filter: drop-shadow(0 0 8px #328cfa);
     }
   }
 

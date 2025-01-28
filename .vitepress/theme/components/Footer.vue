@@ -51,6 +51,7 @@ footer {
 .footer-logo {
   img {
     height: 36px;
+    filter: drop-shadow(0 0 8px #328cfa);
   }
 }
 
