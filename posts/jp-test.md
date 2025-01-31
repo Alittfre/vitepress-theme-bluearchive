@@ -2,6 +2,7 @@
 title: 日本語テスト
 date: 2013-12-24
 tags: [Japanese, test]
+pinned: ture
 head:
   - - meta
     - name: description

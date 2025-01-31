@@ -72,3 +72,11 @@
 .icon-downarrow:before {
   content: "\E802";
 }
+
+.icon-pinned:before {
+  content: "\E777";
+}
+
+.icon-time:before {
+  content: "\E778";
+}

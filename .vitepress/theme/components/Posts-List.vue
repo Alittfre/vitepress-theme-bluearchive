@@ -7,9 +7,11 @@
             <div class="title-dot"></div>
             <h1 class="name">
               <a :href="base + post.href">{{ post.title }}</a>
+              <span v-if="post.pinned" class="iconfont icon-pinned pinned"></span>
             </h1>
           </div>
           <div class="meta-info-bar">
+            <span class="iconfont icon-time time"></span>
             <div class="time-info">
               <time datetime="">{{ formatDate(post.create) }}</time>
             </div>
@@ -109,6 +111,7 @@ const finalPosts = computed(() => {
 }
 
 .posts-content {
+
   article,
   h1,
   ul {
@@ -156,6 +159,12 @@ const finalPosts = computed(() => {
       transition: background 0.5s;
     }
 
+    .name {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
     a {
       color: var(--font-color-grey);
       transition: text-shadow 0.5s, color 0.5s;
@@ -166,9 +175,24 @@ const finalPosts = computed(() => {
     }
   }
 
+  .pinned {
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--font-color-grey);
+    transform: rotate(-135deg);
+    margin-top: 2px;
+  }
+
   .meta-info-bar {
     display: flex;
     margin-bottom: 6px;
+
+    .time {
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--font-color-grey);
+      margin: 2px 5px 0 0;
+    }
 
     .seperator::before {
       content: '';
@@ -280,9 +304,11 @@ const finalPosts = computed(() => {
 
   .post-header {
     padding: 20px 35px 0;
+
     .name {
       font-size: 24px;
     }
+
     .title {
       margin-bottom: 6px;
 
@@ -291,34 +317,52 @@ const finalPosts = computed(() => {
         top: 6px;
       }
     }
+
+    .pinned {
+      font-size: 15px;
+      margin-top: 0;
+    }
+
     .meta-info-bar {
       margin-bottom: 4px;
       font-size: 12px;
+
+      .time {
+        font-size: 11px !important;
+        margin: 1px 2px 0 0 !important;
+      }
+
       .seperator::before {
         margin: 0 8px;
       }
     }
   }
+
   .tags {
     li {
       padding-top: 4px;
       margin-right: 8px;
+
       a {
         font-size: 12px;
         padding: 4px 6px;
+
         .icon-tag {
           font-size: 12px;
         }
       }
     }
   }
+
   .excerpt {
     padding: 0 36px;
     margin-bottom: 4px;
     font-size: 12px;
   }
+
   .pagination {
     margin-top: 32px;
+
     .icon-arrow {
       font-size: 32px;
     }

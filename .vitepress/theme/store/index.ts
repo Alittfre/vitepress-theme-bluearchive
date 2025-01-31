@@ -1,6 +1,20 @@
 import { reactive } from 'vue'
 import { PostData } from '../utils/posts.data'
 
+interface PostData {
+  id: number
+  title: string
+  content: string
+  href: string
+  create: number 
+  update: number
+  tags?: string[]
+  wordCount: number
+  cover?: string
+  excerpt: string | undefined
+  pinned?: boolean // 添加置顶属性
+}
+
 interface StoreState {
   selectedPosts: PostData[]
   currTag: string
