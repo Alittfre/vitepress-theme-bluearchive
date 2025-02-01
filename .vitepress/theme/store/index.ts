@@ -27,6 +27,7 @@ const state: StoreState = reactive({
     wordCount: 0,
     cover: '',
     excerpt: '',
+    pinned: false
   },
   searchDialog: false,
   splashLoading: true,

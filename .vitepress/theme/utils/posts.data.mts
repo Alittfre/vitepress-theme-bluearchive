@@ -21,6 +21,7 @@ interface Post {
   wordCount: number
   cover?: string
   excerpt: string | undefined
+  pinned?: boolean
 }
 
 // Post数据缓存
@@ -62,6 +63,7 @@ function getPost(md: any, file: string, postDir: string): Post {
     wordCount: countWords(content),
     cover: data.cover,
     excerpt: excerpt,
+    pinned: !!data.pinned
   }
 
   cache.set(fullPath, { timestamp, post })
@@ -76,7 +78,12 @@ async function load() {
     .readdirSync(postDir)
     .filter((file) => file.endsWith('.md') && file !== 'index.md')
     .map((file) => getPost(md, file, postDir))
-    .sort((a, b) => b.create - a.create)
+    .sort((a, b) => {
+      // 先按置顶排序,再按创建时间排序
+      if (a.pinned && !b.pinned) return -1
+      if (!a.pinned && b.pinned) return 1
+      return b.create - a.create
+    })
 }
 
 export default {
