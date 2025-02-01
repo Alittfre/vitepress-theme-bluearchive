@@ -175,7 +175,6 @@ const finalPosts = computed(() => {
   }
 
   .pinned {
-    cursor: pointer;
     font-size: 20px;
     color: var(--font-color-grey);
     transform: rotate(-135deg);
@@ -187,7 +186,6 @@ const finalPosts = computed(() => {
     margin-bottom: 7px;
 
     .time {
-      cursor: pointer;
       font-size: 13px;
       color: var(--font-color-grey);
       margin: 3px 2px 0 0;
