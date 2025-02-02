@@ -97,6 +97,7 @@ export default defineConfigWithTheme<ThemeConfig>({
 title: 标题
 date: 日期
 tags: [标签1, 标签2]
+pinned: true 文章置顶，默认false
 head:
   - - meta
     - name: description
