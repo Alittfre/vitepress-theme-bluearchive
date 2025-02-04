@@ -6,7 +6,8 @@ BA 主题博客，基于 VitePress，绝赞画饼中
 
 [在线预览](https://vitepress-theme-bluearchive.vercel.app/)
 
-![preview](./preview.png)
+![preview](./preview.webp)
+![preview_dark](./preview_dark.webp)
 
 ## 功能
 
@@ -29,21 +30,27 @@ BA 主题博客，基于 VitePress，绝赞画饼中
 
 - [ ] 重构排版
 - [ ] RSS
-- [ ] 为 Arona/plana 添加更多交互
-- [ ] 让点击烟花更还原游戏效果
-- [ ] 骨架屏
-- [ ] more...
+- [ ] 为 Arona/Plana 添加更多交互
+  - [x] 眼睛追踪
+  - [x] 点击语音
+  - [ ] 监听复制事件
+  - [ ] fakeGPT
 
 ## 主题配置
 
 **音乐** **首页背景** **头像**在`.vitepress/theme/assets/banner`
-可单独设置暗色模式首页背景，命名为`banner_dark.jpg`
+可单独设置暗色模式首页背景，命名为`banner_dark.webp`
 
 **配置文件**在`.vitepress/config.mts`
 
 ```ts
 export default defineConfigWithTheme<ThemeConfig>({
   //...
+
+  // 生成站点地图
+  sitemap: {
+    hostname: 'https://vitepress-theme-bluearchive.vercel.app', //替换为你自己的域名
+  },
 
   // 站点标题配置
   title: "Sensei's 部落格",
@@ -62,6 +69,9 @@ export default defineConfigWithTheme<ThemeConfig>({
       { icon: 'wechat', url: 'https://weixin.qq.com/' },
     ],
 
+    //spine语音配置，可选zh/jp
+    spineVoiceLang: 'jp',
+
     //footer配置
     footerName: 'Sensei',
     poweredList: [
@@ -77,17 +87,6 @@ export default defineConfigWithTheme<ThemeConfig>({
     admin: ['YourGitHubName'],
   }
 }),
-```
-
-## 站点地图配置(SEO 优化)
-
-配置文件在`.vitepress/config.mts`
-
-```ts
-  // 生成站点地图
-  sitemap: {
-    hostname: 'https://vitepress-theme-bluearchive.vercel.app', //替换为你自己的域名
-  }
 ```
 
 ## 文章配置
