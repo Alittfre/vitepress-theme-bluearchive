@@ -11,7 +11,7 @@ head:
       content: vitepress theme bluearchive Markdown Style test
 ---
 
-This post is originated from [here](https://gist.github.com/apackeer/4159268) and is used for testing markdown style. This post contains nearly every markdown usage. Make sure all the markdown elements below show up correctly.
+This post is originated from https://gist.github.com/apackeer/4159268 and is used for testing markdown style. This post contains nearly every markdown usage. Make sure all the markdown elements below show up correctly.
 
 ---
 
@@ -157,10 +157,8 @@ And more text.
 <dl>
     <dt>Definition list</dt>
     <dd>Is something people use sometimes.</dd>
-
     <dt>Markdown in HTML</dt>
     <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
-
 </dl>
 
 ## Links
