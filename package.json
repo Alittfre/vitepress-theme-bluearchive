@@ -9,10 +9,10 @@
   "devDependencies": {
     "@types/animejs": "^3.1.12",
     "@types/md5": "^2.3.5",
-    "@types/node": "^22.9.0",
-    "less": "^4.2.0",
+    "@types/node": "^22.13.1",
+    "less": "^4.2.2",
     "markdown-it-mathjax3": "^4.3.2",
-    "vitepress": "^1.5.0",
+    "vitepress": "^1.6.3",
     "vue": "^3.5.13"
   },
   "scripts": {
@@ -25,7 +25,7 @@
     "gray-matter": "^4.0.3",
     "markdown-it-custom-attrs": "^1.0.2",
     "md5": "^2.3.0",
-    "minisearch": "^7.1.0",
+    "minisearch": "^7.1.1",
     "normalize.css": "^8.0.1"
   }
 }
