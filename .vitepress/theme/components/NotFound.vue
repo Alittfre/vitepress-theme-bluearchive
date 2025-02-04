@@ -1,6 +1,6 @@
 <template>
   <div class="not-found">
-    <img src="../assets/NotFound.png" alt="" />
+    <img src="../assets/NotFound.webp" alt="" />
     <span>页面不存在</span>
     <span class="band"><a :href="base">回到主页</a></span>
   </div>
@@ -22,11 +22,10 @@ const base = useData().site.value.base
   border: solid 2px var(--foreground-color);
   backdrop-filter: var(--blur-val);
 
-
   img {
     width: 25vw;
 
-    &+span {
+    & + span {
       font-style: italic;
       text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
       font-size: 30px;
@@ -40,7 +39,6 @@ const base = useData().site.value.base
     font-size: 20px;
     font-weight: bold;
   }
-
 }
 
 .band {
@@ -54,7 +52,7 @@ const base = useData().site.value.base
   mask: linear-gradient(to left, transparent 0%, #1a2b51 50%, transparent 100%);
 }
 
-@media(max-width: 768px) {
+@media (max-width: 768px) {
   .not-found {
     img {
       width: 50vw;

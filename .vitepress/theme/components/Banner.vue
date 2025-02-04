@@ -93,10 +93,14 @@ class SiriWave {
     }
     this.phase = (this.phase + this.speed) % (Math.PI * 64)
     this._clear()
-       // 获取计算后的 CSS 变量值
-    const wave1Color = getComputedStyle(document.documentElement).getPropertyValue('--wave-color1').trim()
-    const wave2Color = getComputedStyle(document.documentElement).getPropertyValue('--wave-color2').trim()
-    
+    // 获取计算后的 CSS 变量值
+    const wave1Color = getComputedStyle(document.documentElement)
+      .getPropertyValue('--wave-color1')
+      .trim()
+    const wave2Color = getComputedStyle(document.documentElement)
+      .getPropertyValue('--wave-color2')
+      .trim()
+
     this._drawLine(0.5, wave1Color, 1, 0.35, 6)
     this._drawLine(1, wave2Color, 1, 0.25, 6)
     this.animationFrameID = requestAnimationFrame(this._draw.bind(this))
@@ -215,10 +219,10 @@ onMounted(() => {
 }
 
 .bg-img {
-  background-image: url(../assets/banner/banner.jpg);
-  html[theme="dark"] & {
-      background-image: url(../assets/banner/banner_dark.jpg), url(../assets/banner/banner.jpg);
-    }
+  background-image: url(../assets/banner/banner.webp);
+  html[theme='dark'] & {
+    background-image: url(../assets/banner/banner_dark.webp), url(../assets/banner/banner.webp);
+  }
   position: absolute;
   top: 0;
   width: 100%;

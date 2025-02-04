@@ -14,7 +14,7 @@
           background: `linear-gradient(${angle}deg, var(--infobox-background-initial), var(--infobox-background-final))`,
         }"
       >
-        <img @dragstart.prevent src="../assets/banner/avatar.jpg" alt="" class="avatar" />
+        <img @dragstart.prevent src="../assets/banner/avatar.webp" alt="" class="avatar" />
         <span class="name">{{ name }}</span>
         <span class="motto">
           {{ mottoText }}
@@ -119,7 +119,7 @@ onMounted(() => {
   flex-direction: column;
   align-items: center;
   position: relative;
-padding: 6vh 2vw 3vh;
+  padding: 6vh 2vw 3vh;
   width: 40vw;
   border-radius: 3vw;
   box-shadow: var(--info-box-shadow);
