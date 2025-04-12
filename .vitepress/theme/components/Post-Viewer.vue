@@ -377,10 +377,6 @@ const themeConfig = useData().theme.value
       overflow-y: hidden;
     }
 
-    .vp-code {
-      font-family: monospace;
-    }
-
     .line-numbers-wrapper {
       border-right: 2px solid #dfdfdf;
       text-align: center;
@@ -536,12 +532,6 @@ const themeConfig = useData().theme.value
     border-radius: 8px;
     filter: var(--img-brightness);
     transition: filter 0.5s;
-  }
-
-  code,
-  kbd,
-  samp {
-    font-family: 'Blueaka', sans-serif;
   }
 }
 
