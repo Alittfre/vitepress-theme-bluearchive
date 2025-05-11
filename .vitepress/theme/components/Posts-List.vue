@@ -2,29 +2,38 @@
   <div class="container posts-content">
     <TransitionGroup class="posts-list" name="list" tag="div">
       <article class="post" v-for="post in postsList" :key="post.href">
-        <p v-if="post.cover"> {{ post.cover }} </p>
         <span v-if="post.pinned" class="pinned"></span>
         <header class="post-header">
-          <div class="title">
-            <div class="title-dot"></div>
-            <h1 class="name">
-              <a :href="base + post.href">{{ post.title }}</a>
-            </h1>
+          <div v-if="post.cover" class="cover-container">
+            <img 
+              :src="post.cover" 
+              class="cover-image" 
+              :alt="post.title + '-cover'"
+              loading="lazy"
+            >
           </div>
-          <div class="meta-info-bar">
-            <span class="iconfont icon-time time"></span>
-            <div class="time-info">
-              <time datetime="">{{ formatDate(post.create) }}</time>
+          <div class="header-content">
+            <div class="title">
+              <div class="title-dot" v-if="!post.cover"></div>
+              <h1 class="name">
+                <a :href="base + post.href">{{ post.title }}</a>
+              </h1>
             </div>
-            <div class="wordcount seperator">约{{ post.wordCount }}字</div>
+            <div class="meta-info-bar">
+              <span class="iconfont icon-time time"></span>
+              <div class="time-info">
+                <time datetime="">{{ formatDate(post.create) }}</time>
+              </div>
+              <div class="wordcount seperator">约{{ post.wordCount }}字</div>
+            </div>
+            <ul class="tags">
+              <li v-for="tag in post.tags">
+                <a :href="`${base}tags/`" @click="state.currTag = tag"
+                  ><i class="iconfont icon-tag"></i> {{ tag }}</a
+                >
+              </li>
+            </ul>
           </div>
-          <ul class="tags">
-            <li v-for="tag in post.tags">
-              <a :href="`${base}tags/`" @click="state.currTag = tag"
-                ><i class="iconfont icon-tag"></i> {{ tag }}</a
-              >
-            </li>
-          </ul>
         </header>
         <div class="excerpt">
           <p>{{ post.excerpt }}</p>
@@ -123,7 +132,7 @@ const finalPosts = computed(() => {
 .posts-list {
   position: relative;
   overflow-wrap: break-word;
-
+  
   .post {
     display: flex;
     flex-direction: column;
@@ -148,6 +157,59 @@ const finalPosts = computed(() => {
       background: var(--icon-pinned) no-repeat;
       background-size: contain;
       box-shadow: 0 0 6px rgba(var(--blue-shadow-color), 0.65);
+    }
+
+    .post-header {
+      display: flex;
+      gap: 24px;
+      padding: 32px 40px 0;
+      position: relative;
+
+      .cover-container {
+        flex: 0 0 160px;
+        height: 120px;
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        margin-left: -8px; 
+        align-self: flex-start; 
+        
+        .cover-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.3s ease;
+          
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
+      }
+      .header-content {
+        flex: 1;
+        min-width: 0; 
+        
+        .title {
+          position: relative;
+          margin-bottom: 8px;
+
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      .post-header {
+        flex-direction: column;
+        gap: 16px;
+        padding: 24px 20px 0;
+        
+        .cover-container {
+          flex: none;
+          width: 100%;
+          height: 160px;
+          margin-left: 0;
+        }
+      }
     }
   }
 }
