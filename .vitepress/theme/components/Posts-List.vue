@@ -2,6 +2,7 @@
   <div class="container posts-content">
     <TransitionGroup class="posts-list" name="list" tag="div">
       <article class="post" v-for="post in postsList" :key="post.href">
+        <p v-if="post.cover"> {{ post.cover }} </p>
         <span v-if="post.pinned" class="pinned"></span>
         <header class="post-header">
           <div class="title">

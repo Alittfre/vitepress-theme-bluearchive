@@ -9,5 +9,6 @@ export interface PostData {
   wordCount: number
   cover?: string
   excerpt: string
+  pinned?: boolean
 }
 export declare const data: PostData[]
