@@ -14,7 +14,7 @@
           </div>
           <div class="header-content">
             <div class="title">
-              <div class="title-dot" v-if="!post.cover"></div>
+              <div class="title-dot"></div>
               <h1 class="name">
                 <a :href="base + post.href">{{ post.title }}</a>
               </h1>
@@ -33,11 +33,11 @@
                 >
               </li>
             </ul>
+            <div class="excerpt">
+              <p>{{ post.excerpt }}</p>
+            </div>
           </div>
         </header>
-        <div class="excerpt">
-          <p>{{ post.excerpt }}</p>
-        </div>
       </article>
     </TransitionGroup>
     <span v-if="totalPage != 1" class="pagination">
@@ -163,36 +163,42 @@ const finalPosts = computed(() => {
       display: flex;
       gap: 24px;
       padding: 32px 40px 0;
+      flex-direction: row-reverse;
       position: relative;
+      align-items: stretch;
 
       .cover-container {
-        flex: 0 0 160px;
-        height: 120px;
+        flex: 0 0 180px;
+        height: 140px;
         border-radius: 12px;
         overflow: hidden;
         position: relative;
         margin-left: -8px; 
-        align-self: flex-start; 
-        
+        margin-bottom: 15px;
+        align-self: center; 
         .cover-image {
           width: 100%;
           height: 100%;
           object-fit: cover;
           transition: transform 0.3s ease;
-          
           &:hover {
             transform: scale(1.05);
           }
         }
       }
+
       .header-content {
         flex: 1;
         min-width: 0; 
-        
+        flex-direction: column;
         .title {
           position: relative;
           margin-bottom: 8px;
-
+        }
+        .excerpt {
+          flex: 1;
+          display: flex;
+          align-items: flex-end;
         }
       }
     }
@@ -301,10 +307,6 @@ const finalPosts = computed(() => {
       }
     }
   }
-}
-
-.excerpt {
-  padding: 0 40px;
 }
 
 .pagination {
