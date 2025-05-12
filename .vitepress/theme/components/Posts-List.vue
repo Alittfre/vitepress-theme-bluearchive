@@ -14,7 +14,7 @@
           </div>
           <div class="header-content">
             <div class="title">
-              <div class="title-dot"></div>
+              <div class="title-dot" v-if="!post.cover"></div>
               <h1 class="name">
                 <a :href="base + post.href">{{ post.title }}</a>
               </h1>
@@ -163,7 +163,7 @@ const finalPosts = computed(() => {
       display: flex;
       gap: 24px;
       padding: 32px 40px 0;
-      flex-direction: row-reverse;
+      // flex-direction: row-reverse;
       position: relative;
       align-items: stretch;
 
