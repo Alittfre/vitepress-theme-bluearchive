@@ -20,10 +20,9 @@
         <span class="line"></span>
         <span class="line"></span>
       </div>
-    </nav>
     <DropdownMenu :showMenu="state.showDropdownMenu"></DropdownMenu>
+    </nav>
   </header>
-
   <SearchDialog v-if="state.searchDialog" @close-dialog="closeDialog"></SearchDialog>
 </template>
 

@@ -20,7 +20,7 @@ import ToggleSwitch from './ToggleSwitch.vue'
 .dropdown-menu {
   position: absolute;
   z-index: 50;
-  bottom: 100%;
+  top: 100%;
   right: 0;
   display: flex;
   justify-content: center;
@@ -50,22 +50,26 @@ import ToggleSwitch from './ToggleSwitch.vue'
 }
 
 .dropdown-menu[showmenu='true'] {
-  transform: translateY(135%);
+  opacity: 1;
+  transform: translateY(15px);
   .menu-content {
     box-shadow: 0px 0px 8px rgb(var(--blue-shadow-color), 0.8);
-    transition: box-shadow 0.2s;
+    transition: box-shadow 0.3s;
   }
-  transition: top 0.6s cubic-bezier(0.25, 1, 0.5, 1),
-    transform 0.63s cubic-bezier(0.7, 0.5, 0.2, 1.24);
+  transition: opacity 0.1s ease-in-out,
+    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .dropdown-menu[showmenu='false'] {
+  opacity: 0;
+  transform: translateY(2px);
   .menu-content {
     box-shadow: none;
-    transition: box-shadow 3s;
+    transition: box-shadow 0.3s;
   }
-  transition: top 0.6s cubic-bezier(0.25, 1, 0.5, 1),
-    transform 0.6s cubic-bezier(0.9, -0.33, 0.51, 1.07);
+  transition: opacity 0.2s ease-in-out,
+    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
 }
 
 @media (max-width: 768px) {
