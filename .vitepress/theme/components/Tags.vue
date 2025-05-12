@@ -1,13 +1,15 @@
 <template>
   <ul class="tags">
     <li :class="['item', { active: active === tag }]" v-for="(_, tag) in tagData">
-      <a href="#" @click="setTag(tag)"><i class="iconfont icon-tag"></i> {{ tag }}</a>
+      <a href="javascript:void(0)" @click="setTag(tag)"
+        ><i class="iconfont icon-tag"></i> {{ tag }}</a
+      >
     </li>
   </ul>
 </template>
 <script setup lang="ts">
 import { data as posts, type PostData } from '../utils/posts.data'
-import { ref, watch, onUnmounted } from 'vue'
+import { ref, watch, onUnmounted, onMounted } from 'vue'
 import { useStore } from '../store'
 
 const active = ref<string | null>(null)
@@ -18,6 +20,23 @@ const setTag = (tag: string) => {
   active.value = tag
   state.selectedPosts = tagData[tag] || []
   state.currTag = tag
+
+  const url = new URL(window.location.href)
+
+  // 设置URL的tag参数
+  if (tag && tag.trim() !== '') {
+    url.searchParams.set('tag', tag)
+  } else {
+    url.searchParams.delete('tag')
+  }
+
+  // 清除page参数
+  const pageParam = url.searchParams.get('page')
+  if (!pageParam || pageParam === '1') {
+    url.searchParams.delete('page')
+  }
+
+  window.history.pushState({}, '', url.toString())
 }
 
 for (const post of posts) {
@@ -28,12 +47,42 @@ for (const post of posts) {
   }
 }
 
-setTag(state.currTag)
+// 从URL获取tag
+function getTagFromUrl(): string {
+  if (typeof window !== 'undefined') {
+    const urlParams = new URLSearchParams(window.location.search)
+    const tagParam = urlParams.get('tag')
+    if (tagParam && tagData[tagParam]) {
+      return tagParam
+    }
+  }
+  return state.currTag || ''
+}
+
+// 挂载组件时获取URL的tag
+onMounted(() => {
+  const tagFromUrl = getTagFromUrl()
+
+  if (tagFromUrl) {
+    setTag(tagFromUrl)
+  } else if (state.currTag) {
+    setTag(state.currTag)
+  }
+
+  window.addEventListener('popstate', () => {
+    const tagFromUrl = getTagFromUrl()
+    if (tagFromUrl !== active.value) {
+      setTag(tagFromUrl)
+    }
+  })
+})
 
 watch(
   () => state.currTag,
-  () => {
-    setTag(state.currTag)
+  (newTag) => {
+    if (newTag !== active.value) {
+      setTag(newTag)
+    }
   },
 )
 
