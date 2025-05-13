@@ -124,9 +124,14 @@ const finalPosts = computed(() => {
   return []
 })
 
-// 页码逻辑
-const currPage = ref(1)
+// 文章列表长度
 const pageSize = ref(5)
+
+// 使用store中的currPage
+const currPage = computed({
+  get: () => state.currPage,
+  set: (value) => (state.currPage = value),
+})
 
 // 获取URL信息
 onMounted(() => {
@@ -137,16 +142,16 @@ function updatePageFromUrl() {
   const urlParams = new URLSearchParams(window.location.search)
   const pageParam = urlParams.get('page')
   if (pageParam && !isNaN(parseInt(pageParam)) && parseInt(pageParam) > 0) {
-    currPage.value = parseInt(pageParam)
+    state.currPage = parseInt(pageParam)
   } else {
-    currPage.value = 1
+    state.currPage = 1
   }
 }
 
 // 更新页码逻辑
 function goToPage(page: number) {
   if (page < 1 || page > totalPage.value) return
-  currPage.value = page
+  state.currPage = page
 
   // 获取URL信息
   const url = new URL(window.location.href)

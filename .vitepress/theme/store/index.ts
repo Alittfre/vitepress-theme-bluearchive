@@ -5,6 +5,7 @@ interface StoreState {
   selectedPosts: PostData[]
   currTag: string
   currPost: PostData
+  currPage: number
   searchDialog: boolean
   splashLoading: boolean
   fireworksEnabled: boolean
@@ -29,6 +30,7 @@ const state: StoreState = reactive({
     excerpt: '',
     pinned: false
   },
+  currPage: 1,
   searchDialog: false,
   splashLoading: true,
   fireworksEnabled: true,

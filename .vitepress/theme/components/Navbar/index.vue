@@ -7,7 +7,7 @@
       <span class="menu">
         <ul>
           <li v-for="item in menuList">
-            <a :href="base + item.url">{{ item.name }}</a>
+            <a :href="base + item.url" @click="handleNavClick(item.url)">{{ item.name }}</a>
           </li>
         </ul>
       </span>
@@ -20,7 +20,7 @@
         <span class="line"></span>
         <span class="line"></span>
       </div>
-    <DropdownMenu :showMenu="state.showDropdownMenu"></DropdownMenu>
+      <DropdownMenu :showMenu="state.showDropdownMenu"></DropdownMenu>
     </nav>
   </header>
   <SearchDialog v-if="state.searchDialog" @close-dialog="closeDialog"></SearchDialog>
@@ -44,6 +44,22 @@ const closeDialog = () => {
 }
 const toggleDropdownMenu = () => {
   state.showDropdownMenu = !state.showDropdownMenu
+}
+const resetPage = () => {
+  state.currPage = 1
+}
+
+const handleNavClick = (url: string) => {
+  // 点击首页时重置页码
+  if (url === '') {
+    resetPage()
+  }
+
+  // 点击标签时重置标签和页码
+  if (url === 'tags/') {
+    resetPage()
+    state.currTag = ''
+  }
 }
 </script>
 
