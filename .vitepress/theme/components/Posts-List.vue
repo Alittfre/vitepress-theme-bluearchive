@@ -137,11 +137,16 @@ const currPage = computed({
 onMounted(() => {
   updatePageFromUrl()
 })
-
+const url = new URL(window.location.href)
 function updatePageFromUrl() {
   const urlParams = new URLSearchParams(window.location.search)
   const pageParam = urlParams.get('page')
-  if (pageParam && !isNaN(parseInt(pageParam)) && parseInt(pageParam) > 0) {
+  if (
+    pageParam &&
+    !isNaN(parseInt(pageParam)) &&
+    parseInt(pageParam) > 0 &&
+    parseInt(pageParam) <= totalPage.value
+  ) {
     state.currPage = parseInt(pageParam)
   } else {
     state.currPage = 1
