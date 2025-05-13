@@ -11,9 +11,36 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
 import MusicControl from './Music-Control.vue'
 import SearchButton from './Search-Button.vue'
 import ToggleSwitch from './ToggleSwitch.vue'
+import { useStore } from '../../store'
+
+const { state } = useStore()
+const dropdownMenu = ref<HTMLElement | null>(null)
+
+const handleClickOutside = (event: MouseEvent) => {
+  const target = event.target as HTMLElement
+  const hamburgerEl = document.querySelector('.hamburger')
+
+  // 避免与展开按钮冲突
+  if (hamburgerEl && hamburgerEl.contains(target)) {
+    return
+  }
+
+  if (dropdownMenu.value && !dropdownMenu.value.contains(target) && state.showDropdownMenu) {
+    state.showDropdownMenu = false
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside)
+})
 </script>
 
 <style scoped lang="less">
@@ -56,8 +83,7 @@ import ToggleSwitch from './ToggleSwitch.vue'
     box-shadow: 0px 0px 8px rgb(var(--blue-shadow-color), 0.8);
     transition: box-shadow 0.3s;
   }
-  transition: opacity 0.1s ease-in-out,
-    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: opacity 0.1s ease-in-out, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .dropdown-menu[showmenu='false'] {
@@ -67,8 +93,7 @@ import ToggleSwitch from './ToggleSwitch.vue'
     box-shadow: none;
     transition: box-shadow 0.3s;
   }
-  transition: opacity 0.2s ease-in-out,
-    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: opacity 0.2s ease-in-out, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   pointer-events: none;
 }
 
