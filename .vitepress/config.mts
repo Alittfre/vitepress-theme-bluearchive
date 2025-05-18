@@ -4,7 +4,7 @@ import mdItCustomAttrs from 'markdown-it-custom-attrs'
 import { RSSOptions, RssPlugin } from 'vitepress-plugin-rss'
 
 // 访问 RSS 资源的 URL
-const baseUrl = 'http://127.0.0.1:8000'
+const baseUrl = 'https://vitepress-theme-bluearchive.vercel.app'
 const rssFilename = 'feed.rss'
 const RSS: RSSOptions = {
   title: "BSensei's 部落格",
