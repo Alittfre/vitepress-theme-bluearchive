@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="js">
-import { onMounted, ref, onUnmounted, watch, computed } from 'vue'
+import { onMounted, ref, watch, computed } from 'vue'
 
 import { useStore } from '../../store'
 const { state } = useStore()
@@ -225,7 +225,7 @@ const preloadAudio = async () => {
 }
 
 const handleScroll = () => {
-  if (!clientReady.value) return
+  if (!clientReady.value || !playerContainer.value) return
   const bottomReached = window.innerHeight + window.scrollY + 1 >= document.body.offsetHeight
   const chatDialog = document.querySelector('.chatdialog')
 
@@ -485,6 +485,15 @@ const isDarkMode = computed(() => state.darkMode === 'dark')
 const isEnabled = computed(() => state.SpinePlayerEnabled)
 const currentAssets = computed(() => spineAssets[currentCharacter.value])
 
+// 事件委托
+const handleEvents = (event) => {
+  if (event.type === 'scroll') {
+    handleScroll()
+  } else if (['mousemove', 'touchmove'].includes(event.type)) {
+    moveBonesHandler?.(event)
+  }
+}
+
 // 统一的清理函数
 const cleanup = () => {
   if (blinkInterval) clearTimeout(blinkInterval)
@@ -551,14 +560,6 @@ watch([isDarkMode, isEnabled], async ([dark, enabled], [prevDark, prevEnabled]) 
   }
 }, { immediate: true })
 
-// 事件委托
-const handleEvents = (event) => {
-  if (event.type === 'scroll') {
-    handleScroll()
-  } else if (['mousemove', 'touchmove'].includes(event.type)) {
-    moveBonesHandler?.(event)
-  }
-}
 
 onMounted(() => {
   // 设置客户端就绪状态
