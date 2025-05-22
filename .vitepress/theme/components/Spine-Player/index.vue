@@ -481,7 +481,8 @@ const cleanup = () => {
   if (blinkInterval) clearTimeout(blinkInterval)
   if (eyeControlTimer) clearTimeout(eyeControlTimer)
 
-  // 清理鼠标移动监听
+  // 清理监听事件
+  window.removeEventListener('scroll', handleEvents)
   if (moveBonesHandler && !isMobileDevice()) {
     window.removeEventListener('mousemove', moveBonesHandler)
     moveBonesHandler = null
@@ -525,9 +526,18 @@ const initializeCharacter = async () => {
 
 const debouncedInitialize = debounce(initializeCharacter, 300)
 
-// 监听器
+// 监听主题切换和spine开关
 watch([isDarkMode, isEnabled], async ([dark, enabled], [prevDark, prevEnabled]) => {
-  if (enabled !== prevEnabled || (enabled && dark !== prevDark)) {
+  if (enabled !== prevEnabled) {
+    if (enabled) {
+      // 启用时初始化
+      debouncedInitialize()
+    } else {
+      // 禁用时清理资源
+      cleanup()
+    }
+  } else if (enabled && dark !== prevDark) {
+    // 主题变更且启用状态下重新初始化
     debouncedInitialize()
   }
 }, { immediate: true })
@@ -555,12 +565,6 @@ onMounted(() => {
   if (state.SpinePlayerEnabled) {
     debouncedInitialize()
   }
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleEvents)
-  window.removeEventListener('mousemove', handleEvents)
-  cleanup()
 })
 </script>
 
