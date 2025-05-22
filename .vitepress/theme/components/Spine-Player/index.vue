@@ -132,11 +132,16 @@ const AudioManager = {
   context: null,
   buffers: new Map(),
   currentSource: null,
+  gainNode: null,
 
   initialize() {
     if (!clientReady.value) return
     if (!this.context) {
       this.context = new (window.AudioContext || window.webkitAudioContext)();
+      // 创建增益节点，设置音量为50%
+      this.gainNode = this.context.createGain();
+      this.gainNode.gain.value = 0.5;
+      this.gainNode.connect(this.context.destination);
     }
   },
 
@@ -167,7 +172,8 @@ const AudioManager = {
     return new Promise((resolve) => {
       const source = this.context.createBufferSource();
       source.buffer = buffer;
-      source.connect(this.context.destination);
+      // 连接到增益节点而不是直接连接到目标
+      source.connect(this.gainNode);
       source.onended = () => {
         if (this.currentSource === source) {
           this.currentSource = null;
