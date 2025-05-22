@@ -10,14 +10,12 @@
           <PostInnerBanner v-else></PostInnerBanner>
         </transition>
       </Banner>
-      <ClientOnly>
-        <transition name="fade" mode="out-in">
-          <PostsList
-            v-if="page.filePath === 'index.md' || page.filePath === 'tags/index.md'"
-          ></PostsList>
-          <PostViewer v-else></PostViewer>
-        </transition>
-      </ClientOnly>
+      <transition name="fade" mode="out-in">
+        <PostsList
+          v-if="page.filePath === 'index.md' || page.filePath === 'tags/index.md'"
+        ></PostsList>
+        <PostViewer v-else></PostViewer>
+      </transition>
     </main>
     <Footer></Footer>
     <Fireworks v-if="state.fireworksEnabled"></Fireworks>
