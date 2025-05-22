@@ -13,7 +13,10 @@
       @touchstart="handlePlayerClick"
     ></div>
     <transition name="fade">
-      <div v-if="showDialog" class="chatdialog">{{ currentDialog }}</div>
+      <div v-if="showDialog" class="chatdialog-container">
+        <div class="chatdialog-triangle"></div>
+        <div class="chatdialog">{{ currentDialog }}</div>
+      </div>
     </transition>
   </template>
 </template>
@@ -586,33 +589,39 @@ onMounted(() => {
   transition: all 1s;
   cursor: pointer;
 }
-.chatdialog {
+.chatdialog-container {
   position: fixed;
   bottom: 10vw;
   left: 2vw;
+  z-index: 101;
+  transition: all 1s;
+  pointer-events: none;
+  filter: drop-shadow(0 0 3px rgba(36, 36, 36, 0.6));
+}
+
+.chatdialog-triangle {
+  position: absolute;
+  left: 2vw;
+  top: -10px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid rgba(255, 255, 255, 0.9);
+  z-index: 101;
+}
+
+.chatdialog {
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 25px;
   padding: 12px 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  z-index: 101;
   word-wrap: break-word;
   white-space: pre-wrap;
   line-height: 1.4;
   color: #000000;
   font-size: 0.8vw;
   user-select: none;
-  transition: all 1s;
-
-  &:after {
-    content: '';
-    position: absolute;
-    left: 2vw;
-    top: -8px;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid rgba(255, 255, 255, 0.9);
-    border-top: none;
-  }
+  pointer-events: auto;
 }
 
 // 添加淡入淡出动画
@@ -627,19 +636,22 @@ onMounted(() => {
 }
 
 @media (max-width: 768px) {
-  .chatdialog {
+  .chatdialog-container {
     left: 2vh;
     bottom: 10vh;
+  }
+
+  .chatdialog {
     min-width: auto;
     padding: 12px 20px;
     font-size: 1vh;
     border-radius: 20px;
+  }
 
-    &:after {
-      left: 35px;
-      border-width: 8px;
-      top: -7px;
-    }
+  .chatdialog-triangle {
+    left: 35px;
+    border-width: 8px;
+    top: -8px;
   }
 
   .playerContainer {
