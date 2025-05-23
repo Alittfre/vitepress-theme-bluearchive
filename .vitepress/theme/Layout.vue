@@ -19,7 +19,7 @@
     </main>
     <Footer></Footer>
     <Fireworks v-if="state.fireworksEnabled"></Fireworks>
-    <SpinePlayer></SpinePlayer>
+    <ClientOnly><SpinePlayer></SpinePlayer></ClientOnly>
     <ToTop></ToTop>
     <!-- 背景音乐元素 -->
     <audio id="background-music" loop>

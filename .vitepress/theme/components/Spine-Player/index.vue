@@ -13,13 +13,16 @@
       @touchstart="handlePlayerClick"
     ></div>
     <transition name="fade">
-      <div v-if="showDialog" class="chatdialog">{{ currentDialog }}</div>
+      <div v-if="showDialog" class="chatdialog-container">
+        <div class="chatdialog-triangle"></div>
+        <div class="chatdialog">{{ currentDialog }}</div>
+      </div>
     </transition>
   </template>
 </template>
 
 <script setup lang="js">
-import { onMounted, ref, onUnmounted, watch, computed } from 'vue'
+import { onMounted, ref, watch, computed } from 'vue'
 
 import { useStore } from '../../store'
 const { state } = useStore()
@@ -132,11 +135,16 @@ const AudioManager = {
   context: null,
   buffers: new Map(),
   currentSource: null,
+  gainNode: null,
 
   initialize() {
     if (!clientReady.value) return
     if (!this.context) {
       this.context = new (window.AudioContext || window.webkitAudioContext)();
+      // 创建增益节点，设置音量为50%
+      this.gainNode = this.context.createGain();
+      this.gainNode.gain.value = 0.5;
+      this.gainNode.connect(this.context.destination);
     }
   },
 
@@ -167,7 +175,8 @@ const AudioManager = {
     return new Promise((resolve) => {
       const source = this.context.createBufferSource();
       source.buffer = buffer;
-      source.connect(this.context.destination);
+      // 连接到增益节点而不是直接连接到目标
+      source.connect(this.gainNode);
       source.onended = () => {
         if (this.currentSource === source) {
           this.currentSource = null;
@@ -216,7 +225,7 @@ const preloadAudio = async () => {
 }
 
 const handleScroll = () => {
-  if (!clientReady.value) return
+  if (!clientReady.value || !playerContainer.value) return
   const bottomReached = window.innerHeight + window.scrollY + 1 >= document.body.offsetHeight
   const chatDialog = document.querySelector('.chatdialog')
 
@@ -478,12 +487,22 @@ const isDarkMode = computed(() => state.darkMode === 'dark')
 const isEnabled = computed(() => state.SpinePlayerEnabled)
 const currentAssets = computed(() => spineAssets[currentCharacter.value])
 
+// 事件委托
+const handleEvents = (event) => {
+  if (event.type === 'scroll') {
+    handleScroll()
+  } else if (['mousemove', 'touchmove'].includes(event.type)) {
+    moveBonesHandler?.(event)
+  }
+}
+
 // 统一的清理函数
 const cleanup = () => {
   if (blinkInterval) clearTimeout(blinkInterval)
   if (eyeControlTimer) clearTimeout(eyeControlTimer)
 
-  // 清理鼠标移动监听
+  // 清理监听事件
+  window.removeEventListener('scroll', handleEvents)
   if (moveBonesHandler && !isMobileDevice()) {
     window.removeEventListener('mousemove', moveBonesHandler)
     moveBonesHandler = null
@@ -527,21 +546,22 @@ const initializeCharacter = async () => {
 
 const debouncedInitialize = debounce(initializeCharacter, 300)
 
-// 监听器
+// 监听主题切换和spine开关
 watch([isDarkMode, isEnabled], async ([dark, enabled], [prevDark, prevEnabled]) => {
-  if (enabled !== prevEnabled || (enabled && dark !== prevDark)) {
+  if (enabled !== prevEnabled) {
+    if (enabled) {
+      // 启用时初始化
+      debouncedInitialize()
+    } else {
+      // 禁用时清理资源
+      cleanup()
+    }
+  } else if (enabled && dark !== prevDark) {
+    // 主题变更且启用状态下重新初始化
     debouncedInitialize()
   }
 }, { immediate: true })
 
-// 事件委托
-const handleEvents = (event) => {
-  if (event.type === 'scroll') {
-    handleScroll()
-  } else if (['mousemove', 'touchmove'].includes(event.type)) {
-    moveBonesHandler?.(event)
-  }
-}
 
 onMounted(() => {
   // 设置客户端就绪状态
@@ -558,12 +578,6 @@ onMounted(() => {
     debouncedInitialize()
   }
 })
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleEvents)
-  window.removeEventListener('mousemove', handleEvents)
-  cleanup()
-})
 </script>
 
 <style scoped lang="less">
@@ -578,33 +592,39 @@ onUnmounted(() => {
   transition: all 1s;
   cursor: pointer;
 }
-.chatdialog {
+.chatdialog-container {
   position: fixed;
   bottom: 10vw;
   left: 2vw;
+  z-index: 101;
+  transition: all 1s;
+  pointer-events: none;
+  filter: drop-shadow(0 0 3px rgba(36, 36, 36, 0.6));
+}
+
+.chatdialog-triangle {
+  position: absolute;
+  left: 2vw;
+  top: -10px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid rgba(255, 255, 255, 0.9);
+  z-index: 101;
+}
+
+.chatdialog {
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 25px;
   padding: 12px 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  z-index: 101;
   word-wrap: break-word;
   white-space: pre-wrap;
   line-height: 1.4;
   color: #000000;
   font-size: 0.8vw;
   user-select: none;
-  transition: all 1s;
-
-  &:after {
-    content: '';
-    position: absolute;
-    left: 2vw;
-    top: -8px;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid rgba(255, 255, 255, 0.9);
-    border-top: none;
-  }
+  pointer-events: auto;
 }
 
 // 添加淡入淡出动画
@@ -619,19 +639,22 @@ onUnmounted(() => {
 }
 
 @media (max-width: 768px) {
-  .chatdialog {
+  .chatdialog-container {
     left: 2vh;
     bottom: 10vh;
+  }
+
+  .chatdialog {
     min-width: auto;
     padding: 12px 20px;
     font-size: 1vh;
     border-radius: 20px;
+  }
 
-    &:after {
-      left: 35px;
-      border-width: 8px;
-      top: -7px;
-    }
+  .chatdialog-triangle {
+    left: 35px;
+    border-width: 8px;
+    top: -8px;
   }
 
   .playerContainer {

@@ -133,11 +133,14 @@ const currPage = computed({
   set: (value) => (state.currPage = value),
 })
 
-// 获取URL信息
 onMounted(() => {
+  // 获取URL信息
   updatePageFromUrl()
+  // 监听前进后退
+  window.addEventListener('popstate', () => {
+    updatePageFromUrl()
+  })
 })
-const url = new URL(window.location.href)
 function updatePageFromUrl() {
   const urlParams = new URLSearchParams(window.location.search)
   const pageParam = urlParams.get('page')
@@ -176,13 +179,6 @@ function goToPage(page: number) {
 
   window.history.pushState({}, '', url.toString())
 }
-
-// 监听前进后退
-onMounted(() => {
-  window.addEventListener('popstate', () => {
-    updatePageFromUrl()
-  })
-})
 
 // 计算要显示的页码
 const maxVisiblePages = 3 // 省略号两边显示的页码按钮数量
