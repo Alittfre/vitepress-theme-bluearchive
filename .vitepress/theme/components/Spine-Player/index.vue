@@ -220,13 +220,15 @@ const handleScroll = () => {
   const bottomReached = window.innerHeight + window.scrollY + 1 >= document.body.offsetHeight
   const chatDialog = document.querySelector('.chatdialog')
 
-  if (bottomReached) {
-    playerContainer.value.style.left = '-50%'
-    if (chatDialog) {
-      chatDialog.style.left = '-50%'
+  if (isMobileDevice()) {
+    if (bottomReached) {
+      playerContainer.value.style.left = '-50%'
+      if (chatDialog) {
+        chatDialog.style.left = '-50%'
+      }
+    } else {
+      playerContainer.value.style.left = '0%'
     }
-  } else {
-    playerContainer.value.style.left = '0%'
   }
 }
 
