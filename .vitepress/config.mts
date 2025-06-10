@@ -80,7 +80,7 @@ export default defineConfigWithTheme<ThemeConfig>({
     //banner区配置
     videoBanner: false,
     name: "墨翟's 部落格",
-    welcomeText: 'Hello, VitePress',
+    welcomeText: 'Hello, 墨翟',
     motto: ['和你的日常，就是奇迹', '何気ない日常で、ほんの少しの奇跡を見つける物語。'],
     social: [
       { icon: 'github', url: 'https://github.com/' },
@@ -93,7 +93,7 @@ export default defineConfigWithTheme<ThemeConfig>({
     spineVoiceLang: 'jp',
 
     //footer配置
-    footerName: 'Sensei',
+    footerName: '墨翟',
     poweredList: [
       { name: 'VitePress', url: 'https://github.com/vuejs/vitepress' },
       { name: 'GitHub Pages', url: 'https://docs.github.com/zh/pages' },
