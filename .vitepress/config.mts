@@ -1,4 +1,4 @@
-import { defineConfigWithTheme } from 'vitepress'
+import { defineConfigWithTheme } from '墨翟'
 import mdItCustomAttrs from 'markdown-it-custom-attrs'
 export interface ThemeConfig {
   //navBar
