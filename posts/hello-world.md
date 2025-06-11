@@ -1,7 +1,7 @@
 ---
 title: HelloWorld
-date: 2024-04-16
-tags: [HelloWorld, vue, vitepress]
+date: 2025-06-11
+tags: [HelloWorld, vue]
 pinned: true
 head:
   - - meta
@@ -18,11 +18,11 @@ head:
 
 # Markdown Extension Examples
 
-This page demonstrates some of the built-in markdown extensions provided by VitePress.
+This page demonstrates some of the built-in markdown extensions provided by Mozhai.
 
 ## Syntax Highlighting
 
-VitePress provides Syntax Highlighting powered by [Shiki](https://github.com/shikijs/shiki), with additional features like line-highlighting:
+Mozhai provides Syntax Highlighting powered by [Shiki](https://github.com/shikijs/shiki), with additional features like line-highlighting:
 
 **Input**
 
