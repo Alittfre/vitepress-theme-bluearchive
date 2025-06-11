@@ -6,13 +6,12 @@ pinned: true
 head:
   - - meta
     - name: description
-      content: vitepress-theme-bluearchive HelloWorld
+      content: Mozhai-theme-bluearchive HelloWorld
   - - meta
     - name: keywords
-      content: vitepress theme bluearchive HelloWorld
+      content: Mozhai theme bluearchive HelloWorld
 ---
-
-只是一个 HelloWorld
+所有的起端都是从一个 HelloWorld 开始
 
 ---
 
