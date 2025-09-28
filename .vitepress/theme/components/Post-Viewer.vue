@@ -115,9 +115,6 @@ const themeConfig = useData().theme.value
     font-family: 'JetBrains Mono', sans-serif;
     line-height: 0; // 修复行号对齐
     border-radius: 3px;
-    html[theme='dark'] & {
-      background-color: rgba(157, 124, 216, 0.1);
-    }
   }
 
   /**
@@ -327,10 +324,6 @@ const themeConfig = useData().theme.value
       font-weight: bold;
       padding-bottom: 10px;
       border-bottom: 5px solid var(--font-color-gold);
-    }
-
-    code {
-      background-color: transparent;
     }
 
     button.copy {
