@@ -112,7 +112,8 @@ const themeConfig = useData().theme.value
   }
 
   code {
-    background-color: #f0f0f0;
+    font-family: 'JetBrains Mono', sans-serif;
+    line-height: 0; // 修复行号对齐
     border-radius: 3px;
     html[theme='dark'] & {
       background-color: rgba(157, 124, 216, 0.1);
@@ -553,10 +554,6 @@ const themeConfig = useData().theme.value
         transform: translate(-50%, -32px);
         padding-bottom: 5px;
         border-bottom: 4px solid var(--font-color-gold);
-      }
-
-      code {
-        line-height: 12px;
       }
 
       button.copy {
