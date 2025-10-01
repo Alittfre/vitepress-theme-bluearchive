@@ -1,6 +1,19 @@
 import { defineConfigWithTheme } from 'vitepress'
 // @ts-ignore
 import mdItCustomAttrs from 'markdown-it-custom-attrs'
+
+import { RSSOptions, RssPlugin } from 'vitepress-plugin-rss'
+
+// 访问 RSS 资源的 URL
+const baseUrl = 'https://vitepress-theme-bluearchive.vercel.app'
+const rssFilename = 'feed.rss'
+const RSS: RSSOptions = {
+  title: "BSensei's 部落格",
+  baseUrl,
+  copyright: 'Copyright (c) 2025 Blue Archive',
+  filename: rssFilename
+}
+
 export interface ThemeConfig {
   //navBar
   menuList: { name: string; url: string }[]
@@ -10,7 +23,7 @@ export interface ThemeConfig {
   name: string
   welcomeText: string
   motto: string[]
-  social: { icon: string; url: string }[]
+  socialLinks: { icon: string; url: string }[]
 
   //spine
   spineVoiceLang: 'zh' | 'jp'
@@ -83,11 +96,12 @@ export default defineConfigWithTheme<ThemeConfig>({
     name: "Sensei's 部落格",
     welcomeText: 'Hello, VitePress',
     motto: ['和你的日常，就是奇迹', '何気ない日常で、ほんの少しの奇跡を見つける物語。'],
-    social: [
+    socialLinks: [
       { icon: 'github', url: 'https://github.com/' },
       { icon: 'bilibili', url: 'https://www.bilibili.com/' },
       { icon: 'qq', url: 'https://im.qq.com/index/' },
       { icon: 'wechat', url: 'https://weixin.qq.com/' },
+      { icon: 'continue', url: `${baseUrl}/${rssFilename}` },
     ],
 
     //spine语音配置，可选zh/jp
@@ -118,4 +132,7 @@ export default defineConfigWithTheme<ThemeConfig>({
       })
     },
   },
+  vite: {
+    plugins: [RssPlugin(RSS)]
+  }
 })

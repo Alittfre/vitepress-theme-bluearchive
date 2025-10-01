@@ -40,7 +40,7 @@ const themeConfig = useData().theme.value
 const name = themeConfig.name
 const welcomeText = themeConfig.welcomeText
 const motto = themeConfig.motto
-const social = themeConfig.social
+const social = themeConfig.socialLinks
 
 const multiple = 30
 const welcomeBoxRef = ref<HTMLElement | null>(null)
