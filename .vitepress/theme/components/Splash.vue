@@ -1,10 +1,15 @@
 <template>
-  <div v-if="isVisible" class="splash-container" v-html="svgContent"></div>
+  <div
+    v-if="isVisible"
+    class="splash-container"
+    :class="{ 'fade-out': fading }"
+    v-html="svgContent"
+    @animationend="onAnimationEnd"
+  ></div>
 </template>
 
 <script setup>
 import { onMounted, ref, onUnmounted } from 'vue'
-import anime from 'animejs'
 
 const svgContent =
   ref(`<svg viewBox="0 0 1728 1117" preserveAspectRatio="xMinYMin slice" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -47,50 +52,34 @@ const svgContent =
 </svg>
 `)
 const isVisible = ref(true)
+const fading = ref(false)
 import { useStore } from '../store'
 const { state } = useStore()
 
-const createBreathingAnimation = () => {
-  anime({
-    targets: '#breathingParts',
-    opacity: [0.3, 1],
-    easing: 'easeInOutSine',
-    duration: 500,
-    direction: 'alternate',
-    loop: true,
-  })
-}
-
-const fadeOutSplash = () => {
-  anime({
-    targets: '.splash-container',
-    opacity: 0,
-    duration: 500,
-    easing: 'easeInOutQuad',
-    complete: () => {
-      isVisible.value = false // 隐藏splash
-    },
-  })
+function fadeOutSplash() {
+  fading.value = true
   state.splashLoading = false
 }
 
-const preventDefault = (e) => {
+function onAnimationEnd(e) {
+  if (e.animationName === 'fadeOut') {
+    isVisible.value = false
+  }
+}
+
+function preventDefault(e) {
   e.preventDefault()
 }
 
 onMounted(() => {
-  createBreathingAnimation()
-  // 禁用滚轮事件
   window.addEventListener('wheel', preventDefault, { passive: false })
   setTimeout(() => {
     fadeOutSplash()
-    // 启用滚轮事件
     window.removeEventListener('wheel', preventDefault)
-  }, Math.floor(Math.random() * 300) + 1200) // 随机等待时间
+  }, Math.floor(Math.random() * 300) + 1200)
 })
 
 onUnmounted(() => {
-  // 确保组件卸载时移除事件监听
   window.removeEventListener('wheel', preventDefault)
 })
 </script>
@@ -138,5 +127,26 @@ onUnmounted(() => {
       flood-color: #efe0fd;
     }
   }
+}
+
+</style>
+
+<style>
+.splash-container.fade-out {
+  animation: fadeOut 0.5s ease-in-out forwards;
+}
+
+#breathingParts {
+  animation: breath 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes breath {
+  from { opacity: 0.3; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 </style>

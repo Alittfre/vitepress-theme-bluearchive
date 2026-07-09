@@ -11,9 +11,6 @@ importers:
       '@fontsource/jetbrains-mono':
         specifier: ^5.2.8
         version: 5.2.8
-      animejs:
-        specifier: ^3.2.2
-        version: 3.2.2
       ba-click-fx:
         specifier: ^1.0.8
         version: 1.0.8
@@ -33,9 +30,6 @@ importers:
         specifier: ^8.0.1
         version: 8.0.1
     devDependencies:
-      '@types/animejs':
-        specifier: ^3.1.12
-        version: 3.1.12
       '@types/md5':
         specifier: ^2.3.5
         version: 2.3.5
@@ -432,9 +426,6 @@ packages:
   '@shikijs/vscode-textmate@10.0.1':
     resolution: {integrity: sha512-fTIQwLF+Qhuws31iw7Ncl1R3HUDtGwIipiJ9iU+UsDUwMhegFcQKQHd51nZjb7CArq0MvON8rbgCGQYWHUKAdg==}
 
-  '@types/animejs@3.1.12':
-    resolution: {integrity: sha512-fpdH+ZtlO0kqjTOqRaBdsEmvpRNOayI8k4EVkEtitL5l6wducDOXk0rgQgfZqWf/ZX9DzXrHf257S5i9xTcISQ==}
-
   '@types/estree@1.0.5':
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
 
@@ -570,9 +561,6 @@ packages:
   algoliasearch@5.14.2:
     resolution: {integrity: sha512-aYjI4WLamMxbhdJ2QAA99VbDCJOGzMOdT2agh57bi40n86ufkhZSIAf6mkocr7NmtBLtwCnSHvD5NJ+Ky5elWw==}
     engines: {node: '>= 14.0.0'}
-
-  animejs@3.2.2:
-    resolution: {integrity: sha512-Ao95qWLpDPXXM+WrmwcKbl6uNlC5tjnowlaRYtuVDHHoygjtIPfDUoK9NthrlZsQSKjZXlmji2TrBUAVbiH0LQ==}
 
   ansi-colors@4.1.3:
     resolution: {integrity: sha512-/6w/C21Pm1A7aZitlI5Ni/2J6FFQN8i1Cvz3kHABAAbw93v/NlvKdVOqz7CCWz/3iv/JplRSEEZ83XION15ovw==}
@@ -1432,8 +1420,6 @@ snapshots:
 
   '@shikijs/vscode-textmate@10.0.1': {}
 
-  '@types/animejs@3.1.12': {}
-
   '@types/estree@1.0.5': {}
 
   '@types/hast@3.0.4':
@@ -1586,8 +1572,6 @@ snapshots:
       '@algolia/requester-browser-xhr': 5.14.2
       '@algolia/requester-fetch': 5.14.2
       '@algolia/requester-node-http': 5.14.2
-
-  animejs@3.2.2: {}
 
   ansi-colors@4.1.3: {}
 
