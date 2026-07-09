@@ -5,6 +5,7 @@
   "type": "module",
   "main": ".vitepress/theme/Layout.vue",
   "author": "Alittfre",
+  "packageManager": "pnpm@11.2.2",
   "license": "ISC",
   "devDependencies": {
     "@types/md5": "^2.3.5",
